@@ -28,7 +28,7 @@ $query .= "
   cliente.IDCliente,
   empresa.Empresa,
   cliente.Nombre1,
-  cliente.Apellidos1, 
+  cliente.Telefono, 
   cliente.TipoEvento FROM cliente 
   INNER JOIN empresa 
   ON empresa.IDEmpresa = cliente.IDEmpresa";
@@ -36,7 +36,7 @@ if(!empty($_POST["searchPhrase"]))
 {
  $query .= ' WHERE (cliente.Nombre1 LIKE "%'.$_POST["searchPhrase"].'%" ';
  $query .= 'OR empresa.Empresa LIKE "%'.$_POST["searchPhrase"].'%" ';
- $query .= 'OR cliente.Apellidos1 LIKE "%'.$_POST["searchPhrase"].'%" ';
+ $query .= 'OR cliente.Telefono LIKE "%'.$_POST["searchPhrase"].'%" ';
  $query .= 'OR cliente.TipoEvento LIKE "%'.$_POST["searchPhrase"].'%" ) ';
  $query .= 'OR  cliente.IDCliente LIKE "%'.$_POST["searchPhrase"].'%"  ';
 }

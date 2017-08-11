@@ -128,7 +128,7 @@ while($row = mysqli_fetch_array($result))
        <th data-column-id="IDCliente" data-type="numeric">ID cliente</th>  
        <th data-column-id="Empresa">Empresa</th>
        <th data-column-id="Nombre1">Nombre</th>
-       <th data-column-id="Apellidos1">Apellido</th>
+       <th data-column-id="Telefono">Telefono</th>
        <th data-column-id="TipoEvento">Evento</th>
        <th data-column-id="commands" data-formatter="commands" data-sortable="false">Acciones</th>
       </tr>
@@ -163,7 +163,8 @@ $(document).ready(function(){
    "commands": function(column, row)
    {
     return "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+row.IDCliente+"'>Editar</button>" + 
-    "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+row.IDCliente+"'>Eliminar</button>";
+    "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+row.IDCliente+"'>Eliminar</button>"+ 
+    "&nbsp; <button type='button' class='btn btn-info btn-xs show' data-row-id='"+row.IDCliente+"'>Pedido</button>";
    }
   }
  });
@@ -176,23 +177,14 @@ $(document).on('submit', '#product_form', function(event){
   event.preventDefault();
   var IDEmpresa = $('#IDEmpresa').val();
   var Nombre1 = $('#Nombre1').val();
-  var Apellidos1 = $('#Apellidos1').val();
   var TipoEvento = $('#TipoEvento').val();
   var Nombre2 = $('#Nombre2').val();
-  var Apellidos2 = $('#Apellidos2').val();
-  var Calle = $('#Calle').val();
-  var Ciudad = $('#Ciudad').val();
-  var Estado = $('#Estado').val();
-  var CP = $('#CP').val();
-  var Colonia = $('#Colonia').val();
-  var Telefono = $('#Telefono').val();
+    var Telefono = $('#Telefono').val();
   var Fax = $('#Fax').val();
   var Celular1 = $('#Celular1').val();
   var Celular2 = $('#Celular2').val();
   var Email1 = $('#Email1').val();
-  var Email2 = $('#Email2').val();
   var FechaAlta = $('#FechaAlta').val();
-  var EstatusCompra = $('#EstatusCompra').val();
   var Comentarios = $('#Comentarios').val();
   var Expo = $('#Expo').val();
   var FechaExpo = $('#FechaExpo').val();
@@ -200,7 +192,7 @@ $(document).on('submit', '#product_form', function(event){
   
   
   var form_data = $(this).serialize();
-  if(IDEmpresa != '' && Nombre1 != '' && Apellidos1 != '' && TipoEvento !='')
+  if(IDEmpresa != '' && Nombre1 != '' && Telefono != '' && TipoEvento !='')
   {
    $.ajax({
     url:"../code/insert.php",
@@ -238,29 +230,20 @@ $(document).on('submit', '#product_form', function(event){
 $('#AgregarModal').modal('show');
 $('#IDEmpresa').val(data.IDEmpresa);
 $('#Nombre1').val(data.Nombre1);
-$('#Apellidos1').val(data.Apellidos1);
 $('.modal-title').text("Editar cliente");
 $('#IDCliente').val(data.IDCliente);
 $('#TipoEvento').val(data.TipoEvento);
 $('#action').val("Editar");
 $('#operation').val("Editar");
 $('#Nombre2').val(data.Nombre2);
-$('#Apellidos2').val(data.Apellidos2);
-$('#Calle').val(data.Calle);
 $('#TipoEvento').val(data.TipoEvento);
-$('#Ciudad').val(data.Ciudad);
-$('#Estado').val(data.Eatdo);
-$('#CP').val(data.CP);
-$('#Colonia').val(data.Colonia);
 $('#Telefono').val(data.Telefono);
 $('#Fax').val(data.Fax);
 $('#Celular1').val(data.Celular1);
 $('#Celular2').val(data.Celular2);
 $('#Email1').val(data.Email1);
 $('#FechaAlta').val(data.FechaAlta);
-$('#Email2').val(data.Email2);
 $('#IDAgente').val(data.IDAgente);
-$('#EstatusCompra').val(data.EstatusCompra);
 $('#Comentarios').val(data.Comentarios);
 $('#TipoCliente').val(data.TipoCliente);
 $('#Expo').val(data.Expo);
@@ -313,10 +296,6 @@ $(document).ready(function(){
   $('#operation2').val("Add");
  });
  
- 
-
-
- 
  $(document).on('submit', '#empresa_form',function(event){
   event.preventDefault();
   var Empresa = $('#Empresa').val();
@@ -349,7 +328,7 @@ $(document).ready(function(){
   else
   {
    alert("Empresa vacio");
-  } 
+  }
   });
    });
  
@@ -396,14 +375,7 @@ $(document).ready(function(){
 </div>
 </div>
 
-<div class="col-md-4">
-<div class="form-group">
-<label>Apellidos</label>
-<input type="text" name="Apellidos1" id="Apellidos1" class="form-control" />
-</div>
-</div>
 
-    
        
         <div class="col-md-4">
                     <div class="form-group">
@@ -438,13 +410,6 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="apellido2" class="control-label">Apellidos 2</label>
-<input type="text" class="form-control" name="Apellidos2" id="Apellidos2" placeholder="Apellidos 2">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
 <label for="telefono1" class="control-label">Teléfono</label>
 <input  type="text" class="form-control" name="Telefono" id="Telefono" placeholder="Teléfono">
 </div>
@@ -465,47 +430,6 @@ $(document).ready(function(){
 </div>
 </div>
 
-<div class="col-md-4">
-<div class="form-group">
-<label for="Calle1" class="control-label">Calle</label>
-<input type="text" class="form-control" name="Calle" id="Calle" placeholder="Calle">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="colonia1" class="control-label">Colonia</label>
-<input type="text" class="form-control" name="Colonia" id="Colonia" placeholder="Colonia">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="cp" class="control-label">CP</label>
-<input type="text" class="form-control" name="CP" id="CP" placeholder="Estado">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="estado1" class="control-label">Estado</label>
-<input type="text" class="form-control" name="Estado" id="Estado" placeholder="Estado">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="Ciudad1" class="control-label">Ciudad</label>
-<input type="text" class="form-control" name="Ciudad" id="Ciudad" placeholder="Ciudad">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="EstatusC" class="control-label">Estatus Compra</label>
-<input type="text" class="form-control" name="EstatusCompra" id="EstatusCompra" placeholder="Estatus de la compra">
-</div>
-</div>
 
 <div class="col-md-4">
 <div class="form-group">
@@ -541,13 +465,6 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="Email2" class="control-label">Tipo cliente</label>
-<input type="text" class="form-control" name="TipoCliente" id="TipoCliente" placeholder="Tipo Cliente">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
 <label for="Email2" class="control-label">Expo</label>
 <input type="text" class="form-control" name="Expo" id="Expo" placeholder="Expo">
 </div>
@@ -560,21 +477,6 @@ $(document).ready(function(){
 </div>
 </div>
 
-<div class="col-md-4">
-<div class="form-group">
-<label for="Email2" class="control-label">Email 2</label>
-<input type="text" class="form-control" name="Email2" id="Email2" placeholder="Email 2">
-</div>
-</div>        
-
-
-<div class="col-md-12">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="Oculto" name="Oculto" placeholder="Oculto">
-                    </div>
-                </div>  
-
-</div>
 
        
     <div class="modal-footer">

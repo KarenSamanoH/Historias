@@ -84,7 +84,7 @@ $("#fecha").datepicker();
 
 
 <body >
- <!--oncontextmenu="return false" onkeydown="return false-->
+ <!------oncontextmenu="return false" onkeydown="return false--->
 
 <nav id="mainNav" class="navbar navbar-default navbar-custom">
 <div class="container">
@@ -338,7 +338,7 @@ $resultado=mysqli_query($conexion, $query2);
 while($row2 = mysqli_fetch_assoc($resultado)){ ?>
     
  <div class="btn-group" data-toggle="buttons">
-<label class="btn btn-info   <?=($flag==true)? 'active' : '  ' ?>">				
+<label class="btn btn-info   <?=($flag==true)? active : '  ' ?>">				
 <span class="">
 <i class="fa fa-check-square" aria-hidden="true"> </i><?=$row2 ['Nombre'] ?>  
 </span>
@@ -369,7 +369,7 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
 
 </div>
  
-<!-- -Caja -->
+<!-----Caja---->
 <div class="tab-pane" role="tabpanel" id="caja">
 <h3>Elija el modelo de la caja</h3>
 <ul class="list-inline pull-left">
@@ -413,7 +413,7 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
 </body>
 </html>
 
-<!-- Autocomplete invitaciones  -->
+<!--------Autocomplete invitaciones--------->
 
 <script>  
  $(document).ready(function(){  
@@ -442,7 +442,7 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
            $('#inviList').fadeOut(); 
  }
  </script>  
- <!-- Autocomplete Cajas -->
+ <!-----Autocomplete Cajas----->
  <script>  
  $(document).ready(function(){  
       $('#autoCajas').keyup(function(){  
@@ -466,7 +466,7 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
  </script>  
  
  
-  <!-- Autocomplete Papelería -->
+  <!-----Autocomplete Papelería----->
  <script>  
  $(document).ready(function(){  
       $('#autoPapeleria').keyup(function(){  
@@ -490,7 +490,7 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
  </script>  
  
  
-   <!-- Autocomplete Recuerdos -->
+   <!-----Autocomplete Recuerdos----->
  <script>  
  $(document).ready(function(){  
       $('#autoRecu').keyup(function(){  
@@ -513,7 +513,7 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
  });  
  </script>  
  
- <!-- Autocomplete Boleto -->
+ <!--------Autocomplete Boleto--------->
 
 
  
