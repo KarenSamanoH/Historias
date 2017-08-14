@@ -16,16 +16,14 @@ $output["Nombre1"] = $row["Nombre1"];
 $output["TipoEvento"] = $row["TipoEvento"];
 $output["Nombre2"] = $row["Nombre2"];
 $output["Telefono"] = $row["Telefono"];
-$output["Fax"] = $row["Fax"];
 $output["Celular1"] = $row["Celular1"];
 $output["Celular2"] = $row["Celular2"];
 $output["Email1"] = $row["Email1"];
 $output["FechaAlta"] = $row["FechaAlta"];
 $output["IDAgente"] = $row["IDAgente"];
-$output["Comentarios"] = $row["Comentarios"];
+$output["Direccion"] = $row["Direccion"];
 $output["TipoEvento"] = $row["TipoEvento"];
-$output["Expo"] = $row["Expo"];
-$output["FechaExpo"] = $row["FechaExpo"];
+
   
  }
  echo json_encode($output);
