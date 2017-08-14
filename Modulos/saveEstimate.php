@@ -11,9 +11,10 @@ $lead=$_POST['est-lead'];
 $iva=$_POST['est-iva'];
 $paper=$_POST['est-paper'];
 $final=$_POST['est-final'];
+$current_date=$_POST['current_date'];
+$event_date=$_POST['event_date'];
 
-
-$query = "INSERT INTO cotizacion(FechaEvento,Nombre,Descripcion,IDCliente,IDAgente,CostoMod,CostoFinal) VALUES (null,null,'$descrip',$clientid,1,null,$final)";
+$query = "INSERT INTO cotizacion(FechaCotizacion, FechaEvento, Nombre, Descripcion, IDCliente, IDAgente, CostoMod,CostoFinal) VALUES ('$current_date','$event_date',null,'$descrip',$clientid,1,null,$final)";
 $result = mysqli_query($conexion, $query);
 
 if ($result) {

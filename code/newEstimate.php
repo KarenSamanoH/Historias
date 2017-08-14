@@ -40,6 +40,8 @@ $(document).ready(function(){
 <form id="new-estim"  method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
 <div class="row" style="margin-top: 20px;">
 <input type="hidden" name="clientid" value="<?=$clientId ?>">
+<input type="hidden" name="current_date" value="<?=date("Y-m-d") ?>">
+
                 <div class="col-md-4">
                     <div class="form-group form-group-sm">
                         <label for="empresa1" class="control-label" >Modelo</label>
@@ -98,11 +100,20 @@ $(document).ready(function(){
                         <input type="text" class="form-control" id="est-paper" name="est-paper" placeholder="CP" readonly="">
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="estado1" class="control-label">Fecha de Evento</label>
+                        <input type="text" class="form-control" id="datepicker" name="event_date" placeholder="Fecha" required="true">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
             
                <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Costo Final</label>
-                        <input type="text" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="">
+                        <input type="text" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="" required="true">
                     </div>
                 </div>
             
@@ -116,3 +127,27 @@ $(document).ready(function(){
     </div>
     
 <br>
+
+ <script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  </script>

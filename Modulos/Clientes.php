@@ -427,8 +427,10 @@ $(document).on('submit', '#product_form', function(event){
  {
   Tablacliente.find(".update").on("click", function(event)
   {
+    console.log('hola perro');
 
    var IDCliente = $(this).data("row-id");
+   console.log(IDCliente);
     $.ajax({
     url:"../code/fetch_single.php",
     method:"POST",
@@ -436,6 +438,7 @@ $(document).on('submit', '#product_form', function(event){
     dataType:"json",
     success:function(data)
     {
+      console.log(data);
 $('#AgregarModal').modal('show');
 $('#IDEmpresa').val(data.IDEmpresa);
 $('#Nombre1').val(data.Nombre1);
@@ -550,7 +553,10 @@ function modifiEstimate(idc){
    
 }
 function saveEstimate(id){
-  event.preventDefault();
+  var final=$('#est-final').val();
+
+  if (final!=='') {
+    event.preventDefault();
 $.ajax({  
                       
                      type:"POST",
@@ -560,11 +566,17 @@ $.ajax({
                      success:function(data){ 
                         
                           showEstimates(id);
-                          
+                          //$('.search-box').html(data);
                            
                          
                      }  
                 });  
+}else{
+  alert('faltan datos');
+  event.preventDefault();
+  return false;
+}
+  
 }
 
 </script>
@@ -782,6 +794,9 @@ $(document).ready(function(){
 
 
 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 
+ 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       
 
