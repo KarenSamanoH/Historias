@@ -38,11 +38,13 @@ $Nombre1 = mysqli_real_escape_string($conexion, $_POST["Nombre1"]);
 $TipoEvento = mysqli_real_escape_string($conexion, $_POST["TipoEvento"]);
 $Nombre2= mysqli_real_escape_string($conexion, $_POST["Nombre2"]);
 $Telefono = mysqli_real_escape_string($conexion, $_POST["Telefono"]);
+
 $Celular1 = mysqli_real_escape_string($conexion, $_POST["Celular1"]);
 $Celular2 = mysqli_real_escape_string($conexion, $_POST["Celular2"]);
 $Email1 = mysqli_real_escape_string($conexion, $_POST["Email1"]);
 $FechaAlta = mysqli_real_escape_string($conexion, $_POST["FechaAlta"]);
 $Direccion = mysqli_real_escape_string($conexion, $_POST["Direccion"]);
+
 $IDAgente = mysqli_real_escape_string($conexion, $_POST["IDAgente"]);       
 $query = "
 UPDATE cliente 
@@ -51,22 +53,23 @@ Nombre1 = '".$Nombre1."',
 TipoEvento = '".$TipoEvento."', 
 Nombre2 = '".$Nombre2."',
 Telefono = '".$Telefono."',
+Fax = '".$Fax."',
 Celular1 = '".$Celular1."',
 Celular2 = '".$Celular2."',
 Email1 ='".$Email1."',
 FechaAlta = '".$FechaAlta."',
 IDAgente = '".$IDAgente."', 
 Direccion ='".$Direccion."',
-
+Expo = '".$Expo."',
+FechaExpo ='".$FechaExpo."'
 
    WHERE IDCliente = '".$_POST["IDCliente"]."'
   ";
   if(mysqli_query($conexion, $query))
   {
-   echo 'Informacion actualizada';
+   echo 'Información actualizada';
   }
  }
 }
 ?>
-
 

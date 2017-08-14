@@ -233,29 +233,30 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="row">
                 <div class="col-md-4">
                     <div class="form-group form-group-sm">
-                        <label for="empresa1" class="control-label">Empresa</label>
+                        <label for="empresa1" class="control-label">Empresa <i class="fa fa-suitcase" aria-hidden="true"></i></label>
                         <input type="text" class="form-control" id="Empresa" name="Empresa" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contacto1" class="control-label">Contacto</label>
+                        <label for="contacto1" class="control-label">Contacto <i class="fa fa-phone-square" aria-hidden="true"></i></label>
                         <input type="text" class="form-control" id="Contacto" name="Contacto" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="cargo1" class="control-label">Cargo</label>
+                        <label for="cargo1" class="control-label">Cargo <i class="fa fa-address-card" aria-hidden="true"></i></label>
                         <input type="text" class="form-control" id="Cargo" name="Cargo">
                     </div>
                 </div>
             
             <div class="col-md-4">
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">RCF</label>
+                        <label for="rcf1" class="control-label">RCF <i class="fa fa-hashtag" aria-hidden="true"></i></label>
                         <input type="text" class="form-control" id="RFC" name="RFC" >
                     </div>
                 </div>
+            
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Ciudad</label>
@@ -582,7 +583,7 @@ $.ajax({
 $(document).ready(function(){
  $('#empresa_button').click(function(){
   $('.modal-title').text("Agregar empresa");
-  $('#action').val("Add");
+  $('#action').val("Agregar");
   $('#operation2').val("Add");
  });
 
@@ -642,7 +643,7 @@ $(document).ready(function(){
      
 <div class="col-md-4">
 <div class="form-group">
-<label>Seleccionar empresa</label>
+<label>Seleccionar empresa <i class="fa fa-suitcase" aria-hidden="true"></i></label>
 <select name="IDEmpresa" id="IDEmpresa" class="form-control">
 <option value="">Seleccionar empresa</option>
 <?php echo $output; ?>
@@ -654,7 +655,7 @@ $(document).ready(function(){
         
         <div class="col-md-4">
 <div class="form-group">
-<label>Seleccionar agente</label>
+<label>Seleccionar agente <i class="fa fa-user-secret" aria-hidden="true"></i></label>
 <select name="IDAgente" id="IDAgente"  class="form-control">
 <option value="">Seleccionar agente</option>
 <?php echo $mensaje; ?>
@@ -665,7 +666,7 @@ $(document).ready(function(){
 
         <div class="col-md-4">
                     <div class="form-group">
-   <label>Tipo de Evento</label>
+   <label>Tipo de Evento <i class="fa fa-gift" aria-hidden="true"></i></label>
      <select name="TipoEvento" id="TipoEvento" class="form-control">
       <option value="">Tipo de Evento</option>
       <optgroup label="Fiestas">
@@ -688,7 +689,7 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label>Primer Nombre</label>
+<label>Primer Nombre <i class="fa fa-user" aria-hidden="true"></i></label>
 <input type="text" name="Nombre1" id="Nombre1" class="form-control" />
 </div>
 </div>
@@ -699,21 +700,21 @@ $(document).ready(function(){
    
 <div class="col-md-4">
 <div class="form-group">
-<label for="nombre2" class="control-label">Segundo nombre</label>
+<label for="nombre2" class="control-label">Segundo nombre <i class="fa fa-user-plus" aria-hidden="true"></i></label>
 <input type="text" class="form-control" name="Nombre2" id="Nombre2" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="telefono1" class="control-label">Telefono</label>
+<label for="telefono1" class="control-label">Telefono <i class="fa fa-phone" aria-hidden="true"></i></label>
 <input  type="text" class="form-control" name="Telefono" id="Telefono" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="celular1" class="control-label">Celular</label>
+<label for="celular1" class="control-label">Celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
 <input type="text" class="form-control" name="Celular1" id="Celular1" >
 </div>
 </div>
@@ -721,7 +722,7 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="celular2" class="control-label">Otro celular</label>
+<label for="celular2" class="control-label">Otro celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
 <input type="text" class="form-control" name="Celular2" id="Celular2">
 </div>
 </div>
@@ -730,14 +731,14 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="comentarios" class="control-label">Direccion</label>
+<label for="comentarios" class="control-label">Direccion <i class="fa fa-map-marker" aria-hidden="true"></i></label>
 <input type="text" class="form-control" name="Direccion" id="Direccion" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="Emai1" class="control-label">Email</label>
+<label for="Emai1" class="control-label">Email <i class="fa fa-envelope" aria-hidden="true"></i></label>
 <input type="text" class="form-control" name="Email1" id="Email1" >
 </div>
 </div>
@@ -746,8 +747,8 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="fechaA" class="control-label">Fecha de Alta</label>
-<input type="text" class="form-control" name="FechaAlta" id="FechaAlta" >
+<label for="fechaA" class="control-label">Fecha de Alta <i class="fa fa-calendar" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="FechaAlta" id="datepicker" >
 </div>
 </div>
 
@@ -777,3 +778,26 @@ $(document).ready(function(){
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       
 
+ <script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  </script>
