@@ -22,7 +22,7 @@ while($row = mysqli_fetch_array($result))
 <html lang="en">
 <head>
 
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -46,6 +46,8 @@ while($row = mysqli_fetch_array($result))
 <link href="../bootgrid/jquery.bootgrid.css" rel="stylesheet" type="text/css"/>
 <!----Datapicker----->
 
+<script src="../dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../dist/sweetalert.css">
 
 <!-- Custom Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -214,7 +216,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
        
         </div>
              
-             
+       
 
     </nav>
     
@@ -409,7 +411,7 @@ $(document).on('submit', '#product_form', function(event){
     data:form_data,
     success:function(data)
     {
-     alert(data);
+     swal(data);
      $('#product_form')[0].reset();
      $('#AgregarModal').modal('hide');
      $('#cliente_info').bootgrid('reload');
@@ -418,7 +420,7 @@ $(document).on('submit', '#product_form', function(event){
   }
   else
   {
-   alert("Se requieren todos los campos");
+   swal("Rellena los campos que se te piden")
   }
  });
  
@@ -570,7 +572,7 @@ $.ajax({
                      }  
                 });  
 }else{
-  alert('faltan datos');
+  swal('faltan datos');
   event.preventDefault();
   return false;
 }
@@ -621,7 +623,7 @@ $(document).ready(function(){
   }
   else
   {
-   alert("Empresa vacio");
+   swal("Empresa vacio");
   }
   });
    });
