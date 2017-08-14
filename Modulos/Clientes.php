@@ -56,7 +56,20 @@ while($row = mysqli_fetch_array($result))
 
 
  <style>
+ .navbar{
+  margin-bottom: 0!important;
+  padding-top: 0!important;
 
+ }
+ #cliente_info td:first-child{
+  width: 5px!important;
+ }
+ #cliente_info td:last-child{
+  width: 290px!important;
+ }
+ #cliente_info button{
+  display: inline-block;
+ }
    .box
    {
     width:1270px;
@@ -66,12 +79,110 @@ while($row = mysqli_fetch_array($result))
     border-radius:5px;
     margin-top:25px;
    }
+   .tbuttons{
+    width: 90px;
+    display: inline-block;
+   }
+   .tbuttons button{
+    padding: 6px 12px!important;
+   }
+
+   #estimates-table {
+    border-collapse: collapse;
+    width: 100%;
+
+}
+
+#estimates-table th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+#estimates-table tr{
+  
+}
+
+#estimates-table tr:nth-child(even){background: #f9f9f9}
+
+ #estimates-table th {
+    background-color: #fff;
+    
+}
+#estimates-table tr:hover{
+  background: #f2f2f2;
+}
+.estimate-actions{
+  width: 100%;
+  height: 60px;
+}
+.new-estimate{
+  width: 60px!important;
+  position: relative;
+}
+.search-box{
+        width: 270px;
+        position: relative;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 8px;
+    }
+    .search-box input[type="text"]{
+        height: 32px;
+        padding: 5px 10px;
+        border: 1px solid #CCCCCC;
+        font-size: 14px;
+        border-radius: 3px;
+    }
+    .result{
+        position: absolute;        
+        z-index: 999;
+        top: 100%;
+        left: 0;
+    }
+    .search-box input[type="text"], .result{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    /* Formatting result items */
+    .result p{
+        margin: 0;
+        padding: 7px 10px;
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        cursor: pointer;
+        background: #fff;
+        -webkit-box-shadow: 2px 2px 3px 0px rgba(50, 50, 50, 0.31);
+-moz-box-shadow:    2px 2px 3px 0px rgba(50, 50, 50, 0.31);
+box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
+    }
+    .result p:hover{
+        background: #f2f2f2;
+    }
+    .new-est-form{
+      width: 100%;
+      height: 300px;
+    }
   </style>
  </head>
-<!--   ---Body starts here---->
+<!--   Body starts here -->
 
      <body>  
-         
+         <div id="cotizacionModal" class="modal fade">
+    <div class="modal-dialog">
+     <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal">&times;</button>
+     <h4 class="modal-title">Cotizaciones de Cliente</h4>
+    </div>
+    <div class="modal-body estimate">      
+    <div class="container col-lg-12">
+  
+   <p></p>
+   </div>
+ </div>
+ </div>
+ </div>
+ </div>
          <nav id="mainNav" class="navbar navbar-default navbar-custom">
         <div class="container">
             <div class="navbar-header page-scroll">
@@ -105,17 +216,115 @@ while($row = mysqli_fetch_array($result))
 
     </nav>
     
+    <!-- modal agregar empresa -->
+    <div id="AgregarEmpresa" class="modal fade">
+ <div class="modal-dialog">
+  <form method="post" id="empresa_form">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal">&times;</button>
+     <h4 class="modal-title">Agregar empresa</h4>
+    </div>
+    <div class="modal-body">      
+    <div class="container col-lg-12">
+  <div class="row">
+    <h3 class="text-center">Datos de la empresa</h3>
+  </div>
+        <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-group-sm">
+                        <label for="empresa1" class="control-label">Empresa</label>
+                        <input type="text" class="form-control" id="Empresa" name="Empresa" placeholder="Empresa">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="contacto1" class="control-label">Contacto</label>
+                        <input type="text" class="form-control" id="Contacto" name="Contacto" placeholder="Contacto">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cargo1" class="control-label">Cargo</label>
+                        <input type="text" class="form-control" id="Cargo" name="Cargo" placeholder="Cargo">
+                    </div>
+                </div>
+            
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">RCF</label>
+                        <input type="text" class="form-control" id="RFC" name="RFC" placeholder="RCF">
+                    </div>
+                </div>
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">Ciudad</label>
+                        <input type="text" class="form-control" id="Ciudad" name="ciudad" placeholder="RCF">
+                    </div>
+                </div>
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="curp1" class="control-label">Curp</label>
+                        <input type="text" class="form-control" id="CURP" name="CURP" placeholder="Curp">
+                    </div>
+                </div>
+            
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Calle" class="control-label">Calle</label>
+                        <input type="text" class="form-control" id="Calle" name="Calle" placeholder="Calle">
+                    </div>
+                </div>
+            
+             <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="colonia1" class="control-label">Colonia</label>
+                        <input type="text" class="form-control" id="Colonia"  name="Colonia" placeholder="Colonia">
+                    </div>
+            </div>
+            
+             <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cp" class="control-label">CP</label>
+                        <input type="text" class="form-control" id="CP" name="CP" placeholder="CP">
+                    </div>
+                </div>
+            
+               <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="estado1" class="control-label">Estado</label>
+                        <input type="text" class="form-control" id="Estado" name="Estado" placeholder="Estado">
+                    </div>
+                </div>
+            
 
-  <div class="container responsive">
-   <h1 align="center">Información del cliente</h1>
-   <br />
-   <div align="right">
-    <button type="button" id="add_button" data-toggle="modal" data-target="#AgregarModal" class="btn btn-info btn-lg">Agregar Cliente  <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+
+    </div>   
+    </div>
+    </div>
+    <div class="modal-footer">      
+     <input type="hidden" name="IDEmpresa" id="IDEmpresa" />
+     <input type="hidden" name="operation" id="operation2" />
+     <input type="submit" name="action" id="action" class="btn btn-success" value="Agregar" />
+    </div>
    </div>
-   <p></p>
+  </form>
+ </div>
+</div>
+ <!-- termina modal agregar empresa -->
+
+  <div style="width:100%;">
+  <div style="width: 60%; display: inline-block;">
+    <h1 align="center">Información del cliente</h1>
+  </div>
+  <div style="width: 39%; display: inline-block;">
+  <h1 style="text-align: right;">
+     <button type="button" id="add_button" data-toggle="modal" data-target="#AgregarModal" class="btn btn-info btn-lg">Agregar Cliente  <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+ <button type="button" id="empresa_button" data-toggle="modal" data-target="#AgregarEmpresa" class="btn btn-success btn-lg">Agregar Empresa <i class="fa fa-suitcase" aria-hidden="true"></i></button>
+ </h1>
+  </div>
    
-     <div align="right">
-    <button type="button" id="empresa_button" data-toggle="modal" data-target="#AgregarEmpresa" class="btn btn-success btn-lg">Agregar Empresa <i class="fa fa-suitcase" aria-hidden="true"></i></button>
+   
    </div>
    <p></p>
   </div>
@@ -162,9 +371,9 @@ $(document).ready(function(){
   formatters: {
    "commands": function(column, row)
    {
-    return "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+row.IDCliente+"'>Editar</button>" + 
-    "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+row.IDCliente+"'>Eliminar</button>"+ 
-    "&nbsp; <button type='button' class='btn btn-info btn-xs show' data-row-id='"+row.IDCliente+"'>Pedido</button>";
+    return "<div class=tbuttons><button type='button' class='btn btn-warning btn-xs update' data-row-id='"+row.IDCliente+"'>Editar</button></div>" + 
+    "<div class=tbuttons> <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+row.IDCliente+"'>Eliminar</button></div>"+ 
+    "<div class=tbuttons> <button type='button' onclick='showEstimates("+row.IDCliente+");' class='btn btn-info btn-xs cotiza' data-row-id='"+row.IDCliente+"'>Cotizaciones</button></div>";
    }
   }
  });
@@ -252,6 +461,8 @@ $('#FechaExpo').val(data.FechaExpo);
     }
    });
   });
+
+  
  });
 
  
@@ -281,8 +492,80 @@ $('#FechaExpo').val(data.FechaExpo);
  }); 
 });
 
+function showEstimates(id){
+$('#cotizacionModal').modal('show');
+$('.modal-dialog').css('width','80%');
+    $.ajax({
+    url:"../code/getEstimate.php",
+    method:"POST",
+    data:{clientId:id},
+    success:function(data)
+    {
+     
+     $('.estimate').html(data);
+     
+    }
+   })
+}
+function newEstimate(id){
+  $.ajax({
+    url:"../code/newEstimate.php",
+    method:"POST",
+    data:{clientId:id},
+    success:function(data)
+    {
+     
+     $('.estimate').html(data);
+     
+    }
+   })
+}
+function fillData(id){
+  var model=JSON.parse($('#model-'+id).val());
+$('#est-model ').val(model.Modelo);
+$('#est-descrip ').val(model.Descripcion);
+$('#est-family ').val(model.Familia);
+$('#est-cu ').val(model.CostoUnico);
+$('#est-100').val(model.CostoCiento);
+$('#est-1000 ').val(model.CostoMillar);
+$('#est-lead').val(model.TiempoLead);
+$('#est-iva').val(model.IVA);
+$('#est-paper').val(model.CostoPapel);
+$('#est-final').val(model.CostoFinal);
+  
 
 
+
+
+
+
+
+
+  console.log(model.CostoFinal);
+}
+function modifiEstimate(idc){
+  console.log(idc);
+  
+    $('#send-'+idc).html('<input type="hidden" value='+idc+' name="id-cotizacion">').submit();
+   
+}
+function saveEstimate(id){
+  event.preventDefault();
+$.ajax({  
+                      
+                     type:"POST",
+                     url:"saveEstimate.php",   
+                     data:$('#new-estim').serialize(),  
+                       
+                     success:function(data){ 
+                        
+                          showEstimates(id);
+                          
+                           
+                         
+                     }  
+                });  
+}
 
 </script>
 
@@ -295,6 +578,7 @@ $(document).ready(function(){
   $('#action').val("Add");
   $('#operation2').val("Add");
  });
+
  
  $(document).on('submit', '#empresa_form',function(event){
   event.preventDefault();
@@ -333,6 +617,9 @@ $(document).ready(function(){
    });
  
  </script>
+
+ 
+
 
 <div id="AgregarModal" class="modal fade">
  <div class="modal-dialog">
@@ -495,99 +782,6 @@ $(document).ready(function(){
 
 
 
-<div id="AgregarEmpresa" class="modal fade">
- <div class="modal-dialog">
-  <form method="post" id="empresa_form">
-   <div class="modal-content">
-    <div class="modal-header">
-     <button type="button" class="close" data-dismiss="modal">&times;</button>
-     <h4 class="modal-title">Agregar empresa</h4>
-    </div>
-    <div class="modal-body">      
-    <div class="container col-lg-12">
-	<div class="row">
-		<h3 class="text-center">Datos de la empresa</h3>
-	</div>
-        <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group form-group-sm">
-                        <label for="empresa1" class="control-label">Empresa</label>
-                        <input type="text" class="form-control" id="Empresa" name="Empresa" placeholder="Empresa">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="contacto1" class="control-label">Contacto</label>
-                        <input type="text" class="form-control" id="Contacto" name="Contacto" placeholder="Contacto">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="cargo1" class="control-label">Cargo</label>
-                        <input type="text" class="form-control" id="Cargo" name="Cargo" placeholder="Cargo">
-                    </div>
-                </div>
-            
-            <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="rcf1" class="control-label">RCF</label>
-                        <input type="text" class="form-control" id="RFC" name="RFC" placeholder="RCF">
-                    </div>
-                </div>
-            <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="rcf1" class="control-label">Ciudad</label>
-                        <input type="text" class="form-control" id="Ciudad" name="ciudad" placeholder="RCF">
-                    </div>
-                </div>
-            <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="curp1" class="control-label">Curp</label>
-                        <input type="text" class="form-control" id="CURP" name="CURP" placeholder="Curp">
-                    </div>
-                </div>
-            
-            <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="Calle" class="control-label">Calle</label>
-                        <input type="text" class="form-control" id="Calle" name="Calle" placeholder="Calle">
-                    </div>
-                </div>
-            
-             <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="colonia1" class="control-label">Colonia</label>
-                        <input type="text" class="form-control" id="Colonia"  name="Colonia" placeholder="Colonia">
-                    </div>
-            </div>
-            
-             <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="cp" class="control-label">CP</label>
-                        <input type="text" class="form-control" id="CP" name="CP" placeholder="CP">
-                    </div>
-                </div>
-            
-               <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="estado1" class="control-label">Estado</label>
-                        <input type="text" class="form-control" id="Estado" name="Estado" placeholder="Estado">
-                    </div>
-                </div>
-            
 
-
-    </div>   
-    </div>
-    </div>
-    <div class="modal-footer">      
-     <input type="hidden" name="IDEmpresa" id="IDEmpresa" />
-     <input type="hidden" name="operation" id="operation2" />
-     <input type="submit" name="action" id="action" class="btn btn-success" value="Agregar" />
-    </div>
-   </div>
-  </form>
- </div>
-</div>
       
 
