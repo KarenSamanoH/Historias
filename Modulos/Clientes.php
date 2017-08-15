@@ -33,7 +33,7 @@ while($row = mysqli_fetch_array($result))
 <html lang="en">
 <head>
 
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,6 +57,8 @@ while($row = mysqli_fetch_array($result))
 <link href="../bootgrid/jquery.bootgrid.css" rel="stylesheet" type="text/css"/>
 <!----Datapicker----->
 
+<script src="../dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../dist/sweetalert.css">
 
 <!-- Custom Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -198,7 +200,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="container">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle</span>Menú<i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle</span>MenÃº<i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="../Modulos/Principal.php">Historias en Papel</a>
             </div>
@@ -224,6 +226,8 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
             </div>
        
         </div>
+             
+       
 
     </nav>
     
@@ -244,67 +248,68 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="row">
                 <div class="col-md-4">
                     <div class="form-group form-group-sm">
-                        <label for="empresa1" class="control-label">Empresa</label>
-                        <input type="text" class="form-control" id="Empresa" name="Empresa" placeholder="Empresa">
+                        <label for="empresa1" class="control-label">Empresa <i class="fa fa-suitcase" aria-hidden="true"></i></label>
+                        <input type="text" class="form-control" id="Empresa" name="Empresa" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contacto1" class="control-label">Contacto</label>
-                        <input type="text" class="form-control" id="Contacto" name="Contacto" placeholder="Contacto">
+                        <label for="contacto1" class="control-label">Contacto <i class="fa fa-phone-square" aria-hidden="true"></i></label>
+                        <input type="text" class="form-control" id="Contacto" name="Contacto" >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="cargo1" class="control-label">Cargo</label>
-                        <input type="text" class="form-control" id="Cargo" name="Cargo" placeholder="Cargo">
+                        <label for="cargo1" class="control-label">Cargo <i class="fa fa-address-card" aria-hidden="true"></i></label>
+                        <input type="text" class="form-control" id="Cargo" name="Cargo">
                     </div>
                 </div>
             
             <div class="col-md-4">
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">RCF</label>
-                        <input type="text" class="form-control" id="RFC" name="RFC" placeholder="RCF">
+                        <label for="rcf1" class="control-label">RCF <i class="fa fa-hashtag" aria-hidden="true"></i></label>
+                        <input type="text" class="form-control" id="RFC" name="RFC" >
                     </div>
                 </div>
+            
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Ciudad</label>
-                        <input type="text" class="form-control" id="Ciudad" name="ciudad" placeholder="RCF">
+                        <input type="text" class="form-control" id="Ciudad" name="ciudad">
                     </div>
                 </div>
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="curp1" class="control-label">Curp</label>
-                        <input type="text" class="form-control" id="CURP" name="CURP" placeholder="Curp">
+                        <input type="text" class="form-control" id="CURP" name="CURP" >
                     </div>
                 </div>
             
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="Calle" class="control-label">Calle</label>
-                        <input type="text" class="form-control" id="Calle" name="Calle" placeholder="Calle">
+                        <input type="text" class="form-control" id="Calle" name="Calle" >
                     </div>
                 </div>
             
              <div class="col-md-4">
                     <div class="form-group">
                         <label for="colonia1" class="control-label">Colonia</label>
-                        <input type="text" class="form-control" id="Colonia"  name="Colonia" placeholder="Colonia">
+                        <input type="text" class="form-control" id="Colonia"  name="Colonia" >
                     </div>
             </div>
             
              <div class="col-md-4">
                     <div class="form-group">
                         <label for="cp" class="control-label">CP</label>
-                        <input type="text" class="form-control" id="CP" name="CP" placeholder="CP">
+                        <input type="text" class="form-control" id="CP" name="CP">
                     </div>
                 </div>
             
                <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Estado</label>
-                        <input type="text" class="form-control" id="Estado" name="Estado" placeholder="Estado">
+                        <input type="text" class="form-control" id="Estado" name="Estado" >
                     </div>
                 </div>
             
@@ -326,7 +331,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
 
   <div style="width:100%;">
   <div style="width: 60%; display: inline-block;">
-    <h1 align="center">Información del cliente</h1>
+    <h1 align="center">InformaciÃ³n del cliente</h1>
   </div>
   <div style="width: 39%; display: inline-block;">
   <h1 style="text-align: right;">
@@ -399,20 +404,17 @@ $(document).on('submit', '#product_form', function(event){
   var Nombre1 = $('#Nombre1').val();
   var TipoEvento = $('#TipoEvento').val();
   var Nombre2 = $('#Nombre2').val();
-    var Telefono = $('#Telefono').val();
-  var Fax = $('#Fax').val();
+  var Telefono = $('#Telefono').val();
   var Celular1 = $('#Celular1').val();
   var Celular2 = $('#Celular2').val();
   var Email1 = $('#Email1').val();
   var FechaAlta = $('#FechaAlta').val();
-  var Comentarios = $('#Comentarios').val();
-  var Expo = $('#Expo').val();
-  var FechaExpo = $('#FechaExpo').val();
-  var TipoCliente = $('#TipoCliente').val();
+  var Direccion = $('#Direccion').val();
+
   
   
   var form_data = $(this).serialize();
-  if(IDEmpresa != '' && Nombre1 != '' && Telefono != '' && TipoEvento !='')
+  if(IDEmpresa != '' && Nombre1 != '' && TipoEvento !='')
   {
    $.ajax({
     url:"../code/insert.php",
@@ -420,7 +422,7 @@ $(document).on('submit', '#product_form', function(event){
     data:form_data,
     success:function(data)
     {
-     alert(data);
+     swal(data);
      $('#product_form')[0].reset();
      $('#AgregarModal').modal('hide');
      $('#cliente_info').bootgrid('reload');
@@ -429,7 +431,7 @@ $(document).on('submit', '#product_form', function(event){
   }
   else
   {
-   alert("Se requieren todos los campos");
+   swal("Rellena los campos que se te piden", "", "warning")
   }
  });
  
@@ -438,7 +440,7 @@ $(document).on('submit', '#product_form', function(event){
  {
   Tablacliente.find(".update").on("click", function(event)
   {
-    console.log('hola perro');
+    
 
    var IDCliente = $(this).data("row-id");
    console.log(IDCliente);
@@ -461,16 +463,14 @@ $('#operation').val("Editar");
 $('#Nombre2').val(data.Nombre2);
 $('#TipoEvento').val(data.TipoEvento);
 $('#Telefono').val(data.Telefono);
-$('#Fax').val(data.Fax);
 $('#Celular1').val(data.Celular1);
 $('#Celular2').val(data.Celular2);
 $('#Email1').val(data.Email1);
 $('#FechaAlta').val(data.FechaAlta);
 $('#IDAgente').val(data.IDAgente);
-$('#Comentarios').val(data.Comentarios);
-$('#TipoCliente').val(data.TipoCliente);
-$('#Expo').val(data.Expo);
-$('#FechaExpo').val(data.FechaExpo);
+$('#Direccion').val(data.Direccion);
+
+
      
     }
    });
@@ -484,7 +484,7 @@ $('#FechaExpo').val(data.FechaExpo);
  {
   Tablacliente.find(".delete").on("click", function(event)
   {
-   if(confirm("Seguro quieres eliminar este cliente?"))
+   if(swal("¿Eliminar cliente?", "No se podra recurar el registro", "warning"))
    {
     var IDCliente = $(this).data("row-id");
     console.log(IDCliente);
@@ -494,7 +494,7 @@ $('#FechaExpo').val(data.FechaExpo);
      data:{IDCliente:IDCliente},
      success:function(data)
      {
-      alert(data);
+      swal(data);
       $('#cliente_info').bootgrid('reload');
      }
     })
@@ -583,7 +583,7 @@ $.ajax({
                      }  
                 });  
 }else{
-  alert('faltan datos');
+  swal('faltan datos');
   event.preventDefault();
   return false;
 }
@@ -598,7 +598,7 @@ $.ajax({
 $(document).ready(function(){
  $('#empresa_button').click(function(){
   $('.modal-title').text("Agregar empresa");
-  $('#action').val("Add");
+  $('#action').val("Agregar");
   $('#operation2').val("Add");
  });
 
@@ -625,7 +625,7 @@ $(document).ready(function(){
     data:form_data,
     success:function(data)
     {
-     alert(data);
+     swal(data);
      $('#empresa_form')[0].reset();
      $('#AgregarEmpresa').modal('hide');
      $('#cliente_info').bootgrid('reload');
@@ -634,7 +634,7 @@ $(document).ready(function(){
   }
   else
   {
-   alert("Empresa vacio");
+   swal("Falta información");
   }
   });
    });
@@ -658,17 +658,19 @@ $(document).ready(function(){
      
 <div class="col-md-4">
 <div class="form-group">
-<label>Seleccionar empresa</label>
+<label>Seleccionar empresa <i class="fa fa-suitcase" aria-hidden="true"></i></label>
 <select name="IDEmpresa" id="IDEmpresa" class="form-control">
 <option value="">Seleccionar empresa</option>
 <?php echo $output; ?>
 </select>
 </div>
 </div>
+     
+        
         
         <div class="col-md-4">
 <div class="form-group">
-<label>Seleccionar agente</label>
+<label>Seleccionar agente <i class="fa fa-user-secret" aria-hidden="true"></i></label>
 <select name="IDAgente" id="IDAgente"  class="form-control">
 <option value="">Seleccionar agente</option>
 <?php echo $mensaje; ?>
@@ -677,26 +679,16 @@ $(document).ready(function(){
 </div>
 
 
-
-<div class="col-md-4">
-<div class="form-group">
-<label>Nombre</label>
-<input type="text" name="Nombre1" id="Nombre1" class="form-control" />
-</div>
-</div>
-
-
-       
         <div class="col-md-4">
                     <div class="form-group">
-   <label>Tipo de Evento</label>
+   <label>Tipo de Evento <i class="fa fa-gift" aria-hidden="true"></i></label>
      <select name="TipoEvento" id="TipoEvento" class="form-control">
       <option value="">Tipo de Evento</option>
       <optgroup label="Fiestas">
-                      <option>XV Años</option>
+                      <option>XV AÃ±os</option>
                       <option>Bautizos</option>
-                      <option>Primera comunión</option>
-                      <option>Cumpleaños</option>
+                      <option>Primera comunion</option>
+                      <option>CumpleaÃ±os</option>
                       </optgroup>
                      <optgroup label="Bodas">
                       <option>Boda de oro</option>
@@ -705,60 +697,48 @@ $(document).ready(function(){
                      </optgroup>
                      <optgroup label="Eventos"></optgroup>
                      <option>Promocionales</option>
-                     <option>Campañas publicitarias</option>
+                     <option>CampaÃ±as publicitarias</option>
                      </select>
                     </div>
         </div>
+
+<div class="col-md-4">
+<div class="form-group">
+<label>Primer Nombre <i class="fa fa-user" aria-hidden="true"></i></label>
+<input type="text" name="Nombre1" id="Nombre1" class="form-control" />
+</div>
+</div>
+
+
+       
       
    
 <div class="col-md-4">
 <div class="form-group">
-<label for="nombre2" class="control-label">Nombre 2</label>
-<input type="text" class="form-control" name="Nombre2" id="Nombre2" placeholder="Nombre 2">
+<label for="nombre2" class="control-label">Segundo nombre <i class="fa fa-user-plus" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Nombre2" id="Nombre2" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="telefono1" class="control-label">Teléfono</label>
-<input  type="text" class="form-control" name="Telefono" id="Telefono" placeholder="Teléfono">
+<label for="telefono1" class="control-label">Telefono <i class="fa fa-phone" aria-hidden="true"></i></label>
+<input  type="text" class="form-control" name="Telefono" id="Telefono" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="celular1" class="control-label">Celular 1</label>
-<input type="text" class="form-control" name="Celular1" id="Celular1" placeholder="Celular 1">
-</div>
-</div>
-
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="Emai1" class="control-label">Email 1</label>
-<input type="text" class="form-control" name="Email1" id="Email1" placeholder="Email 1">
+<label for="celular1" class="control-label">Celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Celular1" id="Celular1" >
 </div>
 </div>
 
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="fechaA" class="control-label">Fecha de Alta</label>
-<input type="text" class="form-control" name="FechaAlta" id="FechaAlta" placeholder="Fecha de Alta">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="comentarios" class="control-label">Comentarios</label>
-<input type="text" class="form-control" name="Comentarios" id="Comentarios" placeholder="Comentarios">
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="form-group">
-<label for="credito" class="control-label">Fax</label>
-<input type="text" class="form-control" name="Fax" id="Fax" placeholder="Fax">
+<label for="celular2" class="control-label">Otro celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Celular2" id="Celular2">
 </div>
 </div>
 
@@ -766,8 +746,15 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="celular2" class="control-label">Celular 2</label>
-<input type="text" class="form-control" name="Celular2" id="Celular2" placeholder="Celular 2">
+<label for="comentarios" class="control-label">Direccion <i class="fa fa-map-marker" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Direccion" id="Direccion" >
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="form-group">
+<label for="Emai1" class="control-label">Email <i class="fa fa-envelope" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Email1" id="Email1" >
 </div>
 </div>
 
@@ -775,17 +762,12 @@ $(document).ready(function(){
 
 <div class="col-md-4">
 <div class="form-group">
-<label for="Email2" class="control-label">Expo</label>
-<input type="text" class="form-control" name="Expo" id="Expo" placeholder="Expo">
+<label for="fechaA" class="control-label">Fecha de Alta <i class="fa fa-calendar" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="FechaAlta" id="datepicker" >
 </div>
 </div>
 
-<div class="col-md-4">
-<div class="form-group">
-<label for="Email2" class="control-label">Fecha Expo</label>
-<input type="text" class="form-control" name="FechaExpo" id="Email2" placeholder="FechaExpo">
-</div>
-</div>
+
 
 
        
@@ -810,6 +792,7 @@ $(document).ready(function(){
  
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       
+
 <?php }else{
         echo '
     <script>
@@ -817,3 +800,5 @@ $(document).ready(function(){
         self.location.replace("../index.php");
     </script>';
     }?>
+
+

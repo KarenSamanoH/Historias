@@ -17,6 +17,8 @@ $(document).ready(function(){
                 resultDropdown.html(data);
             });
         } else{
+            
+            
             resultDropdown.empty();
         }
     });
@@ -45,50 +47,49 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group form-group-sm">
                         <label for="empresa1" class="control-label" >Modelo</label>
-                        <input type="text" class="form-control" id="est-model" name="est-model" placeholder="Empresa" readonly="">
+                        <input type="text" class="form-control" id="est-model" name="est-model" readonly="">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="contacto1" class="control-label" >Descripcion</label>
-                        <input type="text" class="form-control" id="est-descrip" name="est-descrip" placeholder="Contacto" readonly="">
+                        <input type="text" class="form-control" id="est-descrip" name="est-descrip" readonly="">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cargo1" class="control-label">Familia</label>
-                        <input type="text" class="form-control" id="est-family" name="est-family" placeholder="Cargo" readonly="">
+                        <input type="text" class="form-control" id="est-family" name="est-family" readonly="">
                     </div>
                 </div>
             
-           
+
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo por ciento</label>
-                        <input type="text" class="form-control" id="est-100" name="est-100" placeholder="RCF" readonly="">
+                        <input type="text" class="form-control" id="est-100" name="est-100" readonly="">
                     </div>
                 </div>
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="curp1" class="control-label">Costo por millar</label>
-                        <input type="text" class="form-control" id="est-1000" name="est-1000" placeholder="Curp" readonly="">
+                        <input type="text" class="form-control" id="est-1000" name="est-1000" readonly="">
                     </div>
                 </div>
-            
-           
+  
             
              <div class="col-md-4">
                     <div class="form-group">
                         <label for="colonia1" class="control-label">IVA</label>
-                        <input type="text" class="form-control" id="est-iva" name="est-iva" placeholder="Colonia" readonly="">
+                        <input type="text" class="form-control" id="est-iva" name="est-iva" readonly="">
                     </div>
             </div>
             
-             
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Fecha de Evento</label>
-                        <input type="text" class="form-control" id="datepicker" name="event_date" placeholder="Fecha" required="true">
+                        <input type="text" class="form-control" id="datepicker" name="event_date" required="true">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -101,8 +102,10 @@ $(document).ready(function(){
                <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Costo Final</label>
+
                         <input type="hidden" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="" required="true">
                         <h1 id="final-amount" style="text-align: center;"></h1>
+
                     </div>
                 </div>
             

@@ -22,7 +22,7 @@ VALUES ('".$Empresa."','".$Calle."','".$Ciudad."','".$Estado."','".$CP."','".$Co
    
   if(mysqli_query($conexion, $query))
   {
-   echo 'Empresa agregada';
+    echo 'Empresa agregada';
   }else{
   	echo mysqli_error($conexion);
   }

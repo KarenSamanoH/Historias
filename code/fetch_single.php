@@ -22,6 +22,7 @@ $output["FechaAlta"] = $row["FechaAlta"];
 $output["IDAgente"] = $row["IDAgente"];
 $output["Direccion"] = $row["Direccion"];
 $output["TipoEvento"] = $row["TipoEvento"];
+
   
  }
  echo json_encode($output);
