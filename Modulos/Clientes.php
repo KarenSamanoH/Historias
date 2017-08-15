@@ -36,7 +36,7 @@ while($row = mysqli_fetch_array($result))
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Historias en papel</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -331,7 +331,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
 
   <div style="width:100%;">
   <div style="width: 60%; display: inline-block;">
-    <h1 align="center">InformaciÃ³n del cliente</h1>
+    <h1 align="center">Informaci�n del cliente</h1>
   </div>
   <div style="width: 39%; display: inline-block;">
   <h1 style="text-align: right;">
@@ -484,7 +484,7 @@ $('#Direccion').val(data.Direccion);
  {
   Tablacliente.find(".delete").on("click", function(event)
   {
-   if(swal("¿Eliminar cliente?", "No se podra recurar el registro", "warning"))
+   if(swal("Eliminar cliente?", "No se podra recurar el registro", "warning"))
    {
     var IDCliente = $(this).data("row-id");
     console.log(IDCliente);
@@ -634,7 +634,7 @@ $(document).ready(function(){
   }
   else
   {
-   swal("Falta información");
+   swal("Falta informaci�n");
   }
   });
    });
@@ -697,7 +697,7 @@ $(document).ready(function(){
                      </optgroup>
                      <optgroup label="Eventos"></optgroup>
                      <option>Promocionales</option>
-                     <option>CampaÃ±as publicitarias</option>
+                     <option>Campa�as publicitarias</option>
                      </select>
                     </div>
         </div>
