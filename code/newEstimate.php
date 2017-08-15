@@ -98,6 +98,14 @@ $(document).ready(function(){
                         <input type="number" class="form-control" name="qty" placeholder="Cantidad" required="true">
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="descuento" class="control-label">Descuento</label>
+                        <select type="number" class="form-control" name="des" placeholder="Descuento" required="true">
+                        </select>
+                    </div>
+                </div>
             
                <div class="col-md-4">
                     <div class="form-group">
