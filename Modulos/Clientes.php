@@ -29,15 +29,7 @@ while($row = mysqli_fetch_array($result))
 }
 ?>
 
-<?php include("../code/conexion.php");
-$query = "SELECT * FROM descuento";
-$result = mysqli_query($conexion, $query);
-$mensaje = '';
-while($row = mysqli_fetch_array($result))
-{
- $mensaje .= '<option value="'.$row["Nombre"].'">'.$row["Descuento"].'</option>'; 
-}
-?>
+
 
 
 <html lang="en">

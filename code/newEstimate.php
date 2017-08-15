@@ -4,7 +4,15 @@ $clientId=$_POST['clientId'];
    
 ?>
 
-
+<?php include("../code/conexion.php");
+$query = "SELECT * FROM descuento";
+$result = mysqli_query($conexion, $query);
+$descu = '';
+while($row = mysqli_fetch_array($result))
+{
+ $descu .= '<option value="'.$row["Descuento"].'">'.$row["Nombre"].'</option>'; 
+}
+?>
 <script type="text/javascript">
 $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){
@@ -102,7 +110,9 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
-                        <select type="number" class="form-control" name="des" placeholder="Descuento" required="true">
+                        <select type="number" class="form-control" name="descu" id="Descuento" placeholder="Descuento" required="true">
+                            <option value="">Seleccionar descuento</option>
+                           <?php echo $descu; ?>
                         </select>
                     </div>
                 </div>
