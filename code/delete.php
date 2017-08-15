@@ -7,7 +7,7 @@ if(isset($_POST["IDCliente"]))
  $query = "DELETE FROM cliente WHERE IDCliente = '".$_POST["IDCliente"]."'";
  if(mysqli_query($conexion, $query))
  {
-  echo 'Cliente eliminado';
+  echo 'Cliente eliminado.", ".", "success';
  }
 }
 ?>

@@ -27,7 +27,7 @@ $IDAgente = mysqli_real_escape_string($conexion, $_POST["IDAgente"]);
   
   if(mysqli_query($conexion, $query))
   {
-   swal("Cliente agregado!", "Consulta el catalogo!", "success");
+   echo "Cliente agregado!";
   }
  }
 
@@ -56,14 +56,17 @@ Celular2 = '".$Celular2."',
 Email1 ='".$Email1."',
 FechaAlta = '".$FechaAlta."',
 IDAgente = '".$IDAgente."', 
-Direccion ='".$Direccion."',
+Direccion ='".$Direccion."'
 
 
    WHERE IDCliente = '".$_POST["IDCliente"]."'
   ";
   if(mysqli_query($conexion, $query))
   {
-   swal("Información editada!", "Los cambios se han guardado!", "success");
+   echo "Información editada!";
+  }else{
+      echo 'error '.mysqli_error($conexion);
+      echo $query;
   }
  }
 }

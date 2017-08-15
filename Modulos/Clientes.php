@@ -403,7 +403,7 @@ $(document).on('submit', '#product_form', function(event){
   
   
   var form_data = $(this).serialize();
-  if(IDEmpresa != '' && Nombre1 != '' && Celular1 != '' && TipoEvento !='')
+  if(IDEmpresa != '' && Nombre1 != '' && TipoEvento !='')
   {
    $.ajax({
     url:"../code/insert.php",
@@ -420,7 +420,7 @@ $(document).on('submit', '#product_form', function(event){
   }
   else
   {
-   swal("Rellena los campos que se te piden")
+   swal("Rellena los campos que se te piden", "", "warning")
   }
  });
  
@@ -429,7 +429,7 @@ $(document).on('submit', '#product_form', function(event){
  {
   Tablacliente.find(".update").on("click", function(event)
   {
-    console.log('hola perro');
+    
 
    var IDCliente = $(this).data("row-id");
    console.log(IDCliente);
@@ -473,7 +473,7 @@ $('#Direccion').val(data.Direccion);
  {
   Tablacliente.find(".delete").on("click", function(event)
   {
-   if(confirm("Seguro quieres eliminar este cliente?"))
+   if(swal("¿Eliminar cliente?", "No se podra recurar el registro", "warning"))
    {
     var IDCliente = $(this).data("row-id");
     console.log(IDCliente);
@@ -483,7 +483,7 @@ $('#Direccion').val(data.Direccion);
      data:{IDCliente:IDCliente},
      success:function(data)
      {
-      alert(data);
+      swal(data);
       $('#cliente_info').bootgrid('reload');
      }
     })
@@ -614,7 +614,7 @@ $(document).ready(function(){
     data:form_data,
     success:function(data)
     {
-     alert(data);
+     swal(data);
      $('#empresa_form')[0].reset();
      $('#AgregarEmpresa').modal('hide');
      $('#cliente_info').bootgrid('reload');
@@ -623,7 +623,7 @@ $(document).ready(function(){
   }
   else
   {
-   swal("Empresa vacio");
+   swal("Falta información");
   }
   });
    });
