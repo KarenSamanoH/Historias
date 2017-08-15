@@ -61,12 +61,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             
-            <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="rcf1" class="control-label">Costo unitario</label>
-                        <input type="text" class="form-control" id="est-cu" name="est-cu" placeholder="RCF" readonly="">
-                    </div>
-                </div>
+           
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo por ciento</label>
@@ -80,12 +75,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             
-            <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="Calle" class="control-label">Tiempo lead</label>
-                        <input type="text" class="form-control" id="est-lead" name="est-lead" placeholder="Calle" readonly="">
-                    </div>
-                </div>
+           
             
              <div class="col-md-4">
                     <div class="form-group">
@@ -94,12 +84,7 @@ $(document).ready(function(){
                     </div>
             </div>
             
-             <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="cp" class="control-label">Costo del papel</label>
-                        <input type="text" class="form-control" id="est-paper" name="est-paper" placeholder="CP" readonly="">
-                    </div>
-                </div>
+             
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Fecha de Evento</label>
@@ -107,17 +92,23 @@ $(document).ready(function(){
                     </div>
                 </div>
                 <div class="col-md-4">
-                    
+                    <div class="form-group">
+                        <label for="estado1" class="control-label">Cantidad</label>
+                        <input type="number" class="form-control" name="qty" placeholder="Cantidad" required="true">
+                    </div>
                 </div>
             
                <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Costo Final</label>
-                        <input type="text" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="" required="true">
+                        <input type="hidden" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="" required="true">
+                        <h1 id="final-amount" style="text-align: center;"></h1>
                     </div>
                 </div>
             
-
+<input type="hidden" class="form-control" id="est-cu" name="est-cu" placeholder="RCF" readonly="">
+<input type="hidden" class="form-control" id="est-lead" name="est-lead" placeholder="Calle" readonly="">
+<input type="hidden" class="form-control" id="est-paper" name="est-paper" placeholder="CP" readonly="">
 
     </div>
     

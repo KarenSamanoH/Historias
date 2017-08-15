@@ -1,4 +1,15 @@
-<?php include("../code/conexion.php");
+<?php 
+
+
+include("../code/conexion.php");
+if( !session_id() )
+    {
+        session_start();
+     
+        
+    }
+    if(@$_SESSION['logged_in'] == true){
+
 $query = "SELECT * FROM empresa";
 $result = mysqli_query($conexion, $query);
 $output = '';
@@ -207,7 +218,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
                         <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../index.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
+                        <a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
                     </li>
                 </ul>
             </div>
@@ -536,7 +547,7 @@ $('#est-iva').val(model.IVA);
 $('#est-paper').val(model.CostoPapel);
 $('#est-final').val(model.CostoFinal);
   
-
+$('#final-amount').html('$'+model.CostoFinal);
 
 
 
@@ -799,4 +810,10 @@ $(document).ready(function(){
  
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       
-
+<?php }else{
+        echo '
+    <script>
+        alert("Inicia Sesion para entrar a esta pagina");
+        self.location.replace("../index.php");
+    </script>';
+    }?>

@@ -111,7 +111,7 @@ $("#fecha").datepicker();
 <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
 </li>
 <li>
-<a class="page-scroll" href="../index.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
+<a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
 </li>
 </ul>
 </div>

@@ -14,11 +14,12 @@ $res=mysqli_fetch_assoc($mysqli->query($sql));
 $user=$res['Contrasena'];
 if ($res){
     $_SESSION['user'] = $user;
+    $_SESSION['logged_in']=true;
     echo 1;
     
 
 }else{
-    
+   $_SESSION['logged_in']=false; 
 echo 0;    
     }
 ?>
