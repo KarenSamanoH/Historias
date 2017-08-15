@@ -93,36 +93,141 @@ $("#fecha").datepicker();
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 <!-- JS--> 
+<style type="text/css">
+  
+.checgroup{
+  
+width: 75px;
+height: 50px;
+display: inline-block;
+font-size: 11px;
+font-weight: bold;
 
+position: relative;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+.controls{
+  width: 45px;
+  position: relative;
+}
+.iteration{
+  background: #000; width: 18px; height: 18px; border-radius: 64px; color: #fff;
+  position: absolute;
+  top: 14px;
+  right: 15px;
+  line-height:  18px;
+
+
+}
+.less{
+   width: 18px; height: 18px; color: #000;
+  display: inline-block;
+  
+  margin-right: -2px;
+  padding: 0;
+  cursor: pointer;
+  background-image: url('../img/less.png');
+  background-position: center;
+  background-size: contain;
+  
+
+}
+.more{
+   width: 18px; height: 18px;  color: #000;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: -2px;
+  padding: 0;
+  pointer-events: default;
+  background-image: url('../img/more.png');
+  background-position: center;
+  background-size: contain;
+  font-family: "helvetica";
+}
+.checgroup input{
+  display: none;
+}
+.checkicon{
+  width: 30px;
+  height: 30px;
+  background-image: url('../img/off.png');
+  background-position: center;
+  background-size: contain;
+  margin: 0 auto;
+  cursor: pointer;
+  
+}
+.checkicon-on{
+  width: 30px;
+  height: 30px;
+  background-image: url('../img/on.png');
+  background-position: center;
+  background-size: contain;
+  margin: 0 auto;
+  
+  
+}
+.checkicon-on-blue{
+  background-image: url('../images/completed.png');
+}
+.checkicon-on-green{
+  background-image: url('../images/ontime.png');
+}
+.checkicon-on-red{
+  background-image: url('../images/not.png');
+}
+.checkicon-on-yellow{
+  background-image: url('../images/late.png');
+}
+.checktext{
+  margin-top: 5px;
+}
+#mainNav{
+  padding:0!important;
+}
+.line {
+    width: 97%;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    margin: 10px;
+}
+.separator {
+    padding: 0 10px;
+    margin-top: 10px;
+    background: #fff;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    color: #808080;
+    font-family: "Helvetica";
+    font-weight: bold;
+}
+.img-circle{
+  width: 25%!important;
+}
+.indicator{
+  position: absolute;
+  right: 7px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+}
+.indicator img{
+  width: 100%;
+}
+</style>
 </head>
 
 
 <body >
  <!-- oncontextmenu="return false" onkeydown="return false -->
-<?php 
-  while($row = mysqli_fetch_array($getprods))
-{  $productId=$row['IDProducto']; ?>
-<div style="display: inline-block; width: 100px; background: red;">
-<p style="background: black;color: #fff;">Producto <?=$row['IDProducto'] ?></p>
-<?php 
-
-  $elems_query="SELECT * FROM elemento WHERE IDProducto=$productId";
-  $getelems=mysqli_query($conexion, $elems_query);
- while($row2 = mysqli_fetch_array($getelems)){ 
-  $idelem=$row2['IDElemento'];
-  ?>
- <div style="width: 100%">Elem <?=$idelem ?>
-   <?php 
-
-  $proces_query="SELECT p.*,cp.Nombre FROM proceso p INNER JOIN catalogoproceso cp ON p.IDCatPro=cp.IDCatPro WHERE IDElemento=$idelem";
-  $getproces=mysqli_query($conexion, $proces_query);
- while($row3 = mysqli_fetch_array($getproces)){ ?>
- <p style="color: #fff;"><?=$row3['Nombre'] ?></p>
-<?php } ?>
- </div>
- <?php } ?>
-</div>
-<?php } ?> 
+ 
 <nav id="mainNav" class="navbar navbar-default navbar-custom">
 <div class="container">
 <div class="navbar-header page-scroll">
@@ -156,11 +261,6 @@ $("#fecha").datepicker();
 
 </nav>
 
-
-<div class="container responsive">
-<h1 align="center">Detalles del pedido</h1>
-</div>
-<?php print_r($_POST); ?>
 <div class="col-xs-12 col-sm-12 ">
 <div class="panel panel-default">
 <div class="panel-heading resume-heading">
@@ -182,25 +282,8 @@ $("#fecha").datepicker();
 </div>
 
 <div class="col-xs-12 col-sm-8">
-<div class="form-group col-xs-4">
-<label for="Nombre" class="control-label">Nombre</label>
-<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="">
-</div>
 
-<div class="form-group col-xs-4">
-<label for="Descripción" class="control-label">Descripción</label>
-<input type="text" class="form-control" id="Descripción" name="Descripción" placeholder="">
-</div>
 
-<div class="form-group col-xs-4">
-<label for="Descuento" class="control-label">Descuento</label>
-<input type="text" class="form-control" id="Descuento" name="Descuento" placeholder="">
-</div>
-
-<div class="form-group col-xs-4">
-<label for="Crédito" class="control-label">Crédito</label>
-<input type="text" class="form-control" id="Crédito" name="Crédito" placeholder="">
-</div>
 
 <div class="form-group col-xs-4">
 <label for="FechaE" class="control-label">Fecha de evento</label>
@@ -220,7 +303,7 @@ $("#fecha").datepicker();
 <label for="Pedido" class="control-label hidden">boton</label>
 <input  type="submit" class="btn btn-success" id="Pedido" name="Pedido" value="  Enviar pedido  ">
 </div>
-    
+   <div class="form-group col-xs-4"></div> 
 <div class="form-group col-xs-4">
 <label for="Pedido" class="control-label hidden">boton</label>
 <input  type="submit" class="btn btn-info" id="Coti" name="Coti" value="Guardar cotización" >
@@ -230,94 +313,31 @@ $("#fecha").datepicker();
 </div>
 </div>
 </div>
-
+<br>
 <div class="container">
-	<div class="row">
-		<section>
-        <div class="wizard">
-            <div class="wizard-inner">
-                <div class="connecting-line"></div>
-                <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="active">
-                        <a href="#invitacion" data-toggle="tab" aria-controls="invitacion" role="tab" title="invitaciones">
-                            <span class="round-tab">
-                            <img src="../img/invitacion.png" class="img-circle img-responsive"/>
-                            </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="disabled">
-                        <a href="#caja" data-toggle="tab" aria-controls="caja" role="tab" title="caja">
-                            <span class="round-tab">
-                            <img src="../img/caja.png" class="img-circle img-responsive"/>
-                            </span>
-                        </a>
-					</li>                  
-
-                    <li role="presentation" class="disabled">
-                        <a href="#papeleria" data-toggle="tab" aria-controls="papeleria" role="tab" title="papeleria">
-                            <span class="round-tab">
-                           <img src="../img/tapa.png" class="img-circle img-responsive"/>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    <li role="presentation" class="disabled">
-                        <a href="#recuerdos" data-toggle="tab" aria-controls="recuerdos" role="tab" title="recuerdos">
-                            <span class="round-tab">
-                            <img src="../img/recuerdos.png" class="img-circle img-responsive"/>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    <li role="presentation" class="disabled">
-                        <a href="#otros" data-toggle="tab" aria-controls="otros" role="tab" title="Otros">
-                            <span class="round-tab">
-                            <img src="../img/otros.png" class="img-circle img-responsive"/>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-
-<div class="pro-section">
-  
-</div>
-   
-
-<div class="tab-content" align="center">
+	<div class="tab-content" align="center">
 <div class="tab-pane active col-xs-12" role="tabpanel" id="invitacion">
-<h3>Elija el modelo de la invitación</h3>
 
-<div class="box col-lg-12">     
-<ul class="list-inline">
-<li><input type="text" class="text-primary form-control inputdefault" id="inviauto" name="inviauto" placeholder="Buscar" /></li>
-<div id="inviList"></div>         
-</ul>
-</div>
-<br/>
 
 <div class="container col-lg-12">
+<?php 
+  while($row4 = mysqli_fetch_array($getprods))
+{  $productId=$row4['IDProducto']; ?>
 <div class="panel-group">
 <div class="panel panel-info">
-<div class="panel-heading">
+<div class="panel-heading" id="panel-<?=$productId ?>" style="position: relative;">
 <h4 class="panel-title">
-<a data-toggle="collapse" href="#collapseB">Boletos</a>
+<a data-toggle="collapse" href="#collapse<?=$productId ?>">Modelo <?=$row4['Modelo'] ?></a>
 </h4>
+<div class="indicator" style="display: none;"><img src="../img/save.png"></div>
 </div>
-<div id="collapseB" class="panel-collapse collapse">
+<div id="collapse<?=$productId ?>" class="panel-collapse collapse">
 <div class="panel-body">
 
-    <form id="boletos" name="boletos">
+    <form id="<?=$productId ?>" name="<?=$productId ?>">
 <div class="row col-md-8 col-md-offset-2">
 <div class="form">
-<div class="col-md-12"  align="center">
-    <h4>Modelo</h4><ul class="list-inline">
-<li><input type="text" class="form-control"  id="IDElemento" name="IDElemento" placeholder="Buscar M" /></li>
-<div id="BoList"></div>   
-</ul>
-</div>
+
     
     <div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div>   
 
@@ -367,33 +387,92 @@ $("#fecha").datepicker();
     
 
 
-
-<div class ="col-md-12 center-block">
-<h5>Procesos</h5>
-<form action="" method="POST">
+<div class="col-md-12"><h5 class="headerSign">ELEMENTOS</h5></div> 
 <?php 
-$flag=true;
-$query2="SELECT * FROM catalogoproceso";
-$resultado=mysqli_query($conexion, $query2);
-while($row2 = mysqli_fetch_assoc($resultado)){ ?>
-    
- <div class="btn-group" data-toggle="buttons">
-<label class="btn btn-info   <?=($flag==true)? 'active' : '  ' ?>">				
-<span class="">
-<i class="fa fa-check-square" aria-hidden="true"> </i><?=$row2 ['Nombre'] ?>  
-</span>
-    <input autocomplete="off" checked=""  type="checkbox" id='<?=$row2['IDCatPro'] ?>' name="check_list[]" value="<?=$row2['IDCatPro'] ?>">
-<span class="">
-    <i class="fa fa-square-o"><br></i><?=$row2 ['Nombre'] ?>  
-</span>
-</label>
-</div>
-    <?php } ?>
-</form>
 
-            
-        </div>
-             
+  $elems_query="SELECT e.*, ce.Nombre FROM elemento e INNER JOIN catalogoelemento ce ON e.IDCatElem=ce.IDCatElem WHERE IDProducto=$productId";
+  $getelems=mysqli_query($conexion, $elems_query);
+ while($row2 = mysqli_fetch_array($getelems)){ 
+  $idelem=$row2['IDElemento'];
+  ?>
+  
+<div class ="col-md-12 center-block">
+<div class="line"><div class="separator">
+  <?=$row2['Nombre'] ?></div>
+  </div>
+  <br>
+<div id="Suaje-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Suaje-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="Suaje" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">Suaje</div>
+<div id="iteration-Suaje-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('Suaje-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('Suaje-<?=$idelem ?>','<?=$idelem ?>','Suaje')"></div>
+       </div>
+</div>
+<div id="Serigrafia-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Serigrafia-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="Serigrafia" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">Serigrafia</div>
+<div id="iteration-Serigrafia-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('Serigrafia-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('Serigrafia-<?=$idelem ?>','<?=$idelem ?>','Serigrafia')"></div>
+       </div>
+</div>
+<div id="Offset-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Offset-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="Offset" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">Offset</div>
+<div id="iteration-Offset-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('Offset-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('Offset-<?=$idelem ?>','<?=$idelem ?>','Offset')"></div>
+       </div>
+</div>
+<div id="Digital-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Digital-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="Digital" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">Digital</div>
+<div id="iteration-Digital-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('Digital-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('Digital-<?=$idelem ?>','<?=$idelem ?>','Digital')"></div>
+       </div>
+</div>
+<div id="LetterPress-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'LetterPress-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="LetterPress" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">LetterPress</div>
+<div id="iteration-LetterPress-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('LetterPress-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('LetterPress-<?=$idelem ?>','<?=$idelem ?>','LetterPress')"></div>
+       </div>
+</div>
+<div id="Encuadernado-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Encuadernado-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="Encuadernado" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">Encuadernado</div>
+<div id="iteration-Encuadernado-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('Encuadernado-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('Encuadernado-<?=$idelem ?>','<?=$idelem ?>','Encuadernado')"></div>
+       </div>
+</div>
+<div id="Acabado-<?=$idelem ?>" class="checgroup">
+         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Acabado-<?=$idelem ?>',<?=$productId ?>);">
+          <input type="checkbox" class="chk" value="Acabado" name="procesos_<?=$idelem ?>[]">
+         </div>
+         <div class="checktext">Acabado</div>
+<div id="iteration-Acabado-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+                  <div class="less" onclick="lessProcess('Acabado-<?=$idelem ?>')"></div>
+         <div class="more" onclick="moreProcess('Acabado-<?=$idelem ?>','<?=$idelem ?>','Acabado')"></div>
+       </div>
+</div>
+</div>
+  <?php } ?>           
 </div>
         
 </div>
@@ -404,48 +483,15 @@ while($row2 = mysqli_fetch_assoc($resultado)){ ?>
 </div>
 </div>
 </div> 
+<?php } ?>  
 
 </div>
 
 </div>
  
-<!-- Caja -->
-<div class="tab-pane" role="tabpanel" id="caja">
-<h3>Elija el modelo de la caja</h3>
-<ul class="list-inline pull-left">
-<li><input type="text" class="text-primary form-control inputdefault"  id="autoCajas" name="autoCajas" autocomplete="off"  placeholder="Buscar" /></li>
-<li><button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search" aria-hidden="true"></i></button></li>       
-<div id="CajasList"></div>   
-</ul>
-</div>
-<div class="tab-pane" role="tabpanel" id="recuerdos">
-<h3>Elija el modelo del recuerdo</h3>
-<ul class="list-inline pull-left">
-<li><input type="text" class="text-primary form-control inputdefault" autocomplete="off" id="autoRecu" name="autoRecu" placeholder="Buscar" /></li>
-<li><button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search" aria-hidden="true"></i></button></li>    
-<div id="RecuList"></div>   
-</ul>
-</div>
-<div class="tab-pane" role="tabpanel" id="papeleria">
-<ul class="list-inline pull-left">
-<h3>Elija su producto de papelería</h3>
-<li><input type="text" class="text-primary form-control inputdefault" autocomplete="off" id="autoPapeleria" name="autoPapeleria" placeholder="Buscar" /></li>
-<li><button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search" aria-hidden="true"></i></button></li> 
-<div id="PapeList"></div>   
-</ul>
-</div>    
-<div class="tab-pane" role="tabpanel" id="otros">
-<h3>Personalize su producto</h3>
-<ul class="list-inline pull-left">
-<li><input type="text" class="text-primary form-control inputdefault" autocomplete="off"  placeholder="Buscar" /></li>
-<li><button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search" aria-hidden="true"></i></button></li>
-</ul>
-</div>
+
 
 <div class="clearfix"></div>
-</div>
-</div>
-</section>
 </div>
 </div>
 
@@ -625,6 +671,61 @@ $('#CostoFinal').val(data.CostoFinal);
     }
   );
  }
+var i = 2;
+ function checking(idorden,id,idprod){
+        $('#panel-'+idprod+' .indicator').show();
+          $('#odete'+idorden).prop("disabled", false).val(idorden);
+          $('#'+id+' .controls').css('visibility','visible');
+          var $checkbox = $('#'+id).find('input:checkbox');
+          var $checkboxicon = $('#'+id).find('div:first');
+        $checkbox.prop('checked', !$checkbox.prop('checked'));
+        $checkboxicon.toggleClass('checkicon-on');
+        var ischk=$checkbox.is(':checked')
+        var len=$("#inputs-"+idorden).find('input[type=checkbox]:checked').length;
+
+        if (len<1) {
+          $('#odete'+idorden).prop("disabled", true).val('');
+        }
+        
+        if (!ischk) {
+          $('#'+id+' .controls').css('visibility','hidden');
+          $('#iteration-'+id).html('1').hide();
+          $('.inc-proc'+id).remove();
+            $checkboxicon.removeClass('checkicon-on-green');
+        $checkboxicon.removeClass('checkicon-on-yellow');
+        $checkboxicon.removeClass('checkicon-on-red');
+        $checkboxicon.removeClass('checkicon-on-blue');
+          console.log('.inc-proc'+id);
+        }
+        i++;
+        }
+
+         function showTooltip(id){
+          $('#'+id).toggleClass('error-div')
+        }
+
+        function lessProcess(id){
+           var itr=$('#iteration-'+id).html();
+           if (itr>1) {
+             $('#iteration-'+id).show();
+          $('#iteration-'+id).html(parseInt(itr)-1);
+          $('.inc-proc'+id+':last').remove();
+           }
+         
+
+        }
+         function moreProcess(id,idor,proceso){
+          
+          var itr=$('#iteration-'+id).html();
+          $('#iteration-'+id).show();
+          var times=parseInt(itr)+1;
+          $('#iteration-'+id).html(times);
+          $('<input class="temporal inc-proc'+id+'" type=hidden name=procesos_'+idor+'[] value="'+proceso+'"/>').fadeIn('slow').appendTo('#'+id);
+        /*
+          $('<input class="temporal inc-proc'+id+'" type=hidden name=procesos_'+idor+'[] value="'+proceso+'-'+times+'"/>').fadeIn('slow').appendTo('#'+id);
+        */
+          
+        }
  </script>  
  
   

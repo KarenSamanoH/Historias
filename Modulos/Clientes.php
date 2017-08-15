@@ -42,7 +42,7 @@ while($row = mysqli_fetch_array($result))
 
 <html lang="en">
 <head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -341,7 +341,9 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
 
   <div style="width:100%;">
   <div style="width: 60%; display: inline-block;">
-    <h1 align="center">Información del cliente</h1>
+
+    <h1 align="center">InformaciÃ³n del cliente</h1>
+
   </div>
   <div style="width: 39%; display: inline-block;">
   <h1 style="text-align: right;">
@@ -644,7 +646,7 @@ $(document).ready(function(){
   }
   else
   {
-   swal("Falta información");
+   swal("Falta informaciï¿½n");
   }
   });
    });
@@ -707,7 +709,7 @@ $(document).ready(function(){
                      </optgroup>
                      <optgroup label="Eventos"></optgroup>
                      <option>Promocionales</option>
-                     <option>Campañas publicitarias</option>
+                     <option>Campaï¿½as publicitarias</option>
                      </select>
                     </div>
         </div>
