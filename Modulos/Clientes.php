@@ -1,4 +1,15 @@
-<?php include("../code/conexion.php");
+<?php 
+
+
+include("../code/conexion.php");
+if( !session_id() )
+    {
+        session_start();
+     
+        
+    }
+    if(@$_SESSION['logged_in'] == true){
+
 $query = "SELECT * FROM empresa";
 $result = mysqli_query($conexion, $query);
 $output = '';
@@ -189,7 +200,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="container">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle</span>Menú<i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle</span>MenÃº<i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="../Modulos/Principal.php">Historias en Papel</a>
             </div>
@@ -209,7 +220,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
                         <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../index.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
+                        <a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
                     </li>
                 </ul>
             </div>
@@ -320,7 +331,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
 
   <div style="width:100%;">
   <div style="width: 60%; display: inline-block;">
-    <h1 align="center">Información del cliente</h1>
+    <h1 align="center">InformaciÃ³n del cliente</h1>
   </div>
   <div style="width: 39%; display: inline-block;">
   <h1 style="text-align: right;">
@@ -473,7 +484,7 @@ $('#Direccion').val(data.Direccion);
  {
   Tablacliente.find(".delete").on("click", function(event)
   {
-   if(swal("�Eliminar cliente?", "No se podra recurar el registro", "warning"))
+   if(swal("¿Eliminar cliente?", "No se podra recurar el registro", "warning"))
    {
     var IDCliente = $(this).data("row-id");
     console.log(IDCliente);
@@ -536,7 +547,7 @@ $('#est-iva').val(model.IVA);
 $('#est-paper').val(model.CostoPapel);
 $('#est-final').val(model.CostoFinal);
   
-
+$('#final-amount').html('$'+model.CostoFinal);
 
 
 
@@ -623,7 +634,7 @@ $(document).ready(function(){
   }
   else
   {
-   swal("Falta informaci�n");
+   swal("Falta información");
   }
   });
    });
@@ -674,10 +685,10 @@ $(document).ready(function(){
      <select name="TipoEvento" id="TipoEvento" class="form-control">
       <option value="">Tipo de Evento</option>
       <optgroup label="Fiestas">
-                      <option>XV Años</option>
+                      <option>XV AÃ±os</option>
                       <option>Bautizos</option>
                       <option>Primera comunion</option>
-                      <option>Cumpleaños</option>
+                      <option>CumpleaÃ±os</option>
                       </optgroup>
                      <optgroup label="Bodas">
                       <option>Boda de oro</option>
@@ -686,7 +697,7 @@ $(document).ready(function(){
                      </optgroup>
                      <optgroup label="Eventos"></optgroup>
                      <option>Promocionales</option>
-                     <option>Campañas publicitarias</option>
+                     <option>CampaÃ±as publicitarias</option>
                      </select>
                     </div>
         </div>
@@ -782,26 +793,12 @@ $(document).ready(function(){
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       
 
- <script>
- $.datepicker.regional['es'] = {
- closeText: 'Cerrar',
- prevText: '< Ant',
- nextText: 'Sig >',
- currentText: 'Hoy',
- monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
- monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
- dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
- dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
- dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
- weekHeader: 'Sm',
- dateFormat: 'dd/mm/yy',
- firstDay: 1,
- isRTL: false,
- showMonthAfterYear: false,
- yearSuffix: ''
- };
- $.datepicker.setDefaults($.datepicker.regional['es']);
-  $( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-  </script>
+<?php }else{
+        echo '
+    <script>
+        alert("Inicia Sesion para entrar a esta pagina");
+        self.location.replace("../index.php");
+    </script>';
+    }?>
+
+

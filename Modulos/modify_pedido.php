@@ -1,4 +1,17 @@
 <?php include("../code/conexion.php");
+$cotizaId=$_POST['id-cotizacion'];
+
+$data_query="SELECT * FROM cotizacion WHERE IDCotizacion=$cotizaId";
+
+
+$getdata=mysqli_fetch_assoc(mysqli_query($conexion, $data_query));
+
+$products_query="SELECT * FROM producto WHERE IDCotizacion=$cotizaId";
+//$getprods=mysqli_fetch_assoc(mysqli_query($conexion, $products_query));
+//print_r($getprods);
+$getprods=mysqli_query($conexion, $products_query);
+
+
 $query = "SELECT * FROM catalogomaterial";
 $result = mysqli_query($conexion, $query);
 $output = '';
@@ -81,12 +94,35 @@ $("#fecha").datepicker();
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 <!-- JS--> 
 
-
+</head>
 
 
 <body >
  <!-- oncontextmenu="return false" onkeydown="return false -->
+<?php 
+  while($row = mysqli_fetch_array($getprods))
+{  $productId=$row['IDProducto']; ?>
+<div style="display: inline-block; width: 100px; background: red;">
+<p style="background: black;color: #fff;">Producto <?=$row['IDProducto'] ?></p>
+<?php 
 
+  $elems_query="SELECT * FROM elemento WHERE IDProducto=$productId";
+  $getelems=mysqli_query($conexion, $elems_query);
+ while($row2 = mysqli_fetch_array($getelems)){ 
+  $idelem=$row2['IDElemento'];
+  ?>
+ <div style="width: 100%">Elem <?=$idelem ?>
+   <?php 
+
+  $proces_query="SELECT p.*,cp.Nombre FROM proceso p INNER JOIN catalogoproceso cp ON p.IDCatPro=cp.IDCatPro WHERE IDElemento=$idelem";
+  $getproces=mysqli_query($conexion, $proces_query);
+ while($row3 = mysqli_fetch_array($getproces)){ ?>
+ <p style="color: #fff;"><?=$row3['Nombre'] ?></p>
+<?php } ?>
+ </div>
+ <?php } ?>
+</div>
+<?php } ?> 
 <nav id="mainNav" class="navbar navbar-default navbar-custom">
 <div class="container">
 <div class="navbar-header page-scroll">
@@ -111,7 +147,7 @@ $("#fecha").datepicker();
 <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
 </li>
 <li>
-<a class="page-scroll" href="../index.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
+<a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
 </li>
 </ul>
 </div>
@@ -124,7 +160,7 @@ $("#fecha").datepicker();
 <div class="container responsive">
 <h1 align="center">Detalles del pedido</h1>
 </div>
-
+<?php print_r($_POST); ?>
 <div class="col-xs-12 col-sm-12 ">
 <div class="panel panel-default">
 <div class="panel-heading resume-heading">
@@ -245,8 +281,11 @@ $("#fecha").datepicker();
                 </ul>
             </div>
 
+<div class="pro-section">
+  
+</div>
+   
 
-            
 <div class="tab-content" align="center">
 <div class="tab-pane active col-xs-12" role="tabpanel" id="invitacion">
 <h3>Elija el modelo de la invitación</h3>

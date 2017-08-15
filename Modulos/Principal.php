@@ -1,7 +1,18 @@
 <?php
 
-session_start();
-if (isset($_SESSION['user'])){
+if( !session_id() )
+    {
+        session_start();
+     
+        
+    }
+    if(@$_SESSION['logged_in'] != true){
+        echo '
+    <script>
+        alert("Inicia Sesion para entrar a esta pagina");
+        self.location.replace("../index.php");
+    </script>';
+    }else{
 ?>
 
 
@@ -704,7 +715,7 @@ if (isset($_SESSION['user'])){
         
         <?php
         
-}else{    header("location:index.php");}
+}
         ?>
 
 

@@ -1,3 +1,22 @@
+
+<?php 
+
+if( !session_id() )
+    {
+        session_start();
+     
+        
+    }
+    if(@$_SESSION['logged_in'] != true){
+        echo '
+    <script>
+        alert("Inicia Sesion para entrar a esta pagina");
+        self.location.replace("../index.php");
+    </script>';
+    }else{
+?>
+
+
 <head>
 
     <meta charset="utf-8">
@@ -46,7 +65,7 @@
                         <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../index.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
+                        <a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
                     </li>
                 </ul>
             </div>
@@ -183,4 +202,4 @@
     <script src="../js/Historias.js" type="text/javascript"></script>
     
  
- </html>
+ </html><?php } ?>

@@ -1,6 +1,5 @@
 
 <?php
-//fetch_single.php
 include("conexion.php");
 if(isset($_POST["IDCliente"]))
 {
