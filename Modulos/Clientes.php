@@ -806,17 +806,18 @@ $(document).ready(function(){
     </script>';
     }?>
 
-<script>
+<script type="text/javascript">
 
 function cotizar(){
 
-var Cantidad =parseDouble($("#qty").val());
-var CostoFinal = parseDouble($("#final-amount").val());
-var CostoUnico = parseDouble($"#est-cu").val();
-var CostoCiento =parseDouble($("#est-100").val());
-var CostoMillar = parseDouble($("#est-1000").val());
-var papel = parseDouble($("#Papel").val());
-var CostoUnitario = parseDouble($("#est-1").val());
+
+var Cantidad =($("#qty").val());
+var CostoFinal =($("#final-amount").val());
+var CostoUnico = ($"#est-cu").val();
+var CostoCiento =($("#est-100").val());
+var CostoMillar =($("#est-1000").val());
+var papel = ($("#Papel").val());
+var CostoUnitario =($("#est-1").val());
 if (Cantidad <= 99) {
 
 //var CostoFinal = CostoUnico + CostoCiento + CostoMillar + Cantidad * CostoUnitario +(Cantidad * 2) + papel;
@@ -837,7 +838,6 @@ document.getElementById("final-amount").value=parseDouble(CostoUnico)+parseDoubl
  
  
 }
-$('#final-amount').html(CostoFinal);
 }
 
 
