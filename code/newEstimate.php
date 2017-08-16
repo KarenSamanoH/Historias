@@ -13,6 +13,8 @@ while($row = mysqli_fetch_array($result))
  $descu .= '<option value="'.$row["Descuento"].'">'.$row["Nombre"].'</option>'; 
 }
 ?>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){
@@ -42,12 +44,12 @@ $(document).ready(function(){
 <br>
 <div style="position: relative;  background: #f9f9f9; height: 50px; border:solid 1px #ddd; border-radius: 3px; text-align: center;">
 <div class="search-box">
-        <input type="text" autocomplete="off" placeholder="Ingresa el modelo a cotizar" />
+    <input type="text"  autocomplete="off" placeholder="Ingresa el modelo a cotizar" />
         <div class="result"></div>
     </div>
 
 </div>
-<form id="new-estim"  method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
+<form id="new-estim" action="Clientes.php" method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
 <div class="row" style="margin-top: 20px;">
 <input type="hidden" name="clientid" value="<?=$clientId ?>">
 <input type="hidden" name="current_date" value="<?=date("Y-m-d") ?>">
@@ -60,7 +62,7 @@ $(document).ready(function(){
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contacto1" class="control-label" >Descripcion</label>
+                        <label for="contacto1" class="control-label" >Descripción</label>
                         <input type="text" class="form-control" id="est-descrip" name="est-descrip" readonly="">
                     </div>
                 </div>
@@ -71,20 +73,41 @@ $(document).ready(function(){
                     </div>
                 </div>
             
+             <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">Costo Unico</label>
+                        <input type="text" class="form-control" id="est-cu" name="est-cu" readonly="">
+                    </div>
+                </div>
 
-            <div class="col-md-4">
+           <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">Costo unitario</label>
+                        <input type="text" class="form-control" id="est-1" name="est-1" readonly="">
+                    </div>
+                </div>
+ 
+      <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo por ciento</label>
                         <input type="text" class="form-control" id="est-100" name="est-100" readonly="">
                     </div>
                 </div>
+
+           
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="curp1" class="control-label">Costo por millar</label>
                         <input type="text" class="form-control" id="est-1000" name="est-1000" readonly="">
                     </div>
                 </div>
-  
+
+        <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">Papel</label>
+                        <input type="text" class="form-control" id="papel" name="papel" readonly="">
+                    </div>
+                </div>
             
              <div class="col-md-4">
                     <div class="form-group">
@@ -103,7 +126,7 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Cantidad</label>
-                        <input type="number" class="form-control" name="qty" placeholder="Cantidad" required="true">
+                        <input type="number" class="form-control" onkeyup="cotizar();" name="qty" id="qty" placeholder="Cantidad" required="true">
                     </div>
                 </div>
 
@@ -126,6 +149,7 @@ $(document).ready(function(){
 
                     </div>
                 </div>
+
             
 <input type="hidden" class="form-control" id="est-cu" name="est-cu" placeholder="RCF" readonly="">
 <input type="hidden" class="form-control" id="est-lead" name="est-lead" placeholder="Calle" readonly="">
@@ -139,6 +163,13 @@ $(document).ready(function(){
     </div>
     
 <br>
+
+
+
+
+
+
+
 
  <script>
  $.datepicker.regional['es'] = {
