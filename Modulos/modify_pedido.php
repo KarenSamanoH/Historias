@@ -11,7 +11,37 @@ $products_query="SELECT * FROM producto WHERE IDCotizacion=$cotizaId";
 //print_r($getprods);
 $getprods=mysqli_query($conexion, $products_query);
 
+function getCheckStatus($id_elem,$id_proc){
+                    require('../code/conexion.php');
+                    
+                    $subquery="SELECT IDCatPro FROM proceso WHERE IDElemento=$id_elem AND IDCatPro='$id_proc'";
+                    $getting=mysqli_query($conexion,$subquery);
+                  $getLast = mysqli_fetch_assoc($getting);
+                if (isset($getLast['IDCatPro'])) {
+                  echo " defcheck";
+                }
+                  
+                
 
+                  }
+function getProcessPrice($id_elem,$id_proc){
+   require('../code/conexion.php');
+                    
+                    $subquery="SELECT CostoFinal FROM proceso WHERE IDElemento=$id_elem AND IDCatPro='$id_proc'";
+                    $getting=mysqli_query($conexion,$subquery);
+                  $getLast = mysqli_fetch_assoc($getting);
+                if (isset($getLast['CostoFinal'])) {
+                  echo '$'.$getLast['CostoFinal'];
+                  echo "<input type='hidden' value='".$getLast['CostoFinal']."' name='precios[]'>";
+                }
+                else{
+                  $subquery2="SELECT CostoUnitario FROM catalogoproceso WHERE IDCatPro='$id_proc'";
+                    $getting2=mysqli_query($conexion,$subquery2);
+                  $getLast2 = mysqli_fetch_assoc($getting2);
+                  echo '$'.$getLast2['CostoUnitario'];
+                  echo "<input type='hidden' value='".$getLast2['CostoUnitario']."' name='precios[]'>";
+                }
+}
 $query = "SELECT * FROM catalogomaterial";
 $result = mysqli_query($conexion, $query);
 $output = '';
@@ -221,6 +251,15 @@ position: relative;
 .indicator img{
   width: 100%;
 }
+.price{
+  position: absolute;
+  width: 75px;
+  height: 25px;
+  line-height: 25px;
+  top:-25px;
+  font-size: 15px;
+  text-align: center;
+}
 </style>
 </head>
 
@@ -401,28 +440,32 @@ position: relative;
   <?=$row2['Nombre'] ?></div>
   </div>
   <br>
+  <br>
 <div id="Suaje-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Suaje-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,1) ?></div>
+         <div class="checkicon <?=getCheckStatus($idelem ,1);?>   " onclick="checking(<?=$idelem ?>,'Suaje-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="Suaje" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">Suaje</div>
-<div id="iteration-Suaje-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+<div id="iteration-Suaje-<?=$idelem ?>" class="iteration" style="display: none">1</div><div class="controls" style=" visibility: hidden;">
                   <div class="less" onclick="lessProcess('Suaje-<?=$idelem ?>')"></div>
          <div class="more" onclick="moreProcess('Suaje-<?=$idelem ?>','<?=$idelem ?>','Suaje')"></div>
        </div>
 </div>
 <div id="Serigrafia-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Serigrafia-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,2) ?></div>
+         <div class="checkicon  <?=getCheckStatus($idelem ,2);?>  " onclick="checking(<?=$idelem ?>,'Serigrafia-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="Serigrafia" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">Serigrafia</div>
-<div id="iteration-Serigrafia-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
+<div id="iteration-Serigrafia-<?=$idelem ?>" class="iteration" style="display: none">1</div><div class="controls" style=" visibility: hidden;">
                   <div class="less" onclick="lessProcess('Serigrafia-<?=$idelem ?>')"></div>
          <div class="more" onclick="moreProcess('Serigrafia-<?=$idelem ?>','<?=$idelem ?>','Serigrafia')"></div>
        </div>
 </div>
 <div id="Offset-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Offset-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,3) ?></div>
+         <div class="checkicon  <?=getCheckStatus($idelem ,3);?>  " onclick="checking(<?=$idelem ?>,'Offset-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="Offset" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">Offset</div>
@@ -432,7 +475,8 @@ position: relative;
        </div>
 </div>
 <div id="Digital-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Digital-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,4) ?></div>
+         <div class="checkicon  <?=getCheckStatus($idelem ,4);?>  " onclick="checking(<?=$idelem ?>,'Digital-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="Digital" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">Digital</div>
@@ -442,7 +486,8 @@ position: relative;
        </div>
 </div>
 <div id="LetterPress-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'LetterPress-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,5) ?></div>
+         <div class="checkicon  <?=getCheckStatus($idelem ,5);?>  " onclick="checking(<?=$idelem ?>,'LetterPress-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="LetterPress" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">LetterPress</div>
@@ -452,7 +497,8 @@ position: relative;
        </div>
 </div>
 <div id="Encuadernado-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Encuadernado-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,6) ?></div>
+         <div class="checkicon  <?=getCheckStatus($idelem ,6);?>  " onclick="checking(<?=$idelem ?>,'Encuadernado-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="Encuadernado" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">Encuadernado</div>
@@ -462,7 +508,8 @@ position: relative;
        </div>
 </div>
 <div id="Acabado-<?=$idelem ?>" class="checgroup">
-         <div class="checkicon     defcheck" onclick="checking(<?=$idelem ?>,'Acabado-<?=$idelem ?>',<?=$productId ?>);">
+<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,7) ?></div>
+         <div class="checkicon  <?=getCheckStatus($idelem ,7);?>  " onclick="checking(<?=$idelem ?>,'Acabado-<?=$idelem ?>',<?=$productId ?>);">
           <input type="checkbox" class="chk" value="Acabado" name="procesos_<?=$idelem ?>[]">
          </div>
          <div class="checktext">Acabado</div>
@@ -472,6 +519,7 @@ position: relative;
        </div>
 </div>
 </div>
+<br>
   <?php } ?>           
 </div>
         
@@ -606,6 +654,7 @@ position: relative;
  
 <script>  
  $(document).ready(function(){  
+  $('.defcheck ').click();
       $('#IDElemento').keyup(function(){  
            var query = $(this).val();  
            if(query != '')  
@@ -673,11 +722,12 @@ $('#CostoFinal').val(data.CostoFinal);
  }
 var i = 2;
  function checking(idorden,id,idprod){
-        $('#panel-'+idprod+' .indicator').show();
+        //$('#panel-'+idprod+' .indicator').show();
           $('#odete'+idorden).prop("disabled", false).val(idorden);
           $('#'+id+' .controls').css('visibility','visible');
+          $('#'+id+' .price').show();
           var $checkbox = $('#'+id).find('input:checkbox');
-          var $checkboxicon = $('#'+id).find('div:first');
+          var $checkboxicon = $('#'+id).find('.checkicon');
         $checkbox.prop('checked', !$checkbox.prop('checked'));
         $checkboxicon.toggleClass('checkicon-on');
         var ischk=$checkbox.is(':checked')
@@ -688,6 +738,7 @@ var i = 2;
         }
         
         if (!ischk) {
+          $('#'+id+' .price').hide();
           $('#'+id+' .controls').css('visibility','hidden');
           $('#iteration-'+id).html('1').hide();
           $('.inc-proc'+id).remove();
