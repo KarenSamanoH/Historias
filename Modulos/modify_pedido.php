@@ -260,6 +260,48 @@ position: relative;
   font-size: 15px;
   text-align: center;
 }
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding:5px 16px;
+    font-size: 16px;
+    min-width: 160px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+.input_fields_wrap th{
+  text-align: center;
+}
 </style>
 </head>
 
@@ -305,7 +347,7 @@ position: relative;
 <div class="panel-heading resume-heading">
 <div class="row">
 <div class="col-lg-12">
-<div class="col-xs-12 col-sm-4">
+<div class="col-xs-12 col-sm-2">
 <figure>
 <img class="img-circle img-responsive" alt="cotizacion" src="../img/cot.png">
 </figure>
@@ -320,7 +362,7 @@ position: relative;
 
 </div>
 
-<div class="col-xs-12 col-sm-8">
+<div class="col-xs-12 col-sm-10">
 
 
 
@@ -345,7 +387,7 @@ position: relative;
    <div class="form-group col-xs-4"></div> 
 <div class="form-group col-xs-4">
 <label for="Pedido" class="control-label hidden">boton</label>
-<input  type="submit" class="btn btn-info" id="Coti" name="Coti" value="Guardar cotización" >
+<input  type="submit" class="btn btn-info" id="Coti" onclick="$('#general-form').submit();" name="Coti" value="Guardar cotización" >
 </div>
 
 </div>
@@ -353,18 +395,19 @@ position: relative;
 </div>
 </div>
 <br>
-<div class="container">
+<div class="container" style="width: 100%!important;">
 	<div class="tab-content" align="center">
 <div class="tab-pane active col-xs-12" role="tabpanel" id="invitacion">
 
-
+ <form id="general-form" method="post" onsubmit="sendAllData(event);">
 <div class="container col-lg-12">
+<input type="hidden" name="total-amount" id="total-amount">
 <?php 
   while($row4 = mysqli_fetch_array($getprods))
 {  $productId=$row4['IDProducto']; ?>
 <div class="panel-group">
 <div class="panel panel-info">
-<div class="panel-heading" id="panel-<?=$productId ?>" style="position: relative;">
+<div class="panel-heading" id="panel-<?=$productId ?>" style="position: relative; background: #31708f!important; color:#fff">
 <h4 class="panel-title">
 <a data-toggle="collapse" href="#collapse<?=$productId ?>">Modelo <?=$row4['Modelo'] ?></a>
 </h4>
@@ -373,20 +416,15 @@ position: relative;
 <div id="collapse<?=$productId ?>" class="panel-collapse collapse">
 <div class="panel-body">
 
-    <form id="<?=$productId ?>" name="<?=$productId ?>">
-<div class="row col-md-8 col-md-offset-2">
-<div class="form">
+<div class=" col-md-4">
+<div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div> 
+  <div class="col-md-6">
 
-    
-    <div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div>   
 
-<div class="col-md-6">
-
-<form action="" method="post">
 
 <div class="form-group">
 <label for="Material" class="control-label">Material</label>
-<select name="Nombre1" id="Nombre1" class="form-control" placeholder='Material' >
+<select name="materiales[<?=$productId ?>]" id="Nombre1" class="form-control" placeholder='Material' >
 <?php echo $output; ?>
 </select>
 </div>
@@ -395,12 +433,12 @@ position: relative;
 
 <div class="form-group">
  <label for="Alto" class="control-label">Alto</label>
-<input class="form-control" type="text" name="Alto" id="Alto" placeholder="Alto">
+<input class="form-control prices" type="number" name="altos[<?=$productId ?>]" id="Alto" placeholder="Alto" value="0">
 </div>
 
 <div class="form-group">
 <label for="Ancho" class="control-label">Ancho</label>
-<input class="form-control" type="text" name="Ancho" id="Ancho" placeholder="Ancho">
+<input class="form-control prices" type="number" name="anchos[<?=$productId ?>]" id="Ancho" placeholder="Ancho" value="0">
 </div>
     
 </div>
@@ -410,19 +448,26 @@ position: relative;
         
        <div class="form-group">
            <label for="Cantidad" class="control-label">Cantidad</label>
-<input class="form-control" type="text" name="Cantidad" id="Cantidad" placeholder="Cantidad">
+<input class="form-control prices" type="number" name="cantidades[<?=$productId ?>]" id="Cantidad" placeholder="Cantidad" value="0">
 </div>
 
 <div class="form-group ">
 <label for="Costo" class="control-label">Costo del modelo</label>
-<input class="form-control" type="text" name="CostoMod" id="CostoMod" value="" placeholder="$">
+<input class="form-control prices" type="number" name="costosMod[<?=$productId ?>]" id="CostoMod" value="0" placeholder="$">
 </div>
     
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final</label>
-<input class="form-control" type="text" name="CostoFinal" id="CostoFinal" value="" placeholder="$ Final">
+<input class="form-control prices" type="number" name="costosFinales[<?=$productId ?>]" id="CostoFinal" value="0" placeholder="$ Final">
 </div> 
         </div>
+</div>   
+<div class=" col-md-8">
+<div class="form">
+
+    
+      
+
     
 
 
@@ -436,87 +481,112 @@ position: relative;
   ?>
   
 <div class ="col-md-12 center-block">
-<div class="line"><div class="separator">
-  <?=$row2['Nombre'] ?></div>
+
+  <br>
+
+<div class="panel panel-info">
+<div class="panel-heading" id="panel-<?=$idelem ?>" style="position: relative; ">
+<h4 class="panel-title">
+<a data-toggle="collapse" href="#collapse-elem-<?=$idelem ?>"><?=$row2['Nombre'] ?></a>
+</h4>
+<div class="indicator" style="display: none;"><img src="../img/save.png"></div>
+</div>
+<div id="collapse-elem-<?=$idelem ?>" class="panel-collapse collapse">
+<div class="panel-body">
+
+    
+<div class="row ">
+<div class="dropdown">
+<button type="button" onclick="drop(<?=$idelem ?>)" class="dropbtn">Agregar Proceso <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+  <div id="newproces-<?=$idelem ?>" class="dropdown-content">
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'Suaje')">Suaje</a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'Hotstamping')">Hotstamping</a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'Serigrafia')">Serigrafia</a>
   </div>
-  <br>
-  <br>
-<div id="Suaje-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,1) ?></div>
-         <div class="checkicon <?=getCheckStatus($idelem ,1);?>   " onclick="checking(<?=$idelem ?>,'Suaje-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="Suaje" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">Suaje</div>
-<div id="iteration-Suaje-<?=$idelem ?>" class="iteration" style="display: none">1</div><div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('Suaje-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('Suaje-<?=$idelem ?>','<?=$idelem ?>','Suaje')"></div>
-       </div>
 </div>
-<div id="Serigrafia-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,2) ?></div>
-         <div class="checkicon  <?=getCheckStatus($idelem ,2);?>  " onclick="checking(<?=$idelem ?>,'Serigrafia-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="Serigrafia" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">Serigrafia</div>
-<div id="iteration-Serigrafia-<?=$idelem ?>" class="iteration" style="display: none">1</div><div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('Serigrafia-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('Serigrafia-<?=$idelem ?>','<?=$idelem ?>','Serigrafia')"></div>
-       </div>
+<br>  
+<table id="input_fields_wrap_<?=$idelem ?>" class="input_fields_wrap" style="width: 90%;text-align: center;">
+<tr>
+<th>Titulo</th>
+
+  <th>Proceso Ventas</th>
+  <th>Proceso</th>
+  <th>Costo</th>
+  <th></th>
+</tr>
+<?php 
+
+  $proces_query="SELECT p.*,cp.Nombre FROM proceso p INNER JOIN catalogoproceso cp ON p.IDCatPro=cp.IDCatPro WHERE IDElemento=$idelem";
+  $getproces=mysqli_query($conexion, $proces_query);
+ while($row3 = mysqli_fetch_array($getproces)){ 
+  $idproces=$row3['IDProceso'];
+
+  ?>
+ 
+  <tr>
+  <td>
+    <?=$row3['Nombre'] ?>
+  </td>
+  <td><select name="procesos-<?=$idelem ?>[]" value="<?= $idproces ?>">
+  <option value="36" <?=($idproces==36)? 'selected' :'';?> >Armado </option>
+        <option value="1" <?=($idproces==1)? 'selected' :'';?> >Caja </option>
+        <option value="2" <?=($idproces==2)? 'selected' :'';?>>Calado </option>
+        <option value="3" <?=($idproces==3)? 'selected' :'';?>>Celofan </option>
+        <option value="4" <?=($idproces==4)? 'selected' :'';?>>Corte </option>
+        <option value="5" <?=($idproces==5)? 'selected' :'';?>>Diseño </option>
+        <option value="6" <?=($idproces==6)? 'selected' :'';?>>Doblez </option>
+        <option value="7" <?=($idproces==7)? 'selected' :'';?>>Dummie </option>
+        <option value="8" <?=($idproces==8)? 'selected' :'';?>>Empalme </option>
+        <option value="9" <?=($idproces==9)? 'selected' :'';?>>Empaque </option>
+        <option value="0" <?=($idproces==0)? 'selected' :'';?>>Grabado </option>
+        <option value="11" <?=($idproces==11)? 'selected' :'';?>>Grapa </option>
+        <option value="12" <?=($idproces==12)? 'selected' :'';?>>Hot Stamping </option>
+        <option value="13" <?=($idproces==13)? 'selected' :'';?>>Idioma </option>
+        <option value="14" <?=($idproces==14)? 'selected' :'';?>>Impresion Digital </option>
+        <option value="15" <?=($idproces==15)? 'selected' :'';?>>Lacre </option>
+        <option value="16" <?=($idproces==16)? 'selected' :'';?>>Laminado </option>
+        <option value="17" <?=($idproces==17)? 'selected' :'';?>>Laton </option>
+        <option value="18" <?=($idproces==18)? 'selected' :'';?>>Liston </option>
+        <option value="19" <?=($idproces==19)? 'selected' :'';?> >Motivo</option>
+        <option value="20" <?=($idproces==20)? 'selected' :'';?>>Offset </option>
+        <option value="21" <?=($idproces==21)? 'selected' :'';?>>Papel </option>
+        <option value="22" <?=($idproces==22)? 'selected' :'';?>>Pegado </option>
+        <option value="23" <?=($idproces==23)? 'selected' :'';?>>Perforacion </option>
+        <option value="24" <?=($idproces==24)? 'selected' :'';?>>Preprensa </option>
+        <option value="25" <?=($idproces==25)? 'selected' :'';?>>Producto </option>
+        <option value="26" <?=($idproces==26)? 'selected' :'';?>>Rotulacion </option>
+        <option value="27" <?=($idproces==27)? 'selected' :'';?>>Sticker </option>
+        <option value="28" <?=($idproces==28)? 'selected' :'';?>>Suaje </option>
+        <option value="29" <?=($idproces==29)? 'selected' :'';?>>Tinta + Grabado </option>
+        <option value="30" <?=($idproces==30)? 'selected' :'';?>>Tinta 1 </option>
+        <option value="31" <?=($idproces==31)? 'selected' :'';?>>Tinta 2 </option>
+        <option value="32 " <?=($idproces==32 )? 'selected' :'';?>>Tinta 3 </option>
+        <option value="33" <?=($idproces==33)? 'selected' :'';?>>Tinta 4 </option>
+        <option value="34" <?=($idproces==34)? 'selected' :'';?>>Tinta 5 </option>
+        <option value="35" <?=($idproces==35)? 'selected' :'';?>>Tinta 6 </option>
+  </select>
+  </td>
+  <td><select>
+    <option>Labrador</option>
+    <option>Ratonero</option>
+    <option>Chilaquil</option>
+  </select>
+  </td>
+  <td>$5
+  <input type="hidden" class="prices" value="5">
+  </td>
+  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>)">Quitar</a></td>
+ </tr>
+<?php } ?> 
+</table>
+
+      
 </div>
-<div id="Offset-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,3) ?></div>
-         <div class="checkicon  <?=getCheckStatus($idelem ,3);?>  " onclick="checking(<?=$idelem ?>,'Offset-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="Offset" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">Offset</div>
-<div id="iteration-Offset-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('Offset-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('Offset-<?=$idelem ?>','<?=$idelem ?>','Offset')"></div>
-       </div>
+        
+
+
 </div>
-<div id="Digital-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,4) ?></div>
-         <div class="checkicon  <?=getCheckStatus($idelem ,4);?>  " onclick="checking(<?=$idelem ?>,'Digital-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="Digital" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">Digital</div>
-<div id="iteration-Digital-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('Digital-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('Digital-<?=$idelem ?>','<?=$idelem ?>','Digital')"></div>
-       </div>
 </div>
-<div id="LetterPress-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,5) ?></div>
-         <div class="checkicon  <?=getCheckStatus($idelem ,5);?>  " onclick="checking(<?=$idelem ?>,'LetterPress-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="LetterPress" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">LetterPress</div>
-<div id="iteration-LetterPress-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('LetterPress-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('LetterPress-<?=$idelem ?>','<?=$idelem ?>','LetterPress')"></div>
-       </div>
-</div>
-<div id="Encuadernado-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,6) ?></div>
-         <div class="checkicon  <?=getCheckStatus($idelem ,6);?>  " onclick="checking(<?=$idelem ?>,'Encuadernado-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="Encuadernado" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">Encuadernado</div>
-<div id="iteration-Encuadernado-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('Encuadernado-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('Encuadernado-<?=$idelem ?>','<?=$idelem ?>','Encuadernado')"></div>
-       </div>
-</div>
-<div id="Acabado-<?=$idelem ?>" class="checgroup">
-<div class="price" style="display:none;" id="price-<?=$idelem ?>"><?=getProcessPrice($idelem,7) ?></div>
-         <div class="checkicon  <?=getCheckStatus($idelem ,7);?>  " onclick="checking(<?=$idelem ?>,'Acabado-<?=$idelem ?>',<?=$productId ?>);">
-          <input type="checkbox" class="chk" value="Acabado" name="procesos_<?=$idelem ?>[]">
-         </div>
-         <div class="checktext">Acabado</div>
-<div id="iteration-Acabado-<?=$idelem ?>" class="iteration" style="display: none">1</div>          <div class="controls" style=" visibility: hidden;">
-                  <div class="less" onclick="lessProcess('Acabado-<?=$idelem ?>')"></div>
-         <div class="more" onclick="moreProcess('Acabado-<?=$idelem ?>','<?=$idelem ?>','Acabado')"></div>
-       </div>
 </div>
 </div>
 <br>
@@ -778,5 +848,157 @@ var i = 2;
           
         }
  </script>  
+ <script>
+
+function drop(id) {
+    document.getElementById("newproces-"+id).classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    collectPrices();
+    
+   
+});
+  var x = 1; 
+  var max_fields      = 1000; 
+  
+    
+  function addProcess(id,sel){
+    wrapper=$("#input_fields_wrap_"+id); 
+    event.preventDefault();
+        console.log(sel);
+         
+        if (sel=='Suaje') {
+        var process_name='Suaje';
+    }else if(sel=='Hotstamping'){
+     var process_name='Hotstamping';
+    }
+    else if (sel=='Serigrafia') {
+     var process_name='Serigrafia';
+    }
+        var sec_options='<option disabled="true" selected="true">Elige el Proceso..</option>'+
+        '<option value="36">Armado </option>'+
+        '<option value="1">Caja </option>'+
+        '<option value="2">Calado </option>'+
+        '<option value="3">Celofan </option>'+
+        '<option value="4">Corte </option>'+
+        '<option value="5">Diseño </option>'+
+        '<option value="6">Doblez </option>'+
+        '<option value="7">Dummie </option>'+
+        '<option value="8">Empalme </option>'+
+        '<option value="9">Empaque </option>'+
+        '<option value="0">Grabado </option>'+
+        '<option value="11">Grapa </option>'+
+        '<option value="12">Hot Stamping </option>'+
+        '<option value="13">Idioma </option>'+
+        '<option value="14">Impresion Digital </option>'+
+        '<option value="15">Lacre </option>'+
+        '<option value="16">Laminado </option>'+
+        '<option value="17">Laton </option>'+
+        '<option value="18">Liston </option>'+
+        '<option value="19"> Motivo</option>'+
+        '<option value="20">Offset </option>'+
+        '<option value="21">Papel </option>'+
+        '<option value="22">Pegado </option>'+
+        '<option alue="23">Perforacion </option>'+
+        '<option value="24">Preprensa </option>'+
+        '<option value="25">Producto </option>'+
+        '<option value="26">Rotulacion </option>'+
+        '<option value="27">Sticker </option>'+
+        '<option value="28">Suaje </option>'+
+        '<option value="29">Tinta + Grabado </option>'+
+        '<option value="30">Tinta 1 </option>'+
+        '<option value="31">Tinta 2 </option>'+
+        '<option value="32 ">Tinta 3 </option>'+
+        '<option value="33">Tinta 4 </option>'+
+        '<option value="34">Tinta 5 </option>'+
+        '<option value="35">Tinta 6 </option>';
+        var sec_options2=' <option disabled="true" selected="true">Elige el Proceso..</option>'+
+                        '<option>Maria Luisa</option>'+
+                        '<option>Marial Luisa 2</option>'+
+                        '<option>Maria Luisa 3</option>'+
+                        '<option>Esquela Sencilla</option>'+
+                        '<option>Esquela Sencilla</option>'+
+                        '<option>Esquela Doble</option>'+
+                        '<option>Esquela Doble</option>'+
+                        '<option>Esquela Triptico</option>'+
+                        '<option>Esquela Triple</option>'+
+                        '<option>Esquela Interior</option>'+
+                        '<option>Esquela Interior</option>'+
+                        '<option>Esquela Exterior</option>'+
+                        '<option>Forro</option>'+
+                        '<option>Hoja Interior 1</option>'+
+                        '<option>Hoja Interior 2</option>'+
+                        '<option>Hoja Interior 3</option>'+
+                        '<option>Cintilla</option>'+
+                        '<option>Cinturon</option>';
+        var new_tr='<tr><td>'+process_name+'</td>'+
+                    '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+
+                    '<td><select disabled class="disabled" name="procesos['+id+']">'+sec_options2+'</select></td>'+
+                    '<td>$5</td><input type="hidden" class="prices" value="5">'+
+                    '<td><a href="#" onclick=removeProcess('+id+')>Quitar</a></td></tr>';
+
+        
+
+      if(x < max_fields){ 
+            x++; 
+            $(wrapper).append(new_tr); 
+        }  
+collectPrices();
+    }
+    function removeProcess(id){
+     
+      console.log('');
+        event.preventDefault();
+        $('#input_fields_wrap_'+id).find('tr:last').remove(); x--;
+        collectPrices();
+    }
+    function sendAllData(event){
+              event.preventDefault();
+                    
+                        $.ajax({  
+                              
+                             type:"POST",
+                             url:"editEstimate.php",   
+                             data:$('#general-form').serialize(),  
+                               
+                             success:function(data){
+                              
+                                  $('.col-lg-12').html(data);  
+                             }  
+                        });
+    }
+
+  function collectPrices(){
+      var sum = 0;
+$('.prices').each(function(){
+    sum += parseFloat(this.value);
+});
+$('#total-amount').val(sum);
+$('#CostoF').val(sum);
+
+
+
+  }
+  $('.prices').keyup(function() {
+  collectPrices();
+});
+
+</script>
  
   
