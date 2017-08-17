@@ -219,6 +219,7 @@ position: relative;
 }
 #mainNav{
   padding:0!important;
+  margin: 0!important;
 }
 .line {
     width: 97%;
@@ -239,7 +240,7 @@ position: relative;
     font-weight: bold;
 }
 .img-circle{
-  width: 25%!important;
+  width: 15%!important;
 }
 .indicator{
   position: absolute;
@@ -265,7 +266,7 @@ position: relative;
     color: white;
     padding:5px 16px;
     font-size: 16px;
-    min-width: 160px;
+    width: 180px;
     border: none;
     cursor: pointer;
 }
@@ -277,31 +278,55 @@ position: relative;
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 100%;
+    text-align: right;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
+    background-color: #fff;
+    width: 100%;
     overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.86);
+-moz-box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.86);
+-webkit-box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.86);
     z-index: 1;
+    text-align: left;
 }
 
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
+  border:1px solid transparent;
     text-decoration: none;
-    display: block;
+    display: inline-block;
+}
+.dropdown-content a:hover{
+   background-color: #d9edf7;
+    border:1px solid #bce8f1;
 }
 
-.dropdown a:hover {background-color: #f1f1f1}
+
 
 .show {display:block;}
 .input_fields_wrap th{
   text-align: center;
+  padding: 6px!important;
+  border:1px solid #f2f2f2;
+  
 }
+.input_fields_wrap{
+  margin-top: 10px;
+}
+.input_fields_wrap tr, td{
+  padding: 6px!important;
+   border:1px solid #f2f2f2;
+}
+.resume-heading{
+  padding-bottom: 0!important;
+}
+.input_fields_wrap tr:nth-child(even){background: #f2f2f2}
 </style>
 </head>
 
@@ -347,7 +372,7 @@ position: relative;
 <div class="panel-heading resume-heading">
 <div class="row">
 <div class="col-lg-12">
-<div class="col-xs-12 col-sm-2">
+<div class="col-xs-12 col-sm-4">
 <figure>
 <img class="img-circle img-responsive" alt="cotizacion" src="../img/cot.png">
 </figure>
@@ -362,17 +387,17 @@ position: relative;
 
 </div>
 
-<div class="col-xs-12 col-sm-10">
+<div class="col-xs-12 col-sm-8">
 
 
 
-<div class="form-group col-xs-4">
+<div class="form-group col-xs-2">
 <label for="FechaE" class="control-label">Fecha de evento</label>
 <input type="text" class="form-control"  id="datepicker" name="FechaE" placeholder="">
 </div>
 
 
-<div class="form-group col-xs-4">
+<div class="form-group col-xs-2">
 <label for="CostoF" class="control-label">Costo Final</label>
 <input type="text" class="form-control" id="CostoF" name="CostoF" placeholder="">
 </div>
@@ -380,13 +405,15 @@ position: relative;
 
 
 
-<div class="form-group col-xs-4">
-<label for="Pedido" class="control-label hidden">boton</label>
+<div class="form-group col-xs-2">
+<p style="margin: 0;">&nbsp</p>
+
 <input  type="submit" class="btn btn-success" id="Pedido" name="Pedido" value="  Enviar pedido  ">
 </div>
-   <div class="form-group col-xs-4"></div> 
-<div class="form-group col-xs-4">
-<label for="Pedido" class="control-label hidden">boton</label>
+
+<div class="form-group col-xs-2">
+<p style="margin: 0;">&nbsp</p>
+
 <input  type="submit" class="btn btn-info" id="Coti" onclick="$('#general-form').submit();" name="Coti" value="Guardar cotización" >
 </div>
 
@@ -496,16 +523,28 @@ position: relative;
 
     
 <div class="row ">
-<div class="dropdown">
+<div class="col-md-2">
+  <h5 class="headerSign" style="text-align: left;">    PROCESOS</h5>
+</div>
+<div class="col-md-10">
+  <div class="dropdown">
 <button type="button" onclick="drop(<?=$idelem ?>)" class="dropbtn">Agregar Proceso <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
   <div id="newproces-<?=$idelem ?>" class="dropdown-content">
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'Suaje')">Suaje</a>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'Hotstamping')">Hotstamping</a>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'Serigrafia')">Serigrafia</a>
+  <?php 
+  $getProcesQuery="SELECT * FROM catalogoproceso";
+  $getProcessCat=mysqli_query($conexion, $getProcesQuery);
+  while ($process=mysqli_fetch_assoc($getProcessCat)){
+  
+   ?>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>)"><?=$process['Nombre'] ?></a>
+    
+    <?php } ?>
   </div>
 </div>
+</div>
+<br> 
 <br>  
-<table id="input_fields_wrap_<?=$idelem ?>" class="input_fields_wrap" style="width: 90%;text-align: center;">
+<table id="input_fields_wrap_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
 <tr>
 <th>Titulo</th>
 
@@ -519,8 +558,8 @@ position: relative;
   $proces_query="SELECT p.*,cp.Nombre FROM proceso p INNER JOIN catalogoproceso cp ON p.IDCatPro=cp.IDCatPro WHERE IDElemento=$idelem";
   $getproces=mysqli_query($conexion, $proces_query);
  while($row3 = mysqli_fetch_array($getproces)){ 
-  $idproces=$row3['IDProceso'];
-
+  $idproces=$row3['IDCatPro'];
+  $IDCatPro=$row3['IDCatPro'];
   ?>
  
   <tr>
@@ -878,19 +917,14 @@ window.onclick = function(event) {
   var max_fields      = 1000; 
   
     
-  function addProcess(id,sel){
+  function addProcess(id,sel,price){
     wrapper=$("#input_fields_wrap_"+id); 
     event.preventDefault();
         console.log(sel);
          
-        if (sel=='Suaje') {
-        var process_name='Suaje';
-    }else if(sel=='Hotstamping'){
-     var process_name='Hotstamping';
-    }
-    else if (sel=='Serigrafia') {
-     var process_name='Serigrafia';
-    }
+        
+       
+    
         var sec_options='<option disabled="true" selected="true">Elige el Proceso..</option>'+
         '<option value="36">Armado </option>'+
         '<option value="1">Caja </option>'+
@@ -947,10 +981,10 @@ window.onclick = function(event) {
                         '<option>Hoja Interior 3</option>'+
                         '<option>Cintilla</option>'+
                         '<option>Cinturon</option>';
-        var new_tr='<tr><td>'+process_name+'</td>'+
+        var new_tr='<tr><td>'+sel+'</td>'+
                     '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+
                     '<td><select disabled class="disabled" name="procesos['+id+']">'+sec_options2+'</select></td>'+
-                    '<td>$5</td><input type="hidden" class="prices" value="5">'+
+                    '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
                     '<td><a href="#" onclick=removeProcess('+id+')>Quitar</a></td></tr>';
 
         
