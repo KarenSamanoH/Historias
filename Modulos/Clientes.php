@@ -29,15 +29,7 @@ while($row = mysqli_fetch_array($result))
 }
 ?>
 
-<?php include("../code/conexion.php");
-$query = "SELECT * FROM descuento";
-$result = mysqli_query($conexion, $query);
-$mensaje = '';
-while($row = mysqli_fetch_array($result))
-{
- $mensaje .= '<option value="'.$row["Nombre"].'">'.$row["Descuento"].'</option>'; 
-}
-?>
+
 
 
 <html lang="en">
@@ -552,13 +544,14 @@ $('#est-model ').val(model.Modelo);
 $('#est-descrip ').val(model.Descripcion);
 $('#est-family ').val(model.Familia);
 $('#est-cu ').val(model.CostoUnico);
+$('#est-1').val(model.CostoUnitario);
 $('#est-100').val(model.CostoCiento);
 $('#est-1000 ').val(model.CostoMillar);
 $('#est-lead').val(model.TiempoLead);
 $('#est-iva').val(model.IVA);
 $('#est-paper').val(model.CostoPapel);
 $('#est-final').val(model.CostoFinal);
-  
+$('#papel').val(model.CostoPapel);  
 $('#final-amount').html('$'+model.CostoFinal);
 
 
@@ -813,4 +806,40 @@ $(document).ready(function(){
     </script>';
     }?>
 
+<script type="text/javascript">
 
+function cotizar(){
+
+
+var Cantidad =($("#qty").val());
+var CostoFinal =($("#final-amount").val());
+var CostoUnico = ($"#est-cu").val();
+var CostoCiento =($("#est-100").val());
+var CostoMillar =($("#est-1000").val());
+var papel = ($("#Papel").val());
+var CostoUnitario =($("#est-1").val());
+if (Cantidad <= 99) {
+
+//var CostoFinal = CostoUnico + CostoCiento + CostoMillar + Cantidad * CostoUnitario +(Cantidad * 2) + papel;
+
+//$CostoFinal = CostoUnico + CostoCiento + CostoMillar;
+//$("#final-amount").val(CostoFinal);
+
+document.getElementById("final-amount").value=parseDouble(CostoUnico)+parseDouble(CostoCiento)+parseDouble(CostoMillar);
+
+} else if (Cantidad > 100) {
+
+//var CostoFinal = CostoUnico + CostoCiento + CostoMillar + ((Cantidad-1000) * (CostoMillar/1000)) + ((Cantidad-100) * (CostoCiento/100)) + (Cantidad * CostoUnitario) + papel;
+
+
+} else if (Cantidad > 1000) {
+
+// var CostoFinal = CostoUnico + CostoCiento + CostoMillar + ((Cantidad-1000) * (CostoMillar/1000)) + ((Cantidad-100) * (CostoCiento/100)) + (Cantidad * CostoUnitario) + papel;
+ 
+ 
+}
+}
+
+
+
+</script>
