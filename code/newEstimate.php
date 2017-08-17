@@ -83,7 +83,7 @@ $(document).ready(function(){
            <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo unitario</label>
-                        <input type="text" class="form-control" id="est-1" name="est-1">
+                        <input type="text" class="form-control" id="est1" name="est1">
                     </div>
                 </div>
  
@@ -198,17 +198,16 @@ $(document).ready(function(){
 function co()
 {
 
+costofinal = document.getElementById("final").value;
+cantidad = document.getElementById("qty").value;
+costounitario = document.getElementById("est-100").value;
 
-    var cantidad = document.new.qty.value;
-    var costofinal;
-    var costounitario = document.new.estcu.value;
-
-    if (cantidad => 1)
+    if (cantidad => 1 && cantidad <= 99)
     {
 
-
-costofinal = cantidad*costounitario;
-document.getElementById("new").value = costofinal;
+    final = cantidad*costounitario;
+      $('#final').html(final);
+      $('#est-final').val(final);
     }
 
     else if (cantidad > 100)
@@ -223,59 +222,4 @@ document.getElementById("new").value = costofinal;
 
 
 </script>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<table class="table table-condensed" id="myTable">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Nombre producto</th>
-      <th>Cantidad</th>
-      <th>Precio unitario</th>
-      <th>Precio</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tbodyusuarios">
-    <tr>
-      <td>1</td>
-      <td>Camiseta</td>
-      <td><input type="number" class="cantidad" value="3"/></td>
-      <td><span class="precio">5</span>$</td>
-      <td><span class="total">15</span>€</td>
-      <td><button class="btn btn-default" type="submit" onclick="deleteRow(this)">Eliminar</button></td>
-     </tr>
-    <tr>
-      <td>1</td>
-      <td>Pantalon</td>
-      <td><input type="number" class="cantidad" value="1"/></td>
-      <td><span class="precio">8</span>$</td>
-      <td><span class="total">8</span>$</td>
-      <td><button class="btn btn-default" type="submit" onclick="deleteRow(this)">Eliminar</button></td>
-     </tr>
-   </tbody>
-</table>
-
-<script type="text/javascript">
-    $('#tbodyusuarios')
-  .on('input', '.cantidad', function() {
-    var $input = $(this), // input.cantidad
-        cantidad = parseInt($input.val(), 10), // valor de input.cantidad
-        $tr = $input.closest('tr'), // fila del input.canitdad
-        precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
-        $total = $tr.find('.total'); // elemento span.total
-    
-    $total.text(precio * cantidad); // seteamo el valor del span.total
-  });
-
-</script>
-
-
-
-
-
-
-
-
 
