@@ -49,7 +49,7 @@ $(document).ready(function(){
     </div>
 
 </div>
-<form id="new-estim" action="Clientes.php" method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
+<form id="new-estim" name="new" action="newEstimate.php" method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
 <div class="row" style="margin-top: 20px;">
 <input type="hidden" name="clientid" value="<?=$clientId ?>">
 <input type="hidden" name="current_date" value="<?=date("Y-m-d") ?>">
@@ -126,7 +126,7 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Cantidad</label>
-                        <input type="number" class="form-control" onkeyup="cotizar();" name="qty" id="qty" placeholder="Cantidad" required="true">
+                        <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
                     </div>
                 </div>
 
@@ -144,8 +144,8 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label for="estado1" class="control-label">Costo Final</label>
 
-                        <input type="hidden" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="" required="true">
-                        <h1 id="final-amount" style="text-align: center;"></h1>
+                        <input type="hidden" class="form-control" id="est-final" name="est-final" readonly="" required="true">
+                        <input type="text" id="final" style="text-align: center;" > 
 
                     </div>
                 </div>
@@ -163,11 +163,6 @@ $(document).ready(function(){
     </div>
     
 <br>
-
-
-
-
-
 
 
 
@@ -194,3 +189,35 @@ $(document).ready(function(){
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
   </script>
+
+
+
+
+<script>
+
+function co()
+{
+
+    var cantidad = document.new.qty.value;
+    var costofinal = document.new.value;
+
+
+    if (cantidad => 1)
+    {
+
+
+
+    }
+
+    else if (cantidad > 100)
+    {
+        alert (":v");
+    }
+
+}
+
+
+    
+
+
+</script>

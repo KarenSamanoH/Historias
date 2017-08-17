@@ -808,9 +808,6 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 
-function cotizar(){
-
-
 var Cantidad =($("#qty").val());
 var CostoFinal =($("#final-amount").val());
 var CostoUnico = ($"#est-cu").val();
@@ -818,26 +815,16 @@ var CostoCiento =($("#est-100").val());
 var CostoMillar =($("#est-1000").val());
 var papel = ($("#Papel").val());
 var CostoUnitario =($("#est-1").val());
-if (Cantidad <= 99) {
 
-//var CostoFinal = CostoUnico + CostoCiento + CostoMillar + Cantidad * CostoUnitario +(Cantidad * 2) + papel;
+function cotizar(){
 
-//$CostoFinal = CostoUnico + CostoCiento + CostoMillar;
-//$("#final-amount").val(CostoFinal);
+if (cantidad <= 99 && => 1){
 
-document.getElementById("final-amount").value=parseDouble(CostoUnico)+parseDouble(CostoCiento)+parseDouble(CostoMillar);
-
-} else if (Cantidad > 100) {
-
-//var CostoFinal = CostoUnico + CostoCiento + CostoMillar + ((Cantidad-1000) * (CostoMillar/1000)) + ((Cantidad-100) * (CostoCiento/100)) + (Cantidad * CostoUnitario) + papel;
+alert ('Hola');        
+        }
 
 
-} else if (Cantidad > 1000) {
 
-// var CostoFinal = CostoUnico + CostoCiento + CostoMillar + ((Cantidad-1000) * (CostoMillar/1000)) + ((Cantidad-100) * (CostoCiento/100)) + (Cantidad * CostoUnitario) + papel;
- 
- 
-}
 }
 
 
