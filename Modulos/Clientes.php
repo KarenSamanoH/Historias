@@ -807,27 +807,4 @@ $(document).ready(function(){
     </script>';
     }?>
 
-<script type="text/javascript">
-
-var Cantidad =($("#qty").val());
-var CostoFinal =($("#final-amount").val());
-var CostoUnico = ($"#est-cu").val();
-var CostoCiento =($("#est-100").val());
-var CostoMillar =($("#est-1000").val());
-var papel = ($("#Papel").val());
-var CostoUnitario =($("#est-1").val());
-
-function cotizar(){
-
-if (cantidad <= 99 && => 1){
-
-alert ('Hola');        
-        }
-
-
-
-}
-
-
-
 </script>
