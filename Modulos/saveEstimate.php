@@ -35,7 +35,7 @@ if ($result) {
 
 	$getelemquery="SELECT id_elemento_linea,IDCatElem FROM elementos_linea WHERE IDLinea=$idprod";
 	$getelems=mysqli_query($conexion, $getelemquery);
-
+	print_r($getelems);
 while ( $row=mysqli_fetch_assoc($getelems)) {
 	$idcatelem=$row['IDCatElem'];
 	$addelemquery="INSERT INTO elemento (IDElemento, IDProducto, IDCatElem, IDCatMod, IDCatMat, Cantidad, Ancho, Alto, Profundidad, CostoMod, PrecioCompra, CostoFinal) VALUES (NULL, $lastprod_id, $idcatelem, NULL, NULL, NULL, 0.00, 0.00, 0.00, 0.00, NULL, 0.00)";
@@ -47,14 +47,17 @@ while ( $row=mysqli_fetch_assoc($getelems)) {
 		$lastelem_id = $conexion->insert_id;
 		echo "last elem ".$lastelem_id."<br>";
 		$id_elem=$row['id_elemento_linea'];
-	$getprocsquery="SELECT IDProcesosLinea FROM procesoslinea WHERE id_elemento_linea=$id_elem";
+		echo "ID ELEMENTO LINEA ".$id_elem." ";
+	$getprocsquery="SELECT IDProcesosLinea,IDCatPro FROM procesoslinea WHERE id_elemento_linea=$id_elem";
 	$getprocs=mysqli_query($conexion, $getprocsquery);
 	while ($row2=mysqli_fetch_assoc($getprocs)) {
 		$idpro=$row2['IDProcesosLinea'];
-		$addprocquery="INSERT INTO proceso (IDProceso, IDElemento, IDCatPro, Descripcion, Cantidad, CostoUnico, CostoUnitario, CostoCiento, CostoMillar, CostoFinal) VALUES (NULL, $lastelem_id, $idpro, NULL, NULL, 0.00, 0.00, 0.00, 0.00, 0.00)";	
+		$idcatpro=$row2['IDCatPro'];
+		$addprocquery="INSERT INTO proceso (IDProceso, IDElemento, IDCatPro, Descripcion, Cantidad, CostoUnico, CostoUnitario, CostoCiento, CostoMillar, CostoFinal) VALUES (NULL, $lastelem_id, $idcatpro, NULL, NULL, 0.00, 0.00, 0.00, 0.00, 0.00)";	
 		$procInserted = mysqli_query($conexion, $addprocquery);
 		if ($procInserted) {
 			echo 'todo bien procesos';
+			
 		}else{
 			echo("Error description: " . mysqli_error($conexion));
 	echo $addprocquery;
