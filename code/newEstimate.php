@@ -53,7 +53,7 @@ $(document).ready(function(){
 <div class="row" style="margin-top: 20px;">
 <input type="hidden" name="clientid" value="<?=$clientId ?>">
 <input type="hidden" name="current_date" value="<?=date("Y-m-d") ?>">
-
+<input type="hidden" name="idprod" id="idprod">
                 <div class="col-md-4">
                     <div class="form-group form-group-sm">
                         <label for="empresa1" class="control-label" >Modelo</label>
@@ -62,7 +62,7 @@ $(document).ready(function(){
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contacto1" class="control-label" >Descripción</label>
+                        <label for="contacto1" class="control-label" >Descripci?</label>
                         <input type="text" class="form-control" id="est-descrip" name="est-descrip" readonly="">
                     </div>
                 </div>

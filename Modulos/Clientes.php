@@ -551,7 +551,8 @@ $('#est-lead').val(model.TiempoLead);
 $('#est-iva').val(model.IVA);
 $('#est-paper').val(model.CostoPapel);
 $('#est-final').val(model.CostoFinal);
-$('#papel').val(model.CostoPapel);  
+$('#papel').val(model.CostoPapel);
+$('#idprod').val(model.IDLinea);  
 $('#final-amount').html('$'+model.CostoFinal);
 
 
