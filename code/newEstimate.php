@@ -76,7 +76,7 @@ $(document).ready(function(){
              <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo Unico</label>
-                        <input type="text" class="form-control" id="estcu" name="est-cu" readonly="">
+                        <input type="text" class="form-control" id="estcu" name="estcu" readonly="">
                     </div>
                 </div>
 
@@ -108,6 +108,13 @@ $(document).ready(function(){
                         <input type="text" class="form-control" id="papel" name="papel" readonly="">
                     </div>
                 </div>
+
+                     <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">Costo por Ajuste</label>
+                        <input type="text" class="form-control" id="CAjuste" name="CAjuste" readonly="">
+                    </div>
+                </div>
             
              <div class="col-md-4">
                     <div class="form-group">
@@ -133,7 +140,7 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
-                        <select type="number" class="form-control" name="descu" id="Descuento" placeholder="Descuento" required="true">
+                        <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true">
                             <option value="">Seleccionar descuento</option>
                            <?php echo $descu; ?>
                         </select>
@@ -197,32 +204,62 @@ $(document).ready(function(){
 
 function co()
 {
+var Descuento =  document.getElementById("descu").value;
+var IVA =  document.getElementById("est-iva").value;
+var costofinal = document.getElementById("est-final").value;
+var Cantidad = document.getElementById("qty").value;
+var CostoCiento = document.getElementById("est-100").value;
+var CostoMillar = document.getElementById("est-1000").value;
+var CostoUnico = document.getElementById("estcu").value;
+var costounitario = document.getElementById("est-1").value;
+var papel =  document.getElementById("papel").value;
+var CAjuste =  document.getElementById("CAjuste").value;
+var final;
+var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
 
-costofinal = document.getElementById("est-final").value;
-Cantidad = document.getElementById("qty").value;
-CostoCiento = document.getElementById("est-100").value;
-CostoMillar = document.getElementById("est-1000").value;
-CostoUnico = document.getElementById("estcu").value;
-costounitario = document.getElementById("est-1").value;
-papel =  document.getElementById("papel").value;
 
-
-
-
-    if (Cantidad > 1 && Cantidad < 99)
+    if (Cantidad > 0 && Cantidad < 99)
     {
 
-      final = CostoUnico + CostoCiento;
-      $('#final').html(final);
-      $('#est-final').val(final);
+var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
+var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
+var total = Costos + CCA + CanCos + parseFloat(papel) + .58;
+var conD = total * parseFloat(Descuento);
+var ConIva = total * parseFloat(IVA);
+alert (total);
+
+var final = total - conD + ConIva;
+
+
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
     }
 
-    else if (Cantidad > 100 && Cantidad< 200)
+    else if (Cantidad > 99 && Cantidad < 999)
     {
-        swal ("Son más de 200");
+
+        var Ca100 = parseFloat(Cantidad) - 100;
+        var CC100 = parseFloat(CostoCiento)/100;
+        var CaC = parseFloat(Cantidad) * parseFloat(costounitario);
+        var conD = total * parseFloat(Descuento);
+       var ConIva = total * parseFloat(IVA);
+      var total= Costos + (Ca100 * CC100 ) + CaC + parseFloat(papel) + .58;
+      var final = total - conD + ConIva;
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
     }
-else if (Cantidad > 201 && Cantidad < 300){
-swal ("Son más de 300");
+else if (Cantidad > 999 && Cantidad < 20000){
+
+
+ var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+ var conD = total * parseFloat(Descuento);
+var ConIva = total * parseFloat(IVA);
+ var final = total - conD + ConIva;
+
+
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
+
 }
 
 }
