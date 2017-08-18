@@ -68,7 +68,7 @@ while($row = mysqli_fetch_array($result))
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 <!-- JS--> 
-
+  <script src="../js/search.js"></script>
 
  <style>
  .navbar{
@@ -808,4 +808,58 @@ $(document).ready(function(){
     </script>';
     }?>
 
+
+<script type="text/javascript">
+
+function cotizar(){
+
+
+var Cantidad =($("#qty").val());
+var CostoFinal =($("#final-amount").val());
+var CostoUnico = $("#est-cu").val();
+var CostoCiento =($("#est-100").val());
+var CostoMillar =($("#est-1000").val());
+var papel = ($("#Papel").val());
+var CostoUnitario =($("#est-1").val());
+if (Cantidad <= 99) {
+
+//var CostoFinal = CostoUnico + CostoCiento + CostoMillar + Cantidad * CostoUnitario +(Cantidad * 2) + papel;
+
+//$CostoFinal = CostoUnico + CostoCiento + CostoMillar;
+//$("#final-amount").val(CostoFinal);
+
+document.getElementById("final-amount").value=parseDouble(CostoUnico)+parseDouble(CostoCiento)+parseDouble(CostoMillar);
+
+} else if (Cantidad > 100) {
+
+//var CostoFinal = CostoUnico + CostoCiento + CostoMillar + ((Cantidad-1000) * (CostoMillar/1000)) + ((Cantidad-100) * (CostoCiento/100)) + (Cantidad * CostoUnitario) + papel;
+
+
+} else if (Cantidad > 1000) {
+
+// var CostoFinal = CostoUnico + CostoCiento + CostoMillar + ((Cantidad-1000) * (CostoMillar/1000)) + ((Cantidad-100) * (CostoCiento/100)) + (Cantidad * CostoUnitario) + papel;
+ 
+ 
+}
+}
+
+function searchEst() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("searcher");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("estimates-table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
 </script>
+
