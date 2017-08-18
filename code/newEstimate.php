@@ -140,7 +140,7 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
-                        <select type="number" class="form-control" name="descu" id="Descuento" placeholder="Descuento" required="true">
+                        <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true">
                             <option value="">Seleccionar descuento</option>
                            <?php echo $descu; ?>
                         </select>
@@ -204,7 +204,8 @@ $(document).ready(function(){
 
 function co()
 {
-
+var Descuento =  document.getElementById("descu").value;
+var IVA =  document.getElementById("est-iva").value;
 var costofinal = document.getElementById("est-final").value;
 var Cantidad = document.getElementById("qty").value;
 var CostoCiento = document.getElementById("est-100").value;
@@ -217,17 +218,19 @@ var final;
 var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
 
 
-
-
-
     if (Cantidad > 0 && Cantidad < 99)
     {
 
 var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
-
 var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
+var total = Costos + CCA + CanCos + parseFloat(papel) + .58;
+var conD = total * parseFloat(Descuento);
+var ConIva = total * parseFloat(IVA);
+alert (total);
 
-var final= Costos + CCA + CanCos + parseFloat(papel) + .58;
+var final = total - conD + ConIva;
+
+
       $('#final').html(final.toFixed(2));
       $('#est-final').val(final.toFixed(2));
     }
@@ -238,16 +241,20 @@ var final= Costos + CCA + CanCos + parseFloat(papel) + .58;
         var Ca100 = parseFloat(Cantidad) - 100;
         var CC100 = parseFloat(CostoCiento)/100;
         var CaC = parseFloat(Cantidad) * parseFloat(costounitario);
-
-
-      var final= Costos + (Ca100 * CC100 ) + CaC + parseFloat(papel) + .58;
+        var conD = total * parseFloat(Descuento);
+       var ConIva = total * parseFloat(IVA);
+      var total= Costos + (Ca100 * CC100 ) + CaC + parseFloat(papel) + .58;
+      var final = total - conD + ConIva;
       $('#final').html(final.toFixed(2));
       $('#est-final').val(final.toFixed(2));
     }
 else if (Cantidad > 999 && Cantidad < 20000){
 
 
- var final = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+ var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+ var conD = total * parseFloat(Descuento);
+var ConIva = total * parseFloat(IVA);
+ var final = total - conD + ConIva;
 
 
       $('#final').html(final.toFixed(2));
