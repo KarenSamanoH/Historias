@@ -807,6 +807,7 @@ $(document).ready(function(){
     </script>';
     }?>
 
+
 <script type="text/javascript">
 
 function cotizar(){
@@ -860,3 +861,4 @@ function searchEst() {
 }
 
 </script>
+

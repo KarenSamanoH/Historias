@@ -1,5 +1,5 @@
-<!-------Cotización-------->
-<!--<script>
+-----Cotización------
+<script>
 
 function cotizar{
 
@@ -39,6 +39,6 @@ $CostoFinal = $CostoUnico + $CostoCiento + $CostoMillar + (($Cantidad-1000) * ($
 }
 }
 ?>
-</script>-->
+</script>
 
 
