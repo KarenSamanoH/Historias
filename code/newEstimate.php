@@ -220,7 +220,7 @@ var Costos = parseInt(CostoMillar) + parseInt(CostoCiento)  + parseInt(CostoUnic
 
 
 
-    if (Cantidad > 1 && Cantidad < 99)
+    if (Cantidad > 0 && Cantidad < 99)
     {
 
 var CCA = parseInt(Cantidad) * parseInt(CAjuste);
