@@ -246,7 +246,9 @@ var final= Costos + CCA + CanCos + parseInt(papel);
 else if (Cantidad > 999 && Cantidad < 20000){
 
 
- var final= Costos + (Ca100 * CC100 ) + CaC + parseInt(papel);
+ var final = parseInt(CostoUnico) + parseInt(CostoCiento) + parseInt(CostoMillar) + ((parseInt(Cantidad)-1000) * (parseInt(CostoMillar)/1000)) + ((parseInt(Cantidad)-100) * (parseInt(CostoCiento)/100)) + (parseInt(Cantidad) * parseInt(costounitario)) + parseInt(papel);
+
+
       $('#final').html(final);
       $('#est-final').val(final);
 
