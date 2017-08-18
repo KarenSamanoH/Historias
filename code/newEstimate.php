@@ -218,7 +218,7 @@ var final;
 var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
 
 
-    if (Cantidad > 0 && Cantidad < 99)
+    if (Cantidad >= 0 && Cantidad <= 100)
     {
 
 var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
@@ -226,7 +226,6 @@ var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
 var total = Costos + CCA + CanCos + parseFloat(papel) + .58;
 var conD = total * parseFloat(Descuento);
 var ConIva = total * parseFloat(IVA);
-alert (total);
 
 var final = total - conD + ConIva;
 
@@ -235,7 +234,7 @@ var final = total - conD + ConIva;
       $('#est-final').val(final.toFixed(2));
     }
 
-    else if (Cantidad > 99 && Cantidad < 999)
+    else if (Cantidad >= 100 && Cantidad <= 1000)
     {
 
         var Ca100 = parseFloat(Cantidad) - 100;
@@ -248,7 +247,7 @@ var final = total - conD + ConIva;
       $('#final').html(final.toFixed(2));
       $('#est-final').val(final.toFixed(2));
     }
-else if (Cantidad > 999 && Cantidad < 20000){
+else if (Cantidad >= 1000 && Cantidad <= 20000){
 
 
  var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
