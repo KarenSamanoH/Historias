@@ -1,7 +1,7 @@
 <?php
 include("conexion.php");
 $clientId=$_POST['clientId'];
-$query = "SELECT * FROM cotizacion WHERE IDCliente=$clientId";
+$query = "SELECT * FROM cotizacion WHERE IDCliente=$clientId ORDER BY IDCotizacion DESC";
  $result= mysqli_query($conexion, $query);
  
  
