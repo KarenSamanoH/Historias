@@ -391,15 +391,15 @@ position: relative;
 
 
 
-<div class="form-group col-xs-2">
+<div class="form-group col-xs-3">
 <label for="FechaE" class="control-label">Fecha de evento</label>
 <input type="text" class="form-control"  id="datepicker" name="FechaE" placeholder="">
 </div>
 
 
-<div class="form-group col-xs-2">
+<div class="form-group col-xs-3">
 <label for="CostoF" class="control-label">Costo Final</label>
-<input type="text" class="form-control" id="CostoF" name="CostoF" placeholder="">
+<input type="text" class="form-control" id="CostoF" name="CostoF" readonly="true" placeholder="">
 </div>
 
 
@@ -1029,7 +1029,7 @@ $('#CostoF').val(sum);
 
 
   }
-  $('.prices').keyup(function() {
+  $('.prices').change(function() {
   collectPrices();
 });
 
