@@ -83,7 +83,7 @@ $(document).ready(function(){
            <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo unitario</label>
-                        <input type="text" class="form-control" id="est1" name="est1">
+                        <input type="text" class="form-control" id="est-1" name="est-1" readonly="">
                     </div>
                 </div>
  
@@ -198,22 +198,32 @@ $(document).ready(function(){
 function co()
 {
 
-costofinal = document.getElementById("final").value;
-cantidad = document.getElementById("qty").value;
-costounitario = document.getElementById("est-100").value;
+costofinal = document.getElementById("est-final").value;
+Cantidad = document.getElementById("qty").value;
+CostoCiento = document.getElementById("est-100").value;
+CostoMillar = document.getElementById("est-1000").value;
+CostoUnico = document.getElementById("estcu").value;
+costounitario = document.getElementById("est-1").value;
+papel =  document.getElementById("papel").value;
 
-    if (cantidad => 1 && cantidad <= 99)
+
+
+
+    if (Cantidad > 1 && Cantidad < 99)
     {
 
-    final = cantidad*costounitario;
+      final = CostoUnico + CostoCiento;
       $('#final').html(final);
       $('#est-final').val(final);
     }
 
-    else if (cantidad > 100)
+    else if (Cantidad > 100 && Cantidad< 200)
     {
-        alert (":v");
+        swal ("Son más de 200");
     }
+else if (Cantidad > 201 && Cantidad < 300){
+swal ("Son más de 300");
+}
 
 }
 
