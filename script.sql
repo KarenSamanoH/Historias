@@ -1,0 +1,9 @@
+ALTER TABLE `cotizacion` ADD `detalles` VARCHAR(1000) NOT NULL;
+ALTER TABLE catalogoelemento ADD `IDCatMat` int(11) DEFAULT NULL;
+ ALTER TABLE catalogoelemento ADD `Cantidad` int(11) DEFAULT NULL;
+ALTER TABLE catalogoelemento ADD  `Ancho` decimal(11,2) DEFAULT '0.00';
+ALTER TABLE catalogoelemento ADD  `Alto` decimal(11,2) DEFAULT '0.00';
+ALTER TABLE catalogoelemento ADD  `Profundidad` decimal(11,2) DEFAULT '0.00';
+ALTER TABLE catalogoelemento ADD  `CostoMod` decimal(11,2) DEFAULT '0.00';
+ALTER TABLE catalogoelemento ADD  `PrecioCompra` decimal(11,2) DEFAULT NULL;
+ALTER TABLE catalogoelemento ADD  `CostoFinal` varchar(50) DEFAULT '0.00';
