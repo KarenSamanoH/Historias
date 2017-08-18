@@ -214,7 +214,7 @@ var costounitario = document.getElementById("est-1").value;
 var papel =  document.getElementById("papel").value;
 var CAjuste =  document.getElementById("CAjuste").value;
 var final;
-var Costos = parseInt(CostoMillar) + parseInt(CostoCiento)  + parseInt(CostoUnico);
+var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
 
 
 
@@ -223,34 +223,35 @@ var Costos = parseInt(CostoMillar) + parseInt(CostoCiento)  + parseInt(CostoUnic
     if (Cantidad > 0 && Cantidad < 99)
     {
 
-var CCA = parseInt(Cantidad) * parseInt(CAjuste);
-var CanCos = parseInt(Cantidad) * parseInt(costounitario);
+var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
 
-var final= Costos + CCA + CanCos + parseInt(papel);
-      $('#final').html(final);
-      $('#est-final').val(final);
+var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
+
+var final= Costos + CCA + CanCos + parseFloat(papel) + .58;
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
     }
 
     else if (Cantidad > 99 && Cantidad < 999)
     {
 
-        var Ca100 = parseInt(Cantidad) - 100;
-        var CC100 = parseInt(CostoCiento)/100;
-        var CaC = parseInt(Cantidad) * parseInt(costounitario);
+        var Ca100 = parseFloat(Cantidad) - 100;
+        var CC100 = parseFloat(CostoCiento)/100;
+        var CaC = parseFloat(Cantidad) * parseFloat(costounitario);
 
 
-      var final= Costos + (Ca100 * CC100 ) + CaC + parseInt(papel);
-      $('#final').html(final);
-      $('#est-final').val(final);
+      var final= Costos + (Ca100 * CC100 ) + CaC + parseFloat(papel) + .58;
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
     }
 else if (Cantidad > 999 && Cantidad < 20000){
 
 
- var final = parseInt(CostoUnico) + parseInt(CostoCiento) + parseInt(CostoMillar) + ((parseInt(Cantidad)-1000) * (parseInt(CostoMillar)/1000)) + ((parseInt(Cantidad)-100) * (parseInt(CostoCiento)/100)) + (parseInt(Cantidad) * parseInt(costounitario)) + parseInt(papel);
+ var final = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
 
 
-      $('#final').html(final);
-      $('#est-final').val(final);
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
 
 }
 
