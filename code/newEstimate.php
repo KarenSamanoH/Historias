@@ -76,7 +76,7 @@ $(document).ready(function(){
              <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo Unico</label>
-                        <input type="text" class="form-control" id="estcu" name="est-cu" readonly="">
+                        <input type="text" class="form-control" id="estcu" name="estcu" readonly="">
                     </div>
                 </div>
 
@@ -106,6 +106,13 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Papel</label>
                         <input type="text" class="form-control" id="papel" name="papel" readonly="">
+                    </div>
+                </div>
+
+                     <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rcf1" class="control-label">Costo por Ajuste</label>
+                        <input type="text" class="form-control" id="CAjuste" name="CAjuste" readonly="">
                     </div>
                 </div>
             
@@ -198,13 +205,17 @@ $(document).ready(function(){
 function co()
 {
 
-costofinal = document.getElementById("est-final").value;
-Cantidad = document.getElementById("qty").value;
-CostoCiento = document.getElementById("est-100").value;
-CostoMillar = document.getElementById("est-1000").value;
-CostoUnico = document.getElementById("estcu").value;
-costounitario = document.getElementById("est-1").value;
-papel =  document.getElementById("papel").value;
+var costofinal = document.getElementById("est-final").value;
+var Cantidad = document.getElementById("qty").value;
+var CostoCiento = document.getElementById("est-100").value;
+var CostoMillar = document.getElementById("est-1000").value;
+var CostoUnico = document.getElementById("estcu").value;
+var costounitario = document.getElementById("est-1").value;
+var papel =  document.getElementById("papel").value;
+var CAjuste =  document.getElementById("CAjuste").value;
+var final;
+var Costos = parseInt(CostoMillar) + parseInt(CostoCiento)  + parseInt(CostoUnico);
+
 
 
 
@@ -212,17 +223,33 @@ papel =  document.getElementById("papel").value;
     if (Cantidad > 1 && Cantidad < 99)
     {
 
-      final = CostoUnico + CostoCiento;
+var CCA = parseInt(Cantidad) * parseInt(CAjuste);
+var CanCos = parseInt(Cantidad) * parseInt(costounitario);
+
+var final= Costos + CCA + CanCos + parseInt(papel);
       $('#final').html(final);
       $('#est-final').val(final);
     }
 
-    else if (Cantidad > 100 && Cantidad< 200)
+    else if (Cantidad > 99 && Cantidad < 999)
     {
-        swal ("Son más de 200");
+
+        var Ca100 = parseInt(Cantidad) - 100;
+        var CC100 = parseInt(CostoCiento)/100;
+        var CaC = parseInt(Cantidad) * parseInt(costounitario);
+
+
+      var final= Costos + (Ca100 * CC100 ) + CaC + parseInt(papel);
+      $('#final').html(final);
+      $('#est-final').val(final);
     }
-else if (Cantidad > 201 && Cantidad < 300){
-swal ("Son más de 300");
+else if (Cantidad > 999 && Cantidad < 20000){
+
+
+ var final= Costos + (Ca100 * CC100 ) + CaC + parseInt(papel);
+      $('#final').html(final);
+      $('#est-final').val(final);
+
 }
 
 }

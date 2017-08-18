@@ -543,7 +543,7 @@ function fillData(id){
 $('#est-model ').val(model.Modelo);
 $('#est-descrip ').val(model.Descripcion);
 $('#est-family ').val(model.Familia);
-$('#est-cu ').val(model.CostoUnico);
+$('#estcu ').val(model.CostoUnico);
 $('#est-1').val(model.CostoUnitario);
 $('#est-100').val(model.CostoCiento);
 $('#est-1000 ').val(model.CostoMillar);
@@ -554,6 +554,7 @@ $('#est-final').val(model.CostoFinal);
 $('#papel').val(model.CostoPapel);
 $('#idprod').val(model.IDLinea);  
 $('#final-amount').html('$'+model.CostoFinal);
+$('#CAjuste').val(model.CAjuste);
 
 
 
