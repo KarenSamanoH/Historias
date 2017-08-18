@@ -6,42 +6,12 @@ $data_query="SELECT * FROM cotizacion WHERE IDCotizacion=$cotizaId";
 
 $getdata=mysqli_fetch_assoc(mysqli_query($conexion, $data_query));
 
+
 $products_query="SELECT * FROM producto WHERE IDCotizacion=$cotizaId";
 //$getprods=mysqli_fetch_assoc(mysqli_query($conexion, $products_query));
 //print_r($getprods);
 $getprods=mysqli_query($conexion, $products_query);
 
-function getCheckStatus($id_elem,$id_proc){
-                    require('../code/conexion.php');
-                    
-                    $subquery="SELECT IDCatPro FROM proceso WHERE IDElemento=$id_elem AND IDCatPro='$id_proc'";
-                    $getting=mysqli_query($conexion,$subquery);
-                  $getLast = mysqli_fetch_assoc($getting);
-                if (isset($getLast['IDCatPro'])) {
-                  echo " defcheck";
-                }
-                  
-                
-
-                  }
-function getProcessPrice($id_elem,$id_proc){
-   require('../code/conexion.php');
-                    
-                    $subquery="SELECT CostoFinal FROM proceso WHERE IDElemento=$id_elem AND IDCatPro='$id_proc'";
-                    $getting=mysqli_query($conexion,$subquery);
-                  $getLast = mysqli_fetch_assoc($getting);
-                if (isset($getLast['CostoFinal'])) {
-                  echo '$'.$getLast['CostoFinal'];
-                  echo "<input type='hidden' value='".$getLast['CostoFinal']."' name='precios[]'>";
-                }
-                else{
-                  $subquery2="SELECT CostoUnitario FROM catalogoproceso WHERE IDCatPro='$id_proc'";
-                    $getting2=mysqli_query($conexion,$subquery2);
-                  $getLast2 = mysqli_fetch_assoc($getting2);
-                  echo '$'.$getLast2['CostoUnitario'];
-                  echo "<input type='hidden' value='".$getLast2['CostoUnitario']."' name='precios[]'>";
-                }
-}
 $query = "SELECT * FROM catalogomaterial";
 $result = mysqli_query($conexion, $query);
 $output = '';
@@ -393,7 +363,7 @@ position: relative;
 
 <div class="form-group col-xs-3">
 <label for="FechaE" class="control-label">Fecha de evento</label>
-<input type="text" class="form-control"  id="datepicker" name="FechaE" placeholder="">
+<input type="text" class="form-control"  id="datepicker" name="FechaE" placeholder="" value="<?=$getdata['FechaEvento'] ?>">
 </div>
 
 
@@ -429,9 +399,20 @@ position: relative;
  <form id="general-form" method="post" onsubmit="sendAllData(event);">
 <div class="container col-lg-12">
 <input type="hidden" name="total-amount" id="total-amount">
-<?php 
-  while($row4 = mysqli_fetch_array($getprods))
-{  $productId=$row4['IDProducto']; ?>
+<?php
+if ($getdata['detalles']!='') {
+  
+$details= json_decode($getdata['detalles'],TRUE);
+
+foreach ($details as $key => $product)
+ 
+{  $getprodinfo="SELECT * FROM catalogoproducto WHERE IDLinea=$key";
+  $prodinfo=mysqli_query($conexion, $getprodinfo);
+  $row4=mysqli_fetch_assoc($prodinfo);
+
+
+
+  $productId=$row4['IDLinea']; ?>
 <div class="panel-group">
 <div class="panel panel-info">
 <div class="panel-heading" id="panel-<?=$productId ?>" style="position: relative; background: #31708f!important; color:#fff">
@@ -475,17 +456,17 @@ position: relative;
         
        <div class="form-group">
            <label for="Cantidad" class="control-label">Cantidad</label>
-<input class="form-control prices" type="number" name="cantidades[<?=$productId ?>]" id="Cantidad" placeholder="Cantidad" value="0">
+<input class="form-control prices" type="number" name="cantidades[<?=$productId ?>]" id="Cantidad" placeholder="Cantidad" value="<?= $details[$key]['cantidad'] ?>">
 </div>
 
 <div class="form-group ">
-<label for="Costo" class="control-label">Costo del modelo</label>
-<input class="form-control prices" type="number" name="costosMod[<?=$productId ?>]" id="CostoMod" value="0" placeholder="$">
+<label for="Costo" class="control-label">Costo del papel</label>
+<input class="form-control prices" type="number" name="costosMod[<?=$productId ?>]" id="CostoMod" value="<?=$details[$key]['papel'] ?>" placeholder="$">
 </div>
     
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final</label>
-<input class="form-control prices" type="number" name="costosFinales[<?=$productId ?>]" id="CostoFinal" value="0" placeholder="$ Final">
+<input class="form-control prices" type="number" name="costosFinales[<?=$productId ?>]" id="CostoFinal" value="<?=$details[$key]['costofinal'] ?>" placeholder="$ Final">
 </div> 
         </div>
 </div>   
@@ -500,11 +481,17 @@ position: relative;
 
 <div class="col-md-12"><h5 class="headerSign">ELEMENTOS</h5></div> 
 <?php 
-
-  $elems_query="SELECT e.*, ce.Nombre FROM elemento e INNER JOIN catalogoelemento ce ON e.IDCatElem=ce.IDCatElem WHERE IDProducto=$productId";
-  $getelems=mysqli_query($conexion, $elems_query);
- while($row2 = mysqli_fetch_array($getelems)){ 
-  $idelem=$row2['IDElemento'];
+  $elements=$product['contenido'];
+  if ($elements!='') {
+    
+  foreach ($elements as $key2 => $element) 
+ { 
+  
+  $elem_query="SELECT* FROM catalogoelemento WHERE IDCatElem=$key2";
+  $getelem=mysqli_query($conexion, $elem_query);
+  $row2=mysqli_fetch_assoc($getelem);
+  $idelem=$row2['IDCatElem'];
+  $procesos=$element['procesos'];
   ?>
   
 <div class ="col-md-12 center-block">
@@ -514,11 +501,11 @@ position: relative;
 <div class="panel panel-info">
 <div class="panel-heading" id="panel-<?=$idelem ?>" style="position: relative; ">
 <h4 class="panel-title">
-<a data-toggle="collapse" href="#collapse-elem-<?=$idelem ?>"><?=$row2['Nombre'] ?></a>
+<a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>"><?=$row2['Nombre'] ?></a>
 </h4>
 <div class="indicator" style="display: none;"><img src="../img/save.png"></div>
 </div>
-<div id="collapse-elem-<?=$idelem ?>" class="panel-collapse collapse">
+<div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
 
     
@@ -547,71 +534,36 @@ position: relative;
 <table id="input_fields_wrap_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
 <tr>
 <th>Titulo</th>
-
-  <th>Proceso Ventas</th>
-  <th>Proceso</th>
+  <th>Catalogo</th>
   <th>Costo</th>
   <th></th>
 </tr>
 <?php 
 
-  $proces_query="SELECT p.*,cp.Nombre FROM proceso p INNER JOIN catalogoproceso cp ON p.IDCatPro=cp.IDCatPro WHERE IDElemento=$idelem";
-  $getproces=mysqli_query($conexion, $proces_query);
- while($row3 = mysqli_fetch_array($getproces)){ 
+  
+  foreach($procesos as $key3 => $proces){
+  $getProcesQuery="SELECT * FROM catalogoproceso WHERE IDCatPro=$proces";
+  $getProcessCat=mysqli_query($conexion, $getProcesQuery);
+   $row3=mysqli_fetch_assoc($getProcessCat);
+  
+
   $idproces=$row3['IDCatPro'];
   $IDCatPro=$row3['IDCatPro'];
+  $CostoUnitario=$row3['CostoUnitario'];
   ?>
  
   <tr>
   <td>
     <?=$row3['Nombre'] ?>
   </td>
-  <td><select name="procesos-<?=$idelem ?>[]" value="<?= $idproces ?>">
-  <option value="36" <?=($idproces==36)? 'selected' :'';?> >Armado </option>
-        <option value="1" <?=($idproces==1)? 'selected' :'';?> >Caja </option>
-        <option value="2" <?=($idproces==2)? 'selected' :'';?>>Calado </option>
-        <option value="3" <?=($idproces==3)? 'selected' :'';?>>Celofan </option>
-        <option value="4" <?=($idproces==4)? 'selected' :'';?>>Corte </option>
-        <option value="5" <?=($idproces==5)? 'selected' :'';?>>Diseño </option>
-        <option value="6" <?=($idproces==6)? 'selected' :'';?>>Doblez </option>
-        <option value="7" <?=($idproces==7)? 'selected' :'';?>>Dummie </option>
-        <option value="8" <?=($idproces==8)? 'selected' :'';?>>Empalme </option>
-        <option value="9" <?=($idproces==9)? 'selected' :'';?>>Empaque </option>
-        <option value="0" <?=($idproces==0)? 'selected' :'';?>>Grabado </option>
-        <option value="11" <?=($idproces==11)? 'selected' :'';?>>Grapa </option>
-        <option value="12" <?=($idproces==12)? 'selected' :'';?>>Hot Stamping </option>
-        <option value="13" <?=($idproces==13)? 'selected' :'';?>>Idioma </option>
-        <option value="14" <?=($idproces==14)? 'selected' :'';?>>Impresion Digital </option>
-        <option value="15" <?=($idproces==15)? 'selected' :'';?>>Lacre </option>
-        <option value="16" <?=($idproces==16)? 'selected' :'';?>>Laminado </option>
-        <option value="17" <?=($idproces==17)? 'selected' :'';?>>Laton </option>
-        <option value="18" <?=($idproces==18)? 'selected' :'';?>>Liston </option>
-        <option value="19" <?=($idproces==19)? 'selected' :'';?> >Motivo</option>
-        <option value="20" <?=($idproces==20)? 'selected' :'';?>>Offset </option>
-        <option value="21" <?=($idproces==21)? 'selected' :'';?>>Papel </option>
-        <option value="22" <?=($idproces==22)? 'selected' :'';?>>Pegado </option>
-        <option value="23" <?=($idproces==23)? 'selected' :'';?>>Perforacion </option>
-        <option value="24" <?=($idproces==24)? 'selected' :'';?>>Preprensa </option>
-        <option value="25" <?=($idproces==25)? 'selected' :'';?>>Producto </option>
-        <option value="26" <?=($idproces==26)? 'selected' :'';?>>Rotulacion </option>
-        <option value="27" <?=($idproces==27)? 'selected' :'';?>>Sticker </option>
-        <option value="28" <?=($idproces==28)? 'selected' :'';?>>Suaje </option>
-        <option value="29" <?=($idproces==29)? 'selected' :'';?>>Tinta + Grabado </option>
-        <option value="30" <?=($idproces==30)? 'selected' :'';?>>Tinta 1 </option>
-        <option value="31" <?=($idproces==31)? 'selected' :'';?>>Tinta 2 </option>
-        <option value="32 " <?=($idproces==32 )? 'selected' :'';?>>Tinta 3 </option>
-        <option value="33" <?=($idproces==33)? 'selected' :'';?>>Tinta 4 </option>
-        <option value="34" <?=($idproces==34)? 'selected' :'';?>>Tinta 5 </option>
-        <option value="35" <?=($idproces==35)? 'selected' :'';?>>Tinta 6 </option>
-  </select>
-  </td>
+  
   <td><select>
-    <option>Labrador</option>
-    <option>Ratonero</option>
-    <option>Chilaquil</option>
+    <option>Conchita</option>
+    <option>Galleta</option>
+    <option>Lazo</option>
   </select>
   </td>
-  <td>$5
+  <td><?=$CostoUnitario ?>
   <input type="hidden" class="prices" value="5">
   </td>
   <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>)">Quitar</a></td>
@@ -629,6 +581,8 @@ position: relative;
 </div>
 </div>
 <br>
+  <?php } } else{ ?>
+  <p>Este producto no contiene elementos </p>
   <?php } ?>           
 </div>
         
@@ -640,8 +594,9 @@ position: relative;
 </div>
 </div>
 </div> 
-<?php } ?>  
-
+<?php } }else{ ?>  
+<p>No hay productos en esta cotizacion</p>
+<?php }?>
 </div>
 
 </div>
@@ -924,7 +879,7 @@ window.onclick = function(event) {
          
         
        
-    
+      /*
         var sec_options='<option disabled="true" selected="true">Elige el Proceso..</option>'+
         '<option value="36">Armado </option>'+
         '<option value="1">Caja </option>'+
@@ -962,28 +917,15 @@ window.onclick = function(event) {
         '<option value="33">Tinta 4 </option>'+
         '<option value="34">Tinta 5 </option>'+
         '<option value="35">Tinta 6 </option>';
-        var sec_options2=' <option disabled="true" selected="true">Elige el Proceso..</option>'+
-                        '<option>Maria Luisa</option>'+
-                        '<option>Marial Luisa 2</option>'+
-                        '<option>Maria Luisa 3</option>'+
-                        '<option>Esquela Sencilla</option>'+
-                        '<option>Esquela Sencilla</option>'+
-                        '<option>Esquela Doble</option>'+
-                        '<option>Esquela Doble</option>'+
-                        '<option>Esquela Triptico</option>'+
-                        '<option>Esquela Triple</option>'+
-                        '<option>Esquela Interior</option>'+
-                        '<option>Esquela Interior</option>'+
-                        '<option>Esquela Exterior</option>'+
-                        '<option>Forro</option>'+
-                        '<option>Hoja Interior 1</option>'+
-                        '<option>Hoja Interior 2</option>'+
-                        '<option>Hoja Interior 3</option>'+
-                        '<option>Cintilla</option>'+
-                        '<option>Cinturon</option>';
+        */
+        var sec_options2=
+        //' <option disabled="true" selected="true">Elige el Proceso..</option>'+
+                        '<option>Galleta</option>'+
+                        '<option>Conchita</option>'+
+                        '<option>Lazo</option>';
         var new_tr='<tr><td>'+sel+'</td>'+
-                    '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+
-                    '<td><select disabled class="disabled" name="procesos['+id+']">'+sec_options2+'</select></td>'+
+                   /* '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+ */
+                    '<td><select  class="disabled" name="procesos['+id+']">'+sec_options2+'</select></td>'+ 
                     '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
                     '<td><a href="#" onclick=removeProcess('+id+')>Quitar</a></td></tr>';
 

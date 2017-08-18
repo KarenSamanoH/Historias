@@ -584,7 +584,7 @@ $.ajax({
                      success:function(data){ 
                         
                           showEstimates(id);
-                          //$('.search-box').html(data);
+                          //$('.modal-body').html(data);
                            
                          
                      }  
