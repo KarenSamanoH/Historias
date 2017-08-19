@@ -557,7 +557,7 @@ foreach ($details as $key => $product)
     <?=$row3['Nombre'] ?>
   </td>
   
-  <td><select>
+  <td><select name="catalogos-<?=$idelem ?>[]">
     <option>Conchita</option>
     <option>Galleta</option>
     <option>Lazo</option>
@@ -925,7 +925,7 @@ window.onclick = function(event) {
                         '<option>Lazo</option>';
         var new_tr='<tr><td>'+sel+'</td>'+
                    /* '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+ */
-                    '<td><select  class="disabled" name="procesos['+id+']">'+sec_options2+'</select></td>'+ 
+                    '<td><select  class="disabled" name="catalogos-'+id+'[]">'+sec_options2+'</select></td>'+ 
                     '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
                     '<td><a href="#" onclick=removeProcess('+id+')>Quitar</a></td></tr>';
 
@@ -963,7 +963,9 @@ collectPrices();
   function collectPrices(){
       var sum = 0;
 $('.prices').each(function(){
-    sum += parseFloat(this.value);
+  var val= this.value;
+  if (val==''){ val=0;}
+    sum += parseFloat(val);
 });
 $('#total-amount').val(sum);
 $('#CostoF').val(sum);
