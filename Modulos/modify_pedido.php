@@ -94,7 +94,9 @@ $("#fecha").datepicker();
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 <!-- JS--> 
 <style type="text/css">
-  
+  .not-allow{
+    cursor:not-allowed!important;
+  }
 .checgroup{
   
 width: 75px;
@@ -463,7 +465,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div></a><div class="model-details">
   &nbsp <img src="../img/t.png" onclick="removeModel(<?=$productId ?>)">
 </div>
-
+<input type="hidden" class="models" name="models[]" value="<?=$productId ?>">
 <div class="indicator" style="display: none;"><img src="../img/save.png"></div>
 </div>
 <div id="collapse<?=$productId ?>" class="panel-collapse collapse">
@@ -783,7 +785,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
  
  
 <script>  
- $(document).ready(function(){  
+ $(document).ready(function(){ 
+
   $('.defcheck ').click();
       $('#IDElemento').keyup(function(){  
            var query = $(this).val();  
@@ -980,8 +983,11 @@ $(document).ready(function(){
    
         var inputVal = $(this).val();
         var resultDropdown = $(this).siblings(".result");
+        var models=$.map($('.models'), function(el, idx) {
+    return $(el).val()
+})
         if(inputVal.length){
-            $.get("backend-search.php", {term: inputVal}).done(function(data){
+            $.get("backend-search.php", {term: inputVal,modelos:models}).done(function(data){
                 
                 resultDropdown.html(data);
             });
@@ -992,13 +998,16 @@ $(document).ready(function(){
         }
     });
     
-    $(document).on("click", ".result p", function(){
+    $(document).on("click", ".result p:not(.not-allow)", function(){
         $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
         $(this).parent(".result").empty();
     });
 });
 
 function fillData(id){
+  
+
+  
      $.ajax({  
                               
                              type:"POST",
@@ -1105,4 +1114,5 @@ collectPrices();
     function drop(id,product) {
     document.getElementById("newproces-"+product+'-'+id).classList.toggle("show");
 }
+
 </script>

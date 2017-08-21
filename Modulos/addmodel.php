@@ -58,7 +58,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div></a><div class="model-details">
   &nbsp <img src="../img/t.png" onclick="removeModel(<?=$productId ?>)">
 </div>
-
+<input type="hidden" class="models" name="models[]" value="<?=$productId ?>">
 <div class="indicator" style="display: none;"><img src="../img/save.png"></div>
 </div>
 <div id="collapse<?=$productId ?>" class="panel-collapse collapse">
