@@ -181,7 +181,10 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
  </head>
 <!--   Body starts here -->
 
-     <body>  
+     <body> 
+
+
+
          <div id="cotizacionModal" class="modal fade">
     <div class="modal-dialog">
      <div class="modal-content">
@@ -221,6 +224,12 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
                     <li>
                         <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
                     </li>
+                       
+                    <li>
+                      <a class="page-scroll" data-toggle="modal" data-target="#ayuda" >Ayuda
+                       <i class="fa fa-question-circle fa-spin fa-1x fa-fw" aria-hidden="true"></i>
+                        </a>
+                    </li>
                     <li>
                         <a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
                     </li>
@@ -229,7 +238,88 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
        
         </div>
              
-       
+  <div class="box" style="border-color: white" align="right">
+
+<!-- Modal -->
+<div id="ayuda" class="modal fade" role="dialog">
+  <div class="modal-dialog" align="center">
+
+    <!-- Ayuda-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿En qué te puedo ayudar?</h4>
+      </div>
+      <div class="modal-body">
+      <!-----Contenido del modal---->
+
+  <div class="row">
+      <div id="accordion" class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a href="#panel-1" data-parent="#accordion" data-toggle="collapse">¿Cómo agregar un cliente?</a>
+            </h2>
+          </div>
+          <div class="panel-collapse collapse" id="panel-1">
+            <div class="panel-body">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7H4OmX2NxwM?rel=0" frameborder="0" allowfullscreen></iframe>            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a href="#panel-2" data-parent="#accordion" data-toggle="collapse">¿Cómo agregar una empresa?</a>
+            </h2>
+          </div>
+          <div class="panel-collapse collapse" id="panel-2">
+            <div class="panel-body">
+              Panel 2
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a href="#panel-3" data-parent="#accordion" data-toggle="collapse">¿Cómo editar la info. de un cliente?</a>
+            </h2>
+          </div>
+          <div class="panel-collapse collapse" id="panel-3">
+            <div class="panel-body">
+              Panel 3
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo hacer una cotización?</a>
+            </h2>
+          </div>
+          <div class="panel-collapse collapse" id="panel-4">
+            <div class="panel-body">
+              Panel 3
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>   
 
     </nav>
     
@@ -251,7 +341,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
                 <div class="col-md-4">
                     <div class="form-group form-group-sm">
                         <label for="empresa1" class="control-label">Empresa <i class="fa fa-suitcase" aria-hidden="true"></i></label>
-                        <input type="text" class="form-control" id="Empresa" name="Empresa" >
+                        <input type="text" class="form-control" id="Empresa" name="Empresa" required="">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -399,12 +489,11 @@ $(document).ready(function(){
  });
  
  
- 
- <!---cliente--->
+
 
 $(document).on('submit', '#product_form', function(event){
   event.preventDefault();
-  var IDEmpresa = $('#IDEmpresa').val();
+  var IDEmpresa = $('#IDEmpresa option:selected').val();
   var Nombre1 = $('#Nombre1').val();
   var TipoEvento = $('#TipoEvento').val();
   var Nombre2 = $('#Nombre2').val();
@@ -418,7 +507,8 @@ $(document).on('submit', '#product_form', function(event){
   
   
   var form_data = $(this).serialize();
-  if(IDEmpresa != '' && Nombre1 != '' && TipoEvento !='')
+  console.log(IDEmpresa+Nombre1+TipoEvento);
+  if(IDEmpresa !== '' && Nombre1 !== '' && TipoEvento !=='')
   {
    $.ajax({
     url:"../code/insert.php",
@@ -488,7 +578,7 @@ $('#Direccion').val(data.Direccion);
  {
   Tablacliente.find(".delete").on("click", function(event)
   {
-   if(swal("Eliminar cliente?", "No se podra recurar el registro", "warning"))
+   if(confirm("¿Eliminar cliente?", "No se podra recurar el registro", "warning"))
    {
     var IDCliente = $(this).data("row-id");
     console.log(IDCliente);
@@ -666,8 +756,8 @@ $(document).ready(function(){
 <div class="col-md-4">
 <div class="form-group">
 <label>Seleccionar empresa <i class="fa fa-suitcase" aria-hidden="true"></i></label>
-<select name="IDEmpresa" id="IDEmpresa" class="form-control">
-<option value="">Seleccionar empresa</option>
+<select name="IDEmpresa" id="IDEmpresa" class="form-control" required="">
+<option value="">Seleccionar empresa</option >
 <?php echo $output; ?>
 </select>
 </div>
@@ -678,7 +768,7 @@ $(document).ready(function(){
         <div class="col-md-4">
 <div class="form-group">
 <label>Seleccionar agente <i class="fa fa-user-secret" aria-hidden="true"></i></label>
-<select name="IDAgente" id="IDAgente"  class="form-control">
+<select name="IDAgente" id="IDAgente"  class="form-control" required="">
 <option value="">Seleccionar agente</option>
 <?php echo $mensaje; ?>
 </select>
@@ -689,7 +779,7 @@ $(document).ready(function(){
         <div class="col-md-4">
                     <div class="form-group">
    <label>Tipo de Evento <i class="fa fa-gift" aria-hidden="true"></i></label>
-     <select name="TipoEvento" id="TipoEvento" class="form-control">
+     <select name="TipoEvento" id="TipoEvento" class="form-control" required="">
       <option value="">Tipo de Evento</option>
       <optgroup label="Fiestas">
                       <option>XV AÃ±os</option>
@@ -712,7 +802,7 @@ $(document).ready(function(){
 <div class="col-md-4">
 <div class="form-group">
 <label>Primer Nombre <i class="fa fa-user" aria-hidden="true"></i></label>
-<input type="text" name="Nombre1" id="Nombre1" class="form-control" />
+<input type="text" name="Nombre1" id="Nombre1" class="form-control" required="" />
 </div>
 </div>
 
