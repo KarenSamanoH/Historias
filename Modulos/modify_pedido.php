@@ -999,7 +999,7 @@ $(document).ready(function(){
     });
     
     $(document).on("click", ".result p:not(.not-allow)", function(){
-        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        $(this).parents(".search-box").find('input[type="text"]').val('');
         $(this).parent(".result").empty();
     });
 });
