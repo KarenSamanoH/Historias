@@ -183,7 +183,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
