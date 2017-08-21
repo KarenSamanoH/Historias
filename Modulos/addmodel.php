@@ -175,8 +175,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
 <div class="col-md-10">
   <div class="dropdown">
-<button type="button" onclick="drop(<?=$idelem ?>)" class="dropbtn">Agregar Proceso <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
-  <div id="newproces-<?=$idelem ?>" class="dropdown-content">
+<button type="button" onclick="drop(<?=$idelem ?>,<?=$productId ?>)" class="dropbtn">Agregar Proceso <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+  <div id="newproces-<?=$productId ?>-<?=$idelem ?>" class="dropdown-content">
   <?php 
   $getProcesQuery="SELECT * FROM catalogoproceso";
   $getProcessCat=mysqli_query($conexion, $getProcesQuery);
