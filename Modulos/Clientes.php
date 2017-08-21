@@ -518,6 +518,7 @@ $(document).on('submit', '#product_form', function(event){
     {
      swal(data);
      $('#product_form')[0].reset();
+     
      $('#AgregarModal').modal('hide');
      $('#cliente_info').bootgrid('reload');
     }
