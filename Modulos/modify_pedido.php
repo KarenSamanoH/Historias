@@ -94,7 +94,13 @@ $("#fecha").datepicker();
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 <!-- JS--> 
 <style type="text/css">
-  
+  .not-allow{
+    cursor:not-allowed!important;
+  }
+  .soft{
+    color: #bce8f1!important;
+    font-weight: normal!important;
+  }
 .checgroup{
   
 width: 75px;
@@ -210,7 +216,7 @@ position: relative;
     font-weight: bold;
 }
 .img-circle{
-  width: 15%!important;
+  width: 35%!important;
 }
 .indicator{
   position: absolute;
@@ -221,6 +227,7 @@ position: relative;
 }
 .indicator img{
   width: 100%;
+  cursor: pointer;
 }
 .price{
   position: absolute;
@@ -239,6 +246,7 @@ position: relative;
     width: 180px;
     border: none;
     cursor: pointer;
+    
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -250,6 +258,7 @@ position: relative;
     display: inline-block;
     width: 100%;
     text-align: right;
+
 }
 
 .dropdown-content {
@@ -287,7 +296,7 @@ position: relative;
   
 }
 .input_fields_wrap{
-  margin-top: 10px;
+  margin-top: 30px!important;
 }
 .input_fields_wrap tr, td{
   padding: 6px!important;
@@ -297,6 +306,33 @@ position: relative;
   padding-bottom: 0!important;
 }
 .input_fields_wrap tr:nth-child(even){background: #f2f2f2}
+.col-md-4 img{
+  width: 80%;
+}
+.panel-body-parent{
+  background:#F7F7F7!important;
+}
+.model-details{
+  display: inline-block;
+  width: 20%;
+  color: #fff;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  position: relative;
+}
+.model-details img{
+  width: 30px;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  cursor: pointer;
+}
+.addelem{
+  background: #5bc0de!important;
+  width: 190px!important;
+
+}
 </style>
 </head>
 
@@ -342,7 +378,7 @@ position: relative;
 <div class="panel-heading resume-heading">
 <div class="row">
 <div class="col-lg-12">
-<div class="col-xs-12 col-sm-4">
+<div class="col-xs-12 col-sm-2">
 <figure>
 <img class="img-circle img-responsive" alt="cotizacion" src="../img/cot.png">
 </figure>
@@ -357,17 +393,17 @@ position: relative;
 
 </div>
 
-<div class="col-xs-12 col-sm-8">
+<div class="col-xs-12 col-sm-10">
 
 
 
-<div class="form-group col-xs-3">
+<div class="form-group col-xs-2">
 <label for="FechaE" class="control-label">Fecha de evento</label>
 <input type="text" class="form-control"  id="datepicker" name="FechaE" placeholder="" value="<?=$getdata['FechaEvento'] ?>">
 </div>
 
 
-<div class="form-group col-xs-3">
+<div class="form-group col-xs-2">
 <label for="CostoF" class="control-label">Costo Final</label>
 <input type="text" class="form-control" id="CostoF" name="CostoF" readonly="true" placeholder="">
 </div>
@@ -386,6 +422,12 @@ position: relative;
 
 <input  type="submit" class="btn btn-info" id="Coti" onclick="$('#general-form').submit();" name="Coti" value="Guardar cotización" >
 </div>
+<div class="form-group col-xs-2">
+<div class="search-box" style="margin-top: 25px;">
+    <input type="text"  autocomplete="off" placeholder="Agregar otro modelo" />
+        <div class="result"></div>
+    </div>
+</div>
 
 </div>
 </div>
@@ -397,7 +439,7 @@ position: relative;
 <div class="tab-pane active col-xs-12" role="tabpanel" id="invitacion">
 
  <form id="general-form" method="post" onsubmit="sendAllData(event);">
-<div class="container col-lg-12">
+<div class="container col-lg-12" id="container">
 <input type="hidden" name="total-amount" id="total-amount">
 <?php
 if ($getdata['detalles']!='') {
@@ -413,18 +455,92 @@ foreach ($details as $key => $product)
 
 
   $productId=$row4['IDLinea']; ?>
-<div class="panel-group">
+<div class="panel-group" id="panel-group-<?=$productId ?>">
 <div class="panel panel-info">
 <div class="panel-heading" id="panel-<?=$productId ?>" style="position: relative; background: #31708f!important; color:#fff">
-<h4 class="panel-title">
-<a data-toggle="collapse" href="#collapse<?=$productId ?>">Modelo <?=$row4['Modelo'] ?></a>
-</h4>
+<a data-toggle="collapse" href="#collapse<?=$productId ?>">
+<div class="model-details">
+MODELO: <?=$row4['Modelo'] ?>
+</div><div class="model-details soft">
+DESCUENTO: 
+</div><div class="model-details soft">
+CANTIDAD: <?= $details[$key]['cantidad'] ?>
+</div><div class="model-details soft">
+  PRECIO: <?=$details[$key]['costofinal'] ?>
+</div></a><div class="model-details">
+  &nbsp <img src="../img/tf.png" onclick="removeModel(<?=$productId ?>)" title="Quitar este modelo" >
+</div>
+<input type="hidden" class="models" name="models[]" value="<?=$productId ?>">
 <div class="indicator" style="display: none;"><img src="../img/save.png"></div>
 </div>
 <div id="collapse<?=$productId ?>" class="panel-collapse collapse">
-<div class="panel-body">
+<div class="panel-body panel-body-parent">
 
 <div class=" col-md-4">
+<img src="../img/22.jpg">
+</div>   
+<div class=" col-md-8" >
+<div class="form">
+
+    
+      
+
+    
+
+
+
+<div class="col-md-2">
+  <h5 class="headerSign" style="text-align: left;">    ELEMENTOS</h5>
+</div>
+<div class="col-md-10">
+  <div class="dropdown">
+<button type="button" onclick="dropElems(<?=$productId ?>)" class="dropbtn addelem">Agregar Elemento <span class="glyphicon glyphicon-chevron-down " aria-hidden="true"></span></button>
+  <div id="newelem-<?=$productId ?>" class="dropdown-content">
+  <?php 
+  $getElemsQuery="SELECT * FROM catalogoelemento";
+  $getElems=mysqli_query($conexion, $getElemsQuery);
+  while ($catelem=mysqli_fetch_assoc($getElems)){
+  
+   ?>
+    <a href="#" onclick="addElem(<?=$productId ?>,'<?=$catelem['Nombre'] ?>',<?=$catelem['IDCatElem'] ?>)"><?=$catelem['Nombre'] ?></a>
+    
+    <?php } ?>
+  </div>
+</div>
+</div>
+<div class="container col-lg-12" id="elem-contain-<?=$productId ?>">
+<?php 
+  $elements=$product['contenido'];
+  if ($elements!='') {
+    
+  foreach ($elements as $key2 => $element) 
+ { 
+  
+  $elem_query="SELECT* FROM catalogoelemento WHERE IDCatElem=$key2";
+  $getelem=mysqli_query($conexion, $elem_query);
+  $row2=mysqli_fetch_assoc($getelem);
+  $idelem=$row2['IDCatElem'];
+  $procesos=$element['procesos'];
+  ?>
+  
+<div class ="col-md-12 center-block" id="elem-<?=$productId ?>-<?=$idelem ?>">
+
+  <br>
+
+<div class="panel panel-info">
+
+<div class="panel-heading panel-elem" id="panel-<?=$idelem ?>" style="position: relative; background: #d9edf7;">
+<a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>">
+<h4 class="panel-title">
+<?=$row2['Nombre'] ?>
+</h4></a>
+<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)" title="Quitar este elemento"></div>
+</div>
+<div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
+<div class="panel-body">
+
+    
+<div class="row ">
 <div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div> 
   <div class="col-md-6">
 
@@ -469,69 +585,27 @@ foreach ($details as $key => $product)
 <input class="form-control prices" type="number" name="costosFinales[<?=$productId ?>]" id="CostoFinal" value="<?=$details[$key]['costofinal'] ?>" placeholder="$ Final">
 </div> 
         </div>
-</div>   
-<div class=" col-md-8">
-<div class="form">
-
-    
-      
-
-    
-
-
-<div class="col-md-12"><h5 class="headerSign">ELEMENTOS</h5></div> 
-<?php 
-  $elements=$product['contenido'];
-  if ($elements!='') {
-    
-  foreach ($elements as $key2 => $element) 
- { 
-  
-  $elem_query="SELECT* FROM catalogoelemento WHERE IDCatElem=$key2";
-  $getelem=mysqli_query($conexion, $elem_query);
-  $row2=mysqli_fetch_assoc($getelem);
-  $idelem=$row2['IDCatElem'];
-  $procesos=$element['procesos'];
-  ?>
-  
-<div class ="col-md-12 center-block">
-
-  <br>
-
-<div class="panel panel-info">
-<div class="panel-heading" id="panel-<?=$idelem ?>" style="position: relative; ">
-<h4 class="panel-title">
-<a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>"><?=$row2['Nombre'] ?></a>
-</h4>
-<div class="indicator" style="display: none;"><img src="../img/save.png"></div>
-</div>
-<div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
-<div class="panel-body">
-
-    
-<div class="row ">
 <div class="col-md-2">
   <h5 class="headerSign" style="text-align: left;">    PROCESOS</h5>
 </div>
 <div class="col-md-10">
   <div class="dropdown">
-<button type="button" onclick="drop(<?=$idelem ?>)" class="dropbtn">Agregar Proceso <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
-  <div id="newproces-<?=$idelem ?>" class="dropdown-content">
+<button type="button" onclick="drop(<?=$idelem ?>,<?=$productId ?>)" class="dropbtn">Agregar Proceso <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+  <div id="newproces-<?=$productId ?>-<?=$idelem ?>" class="dropdown-content">
   <?php 
   $getProcesQuery="SELECT * FROM catalogoproceso";
   $getProcessCat=mysqli_query($conexion, $getProcesQuery);
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
 </div>
 </div>
-<br> 
-<br>  
-<table id="input_fields_wrap_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
+  
+<table id="input_fields_wrap_<?=$productId ?>_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
 <tr>
 <th>Titulo</th>
   <th>Catalogo</th>
@@ -540,8 +614,9 @@ foreach ($details as $key => $product)
 </tr>
 <?php 
 
-  
+ 
   foreach($procesos as $key3 => $proces){
+
   $getProcesQuery="SELECT * FROM catalogoproceso WHERE IDCatPro=$proces";
   $getProcessCat=mysqli_query($conexion, $getProcesQuery);
    $row3=mysqli_fetch_assoc($getProcessCat);
@@ -557,7 +632,7 @@ foreach ($details as $key => $product)
     <?=$row3['Nombre'] ?>
   </td>
   
-  <td><select>
+  <td><select name="catalogos-<?=$idelem ?>[]">
     <option>Conchita</option>
     <option>Galleta</option>
     <option>Lazo</option>
@@ -566,7 +641,7 @@ foreach ($details as $key => $product)
   <td><?=$CostoUnitario ?>
   <input type="hidden" class="prices" value="5">
   </td>
-  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>)">Quitar</a></td>
+  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>)">Quitar</a></td>
  </tr>
 <?php } ?> 
 </table>
@@ -583,7 +658,8 @@ foreach ($details as $key => $product)
 <br>
   <?php } } else{ ?>
   <p>Este producto no contiene elementos </p>
-  <?php } ?>           
+  <?php } ?> 
+  </div>          
 </div>
         
 </div>
@@ -717,7 +793,8 @@ foreach ($details as $key => $product)
  
  
 <script>  
- $(document).ready(function(){  
+ $(document).ready(function(){ 
+
   $('.defcheck ').click();
       $('#IDElemento').keyup(function(){  
            var query = $(this).val();  
@@ -844,8 +921,9 @@ var i = 2;
  </script>  
  <script>
 
-function drop(id) {
-    document.getElementById("newproces-"+id).classList.toggle("show");
+
+function dropElems(id) {
+    document.getElementById("newelem-"+id).classList.toggle("show");
 }
 
 window.onclick = function(event) {
@@ -872,8 +950,113 @@ window.onclick = function(event) {
   var max_fields      = 1000; 
   
     
-  function addProcess(id,sel,price){
-    wrapper=$("#input_fields_wrap_"+id); 
+
+    
+    function sendAllData(event){
+              event.preventDefault();
+                    
+                        $.ajax({  
+                              
+                             type:"POST",
+                             url:"editEstimate.php",   
+                             data:$('#general-form').serialize(),  
+                               
+                             success:function(data){
+                              
+                                  $('.col-lg-12').html(data);  
+                             }  
+                        });
+    }
+
+  function collectPrices(){
+      var sum = 0;
+$('.prices').each(function(){
+  var val= this.value;
+  if (val==''){ val=0;}
+    sum += parseFloat(val);
+});
+$('#total-amount').val(sum);
+$('#CostoF').val(sum);
+
+
+
+  }
+  $('.prices').change(function() {
+  collectPrices();
+});
+
+
+$(document).ready(function(){
+    $('.search-box input[type="text"]').on("keyup input", function(){
+   
+        var inputVal = $(this).val();
+        var resultDropdown = $(this).siblings(".result");
+        var models=$.map($('.models'), function(el, idx) {
+    return $(el).val()
+})
+        if(inputVal.length){
+            $.get("backend-search.php", {term: inputVal,modelos:models}).done(function(data){
+                
+                resultDropdown.html(data);
+            });
+        } else{
+            
+            
+            resultDropdown.empty();
+        }
+    });
+    
+    $(document).on("click", ".result p:not(.not-allow)", function(){
+        $(this).parents(".search-box").find('input[type="text"]').val('');
+        $(this).parent(".result").empty();
+    });
+});
+
+function fillData(id){
+  
+
+  
+     $.ajax({  
+                              
+                             type:"POST",
+                             url:"addmodel.php",   
+                             data:{idmodelo:id},  
+                               
+                             success:function(data){
+                              
+                                  $('#container').append(data);
+                                  collectPrices();  
+                             }  
+                        });
+}
+function removeModel(id){
+  $('#panel-group-'+id).remove();
+  collectPrices();
+}
+function addElem(product,name,id){
+  event.preventDefault();
+   $.ajax({  
+                              
+                             type:"POST",
+                             url:"addelem.php",   
+                             data:{idelemento:id,producto:product},  
+                               
+                             success:function(data){
+                              
+                                  $('#elem-contain-'+product).append(data);
+                                  collectPrices();  
+                             }  
+                        });
+}
+function removeProcess(id,product){
+     
+      console.log('');
+        event.preventDefault();
+        $('#input_fields_wrap_'+product+'_'+id).find('tr:last').remove(); x--;
+        collectPrices();
+    }
+  function addProcess(id,sel,price,product){
+    wrapper=$("#input_fields_wrap_"+product+'_'+id); 
     event.preventDefault();
         console.log(sel);
          
@@ -925,9 +1108,9 @@ window.onclick = function(event) {
                         '<option>Lazo</option>';
         var new_tr='<tr><td>'+sel+'</td>'+
                    /* '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+ */
-                    '<td><select  class="disabled" name="procesos['+id+']">'+sec_options2+'</select></td>'+ 
+                    '<td><select  class="disabled" name="catalogos-'+id+'[]">'+sec_options2+'</select></td>'+ 
                     '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
-                    '<td><a href="#" onclick=removeProcess('+id+')>Quitar</a></td></tr>';
+                    '<td><a href="#" onclick=removeProcess('+id+','+product+')>Quitar</a></td></tr>';
 
         
 
@@ -937,44 +1120,14 @@ window.onclick = function(event) {
         }  
 collectPrices();
     }
-    function removeProcess(id){
+    function drop(id,product) {
+    document.getElementById("newproces-"+product+'-'+id).classList.toggle("show");
+}
+function removeElement(id,product){
      
       console.log('');
         event.preventDefault();
-        $('#input_fields_wrap_'+id).find('tr:last').remove(); x--;
+        $('#elem-'+product+'-'+id).remove();
         collectPrices();
     }
-    function sendAllData(event){
-              event.preventDefault();
-                    
-                        $.ajax({  
-                              
-                             type:"POST",
-                             url:"editEstimate.php",   
-                             data:$('#general-form').serialize(),  
-                               
-                             success:function(data){
-                              
-                                  $('.col-lg-12').html(data);  
-                             }  
-                        });
-    }
-
-  function collectPrices(){
-      var sum = 0;
-$('.prices').each(function(){
-    sum += parseFloat(this.value);
-});
-$('#total-amount').val(sum);
-$('#CostoF').val(sum);
-
-
-
-  }
-  $('.prices').change(function() {
-  collectPrices();
-});
-
 </script>
- 
-  

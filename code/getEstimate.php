@@ -51,4 +51,6 @@ $query = "SELECT * FROM cotizacion WHERE IDCliente=$clientId ORDER BY IDCotizaci
 <?php } else{?>
 <p style="text-align: center;">Este cliente no tiene cotizaciones </p>
 	<?php } ?>
+
+	
 <br>

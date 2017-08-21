@@ -49,7 +49,7 @@ $(document).ready(function(){
     </div>
 
 </div>
-<form id="new-estim" name="new" action="newEstimate.php" method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
+<form id="new-estim" action="Clientes.php" method="post" onsubmit="saveEstimate(<?=$clientId ?>);">
 <div class="row" style="margin-top: 20px;">
 <input type="hidden" name="clientid" value="<?=$clientId ?>">
 <input type="hidden" name="current_date" value="<?=date("Y-m-d") ?>">
@@ -76,7 +76,7 @@ $(document).ready(function(){
              <div class="col-md-4">
                     <div class="form-group">
                         <label for="rcf1" class="control-label">Costo Unico</label>
-                        <input type="text" class="form-control" id="estcu" name="estcu" readonly="">
+                        <input type="text" class="form-control" id="est-cu" name="est-cu" readonly="">
                     </div>
                 </div>
 
@@ -108,13 +108,6 @@ $(document).ready(function(){
                         <input type="text" class="form-control" id="papel" name="papel" readonly="">
                     </div>
                 </div>
-
-                     <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="rcf1" class="control-label">Costo por Ajuste</label>
-                        <input type="text" class="form-control" id="CAjuste" name="CAjuste" readonly="">
-                    </div>
-                </div>
             
              <div class="col-md-4">
                     <div class="form-group">
@@ -133,14 +126,14 @@ $(document).ready(function(){
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado1" class="control-label">Cantidad</label>
-                        <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
+                        <input type="number" class="form-control" onkeyup="cotizar();" name="qty" id="qty" placeholder="Cantidad" required="true">
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
-                        <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true">
+                        <select type="number" class="form-control" name="descu" id="Descuento" placeholder="Descuento" required="true">
                             <option value="">Seleccionar descuento</option>
                            <?php echo $descu; ?>
                         </select>
@@ -151,8 +144,8 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label for="estado1" class="control-label">Costo Final</label>
 
-                        <input type="hidden" class="form-control" id="est-final" name="est-final" readonly="" required="true">
-                        <h1 type="text" id="final" style="text-align: center;" ></h1>
+                        <input type="hidden" class="form-control" id="est-final" name="est-final" placeholder="Estado" readonly="" required="true">
+                        <h1 id="final-amount" style="text-align: center;"></h1>
 
                     </div>
                 </div>
@@ -170,6 +163,11 @@ $(document).ready(function(){
     </div>
     
 <br>
+
+
+
+
+
 
 
 
@@ -196,9 +194,6 @@ $(document).ready(function(){
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
   </script>
-
-
-
 
 <script>
 
@@ -267,4 +262,5 @@ var ConIva =  (total - conD) * parseFloat(IVA);
 
 
 </script>
+
 
