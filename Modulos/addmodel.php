@@ -109,18 +109,18 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   $procesos=$element['procesos'];
   ?>
   
-<div class ="col-md-12 center-block">
+<div class ="col-md-12 center-block" id="elem-<?=$productId ?>-<?=$idelem ?>">
 
   <br>
 
 <div class="panel panel-info">
-<a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>">
-<div class="panel-heading panel-elem" id="panel-<?=$idelem ?>" style="position: relative; background: #d9edf7;">
+
+<div class="panel-heading panel-elem" id="panel-<?=$idelem ?>" style="position: relative; background: #d9edf7;"><a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>">
 <h4 class="panel-title">
 <?=$row2['Nombre'] ?>
-</h4>
-<div class="indicator" style="display: none;"><img src="../img/save.png"></div>
-</div></a>
+</h4></a>
+<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)"></div>
+</div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
 

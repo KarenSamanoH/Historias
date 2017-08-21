@@ -227,6 +227,7 @@ position: relative;
 }
 .indicator img{
   width: 100%;
+  cursor: pointer;
 }
 .price{
   position: absolute;
@@ -521,18 +522,19 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   $procesos=$element['procesos'];
   ?>
   
-<div class ="col-md-12 center-block">
+<div class ="col-md-12 center-block" id="elem-<?=$productId ?>-<?=$idelem ?>">
 
   <br>
 
 <div class="panel panel-info">
-<a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>">
+
 <div class="panel-heading panel-elem" id="panel-<?=$idelem ?>" style="position: relative; background: #d9edf7;">
+<a data-toggle="collapse" href="#collapse-elem-<?=$productId ?>-<?=$idelem ?>">
 <h4 class="panel-title">
 <?=$row2['Nombre'] ?>
-</h4>
-<div class="indicator" style="display: none;"><img src="../img/save.png"></div>
-</div></a>
+</h4></a>
+<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)"></div>
+</div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
 
@@ -1030,6 +1032,7 @@ function removeModel(id){
   collectPrices();
 }
 function addElem(product,name,id){
+  event.preventDefault();
    $.ajax({  
                               
                              type:"POST",
@@ -1118,5 +1121,11 @@ collectPrices();
     function drop(id,product) {
     document.getElementById("newproces-"+product+'-'+id).classList.toggle("show");
 }
-
+function removeElement(id,product){
+     
+      console.log('');
+        event.preventDefault();
+        $('#elem-'+product+'-'+id).remove();
+        collectPrices();
+    }
 </script>
