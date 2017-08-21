@@ -67,7 +67,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <div class=" col-md-4">
 <img src="../img/22.jpg">
 </div>   
-<div class=" col-md-8">
+<div class=" col-md-8" id="elem-contain-<?=$productId ?>">
 <div class="form">
 
     
@@ -76,7 +76,25 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
     
 
 
-<div class="col-md-12"><h5 class="headerSign">ELEMENTOS</h5></div> 
+<div class="col-md-2">
+  <h5 class="headerSign" style="text-align: left;">    ELEMENTOS</h5>
+</div>
+<div class="col-md-10">
+  <div class="dropdown">
+<button type="button" onclick="dropElems(<?=$productId ?>)" class="dropbtn addelem">Agregar Elemento <span class="glyphicon glyphicon-chevron-down " aria-hidden="true"></span></button>
+  <div id="newelem-<?=$productId ?>" class="dropdown-content">
+  <?php 
+  $getElemsQuery="SELECT * FROM catalogoelemento";
+  $getElems=mysqli_query($conexion, $getElemsQuery);
+  while ($catelem=mysqli_fetch_assoc($getElems)){
+  
+   ?>
+    <a href="#" onclick="addElem(<?=$productId ?>,'<?=$catelem['Nombre'] ?>',<?=$catelem['IDCatElem'] ?>)"><?=$catelem['Nombre'] ?></a>
+    
+    <?php } ?>
+  </div>
+</div>
+</div>
 <?php 
   $elements=$product['contenido'];
   if ($elements!='') {
