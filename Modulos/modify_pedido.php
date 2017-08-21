@@ -291,7 +291,7 @@ position: relative;
   
 }
 .input_fields_wrap{
-  margin-top: 10px;
+  margin-top: 30px!important;
 }
 .input_fields_wrap tr, td{
   padding: 6px!important;
@@ -597,8 +597,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   </div>
 </div>
 </div>
-<br> 
-<br>  
+  
 <table id="input_fields_wrap_<?=$productId ?>_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
 <tr>
 <th>Titulo</th>
@@ -608,8 +607,9 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </tr>
 <?php 
 
-  
+ 
   foreach($procesos as $key3 => $proces){
+
   $getProcesQuery="SELECT * FROM catalogoproceso WHERE IDCatPro=$proces";
   $getProcessCat=mysqli_query($conexion, $getProcesQuery);
    $row3=mysqli_fetch_assoc($getProcessCat);
