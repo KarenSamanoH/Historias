@@ -191,7 +191,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
 <br> 
 <br>  
-<table id="input_fields_wrap_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
+<table id="input_fields_wrap_<?=$productId ?>_<?=$idelem ?>" class="input_fields_wrap" style="width: 98%;text-align: center;">
 <tr>
 <th>Titulo</th>
   <th>Catalogo</th>
@@ -226,7 +226,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   <td><?=$CostoUnitario ?>
   <input type="hidden" class="prices" value="5">
   </td>
-  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>)">Quitar</a></td>
+  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>)">Quitar</a></td>
  </tr>
 <?php } ?> 
 </table>
