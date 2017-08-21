@@ -97,6 +97,10 @@ $("#fecha").datepicker();
   .not-allow{
     cursor:not-allowed!important;
   }
+  .soft{
+    color: #bce8f1!important;
+    font-weight: normal!important;
+  }
 .checgroup{
   
 width: 75px;
@@ -456,11 +460,11 @@ foreach ($details as $key => $product)
 <a data-toggle="collapse" href="#collapse<?=$productId ?>">
 <div class="model-details">
 MODELO: <?=$row4['Modelo'] ?>
-</div><div class="model-details">
+</div><div class="model-details soft">
 DESCUENTO: 
-</div><div class="model-details">
+</div><div class="model-details soft">
 CANTIDAD: <?= $details[$key]['cantidad'] ?>
-</div><div class="model-details">
+</div><div class="model-details soft">
   PRECIO: <?=$details[$key]['costofinal'] ?>
 </div></a><div class="model-details">
   &nbsp <img src="../img/t.png" onclick="removeModel(<?=$productId ?>)">
