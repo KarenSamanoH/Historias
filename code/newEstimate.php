@@ -194,3 +194,73 @@ $(document).ready(function(){
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
   </script>
+
+<script>
+
+function co()
+{
+var Descuento =  document.getElementById("descu").value;
+var IVA =  document.getElementById("est-iva").value;
+var costofinal = document.getElementById("est-final").value;
+var Cantidad = document.getElementById("qty").value;
+var CostoCiento = document.getElementById("est-100").value;
+var CostoMillar = document.getElementById("est-1000").value;
+var CostoUnico = document.getElementById("estcu").value;
+var costounitario = document.getElementById("est-1").value;
+var papel =  document.getElementById("papel").value;
+var CAjuste =  document.getElementById("CAjuste").value;
+var final;
+var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
+
+
+    if (Cantidad >= 0 && Cantidad <= 100)
+    {
+
+ //var total = parseFloat(CostoUnico) + parsefloat(CostoCiento) + parsefloat(CostoMillar) + (parsefloat(Cantidad) * parsefloat(costounitario) + parseFloat(Cantidad) * parsefloat(CAjuste)) + parsefloat(papel); 
+var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
+var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
+var total = Costos + CCA + CanCos + parseFloat(papel) + .58;
+var conD = total * parseFloat(Descuento);
+var ConIva =  (total - conD) * parseFloat(IVA);
+var final = conD  + ConIva;
+
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
+    }
+
+    else if (Cantidad >= 101 && Cantidad <= 999)
+    {
+
+       
+
+var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parsefloat(papel); 
+        var conD = total * parseFloat(Descuento);
+       var ConIva =  (total - conD) * parseFloat(IVA);
+      var final = conD + ConIva;
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
+
+    }
+else if (Cantidad >= 1000 && Cantidad <= 20000){
+
+
+ var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+ var conD = total * parseFloat(Descuento);
+var ConIva =  (total - conD) * parseFloat(IVA);
+ var final = conD + ConIva;
+
+
+      $('#final').html(final.toFixed(2));
+      $('#est-final').val(final.toFixed(2));
+
+}
+
+}
+
+
+    
+
+
+</script>
+
+
