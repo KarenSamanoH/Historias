@@ -479,7 +479,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <div class=" col-md-4">
 <img src="../img/22.jpg">
 </div>   
-<div class=" col-md-8" id="elem-contain-<?=$productId ?>">
+<div class=" col-md-8" >
 <div class="form">
 
     
@@ -508,6 +508,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   </div>
 </div>
 </div>
+<div class="container col-lg-12" id="elem-contain-<?=$productId ?>">
 <?php 
   $elements=$product['contenido'];
   if ($elements!='') {
@@ -657,7 +658,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <br>
   <?php } } else{ ?>
   <p>Este producto no contiene elementos </p>
-  <?php } ?>           
+  <?php } ?> 
+  </div>          
 </div>
         
 </div>
