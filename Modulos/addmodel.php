@@ -56,7 +56,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div><div class="model-details soft">
   PRECIO: <?=$details[$key]['costofinal'] ?>
 </div></a><div class="model-details">
-  &nbsp <img src="../img/t.png" onclick="removeModel(<?=$productId ?>)">
+  &nbsp <img src="../img/tf.png" onclick="removeModel(<?=$productId ?>)" title="Quitar este modelo" >
 </div>
 <input type="hidden" class="models" name="models[]" value="<?=$productId ?>">
 <div class="indicator" style="display: none;"><img src="../img/save.png"></div>
@@ -119,7 +119,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <h4 class="panel-title">
 <?=$row2['Nombre'] ?>
 </h4></a>
-<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)"></div>
+<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)" title="Quitar este elemento"></div>
 </div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">

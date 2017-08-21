@@ -35,7 +35,7 @@ include("../code/conexion.php");
 <h4 class="panel-title">
 <?=$row2['Nombre'] ?>
 </h4></a>
-<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)"></div>
+<div class="indicator" style=""><img src="../img/t.png" onclick="removeElement(<?=$idelem ?>,<?=$productId ?>)" title="Quitar este elemento"></div>
 </div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
