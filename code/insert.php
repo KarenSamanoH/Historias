@@ -27,7 +27,7 @@ $IDAgente = mysqli_real_escape_string($conexion, $_POST["IDAgente"]);
   
   if(mysqli_query($conexion, $query))
   {
-   echo "Cliente agregado!";
+   echo "¡Cliente agregado!";
   }
  }
 
