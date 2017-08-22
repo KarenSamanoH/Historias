@@ -123,14 +123,7 @@ $(document).ready(function(){
                         <input type="text" class="form-control" id="datepicker" name="event_date" required="true">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="estado1" class="control-label">Cantidad</label>
-                        <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
+                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
                         <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true">
@@ -139,6 +132,14 @@ $(document).ready(function(){
                         </select>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="estado1" class="control-label">Cantidad</label>
+                        <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
+                    </div>
+                </div>
+
+               
 
                   <div class="col-md-4">
                     <div class="form-group">
