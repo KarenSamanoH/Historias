@@ -39,7 +39,7 @@ include("../code/conexion.php");
 </div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
-
+<input type="hidden" name="elements-<?=$productId ?>[<?=$idelem; ?>]" value="<?=$idelem; ?>">
     
 <div class="row ">
 <div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div> 
@@ -99,7 +99,7 @@ include("../code/conexion.php");
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
@@ -131,13 +131,13 @@ include("../code/conexion.php");
   $IDCatPro=$row3['IDCatPro'];
   $CostoUnitario=$row3['CostoUnitario'];
   ?>
- 
+<input type="hidden" name="procesos-<?=$productId ?>-<?=$idelem ?>[]" value="<?=$idproces ?>">
   <tr>
   <td>
     <?=$row3['Nombre'] ?>
   </td>
   
-  <td><select name="catalogos-<?=$idelem ?>[]">
+  <td><select name="catalogos-<?=$productId ?>-<?=$idelem ?>[]">
     <option>Conchita</option>
     <option>Galleta</option>
     <option>Lazo</option>

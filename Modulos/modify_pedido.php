@@ -441,6 +441,7 @@ position: relative;
  <form id="general-form" method="post" onsubmit="sendAllData(event);">
 <div class="container col-lg-12" id="container">
 <input type="hidden" name="total-amount" id="total-amount">
+<input type="hidden" name="id-cotiza"  value="<?=$cotizaId ?>">
 <?php
 if ($getdata['detalles']!='') {
   
@@ -538,7 +539,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
-
+<input type="hidden" name="elements-<?=$productId ?>[<?=$idelem; ?>]" value="<?=$idelem; ?>">
     
 <div class="row ">
 <div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div> 
@@ -598,7 +599,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
@@ -614,7 +615,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </tr>
 <?php 
 
- 
+ if ($element['procesos']!='') {
+   
   foreach($procesos as $key3 => $proces){
 
   $getProcesQuery="SELECT * FROM catalogoproceso WHERE IDCatPro=$proces";
@@ -626,13 +628,13 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   $IDCatPro=$row3['IDCatPro'];
   $CostoUnitario=$row3['CostoUnitario'];
   ?>
- 
+<input type="hidden" name="procesos-<?=$productId ?>-<?=$idelem ?>[]" value="<?=$idproces ?>">
   <tr>
   <td>
     <?=$row3['Nombre'] ?>
   </td>
   
-  <td><select name="catalogos-<?=$idelem ?>[]">
+  <td><select name="catalogos-<?=$productId ?>-<?=$idelem ?>[]">
     <option>Conchita</option>
     <option>Galleta</option>
     <option>Lazo</option>
@@ -643,7 +645,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   </td>
   <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>)">Quitar</a></td>
  </tr>
-<?php } ?> 
+<?php } }?> 
 </table>
 
       
@@ -1009,7 +1011,9 @@ $(document).ready(function(){
     $(document).on("click", ".result p:not(.not-allow)", function(){
         $(this).parents(".search-box").find('input[type="text"]').val('');
         $(this).parent(".result").empty();
+
     });
+    
 });
 
 function fillData(id){
@@ -1055,7 +1059,7 @@ function removeProcess(id,product){
         $('#input_fields_wrap_'+product+'_'+id).find('tr:last').remove(); x--;
         collectPrices();
     }
-  function addProcess(id,sel,price,product){
+  function addProcess(id,sel,price,product,idpro){
     wrapper=$("#input_fields_wrap_"+product+'_'+id); 
     event.preventDefault();
         console.log(sel);
@@ -1107,8 +1111,10 @@ function removeProcess(id,product){
                         '<option>Conchita</option>'+
                         '<option>Lazo</option>';
         var new_tr='<tr><td>'+sel+'</td>'+
+        '<input type="hidden" name="procesos-'+product+'-'+id+'[]" value="'+idpro+'">'+
+
                    /* '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+ */
-                    '<td><select  class="disabled" name="catalogos-'+id+'[]">'+sec_options2+'</select></td>'+ 
+                    '<td><select  class="disabled" name="catalogos-'+product+'-'+id+'[]">'+sec_options2+'</select></td>'+ 
                     '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
                     '<td><a href="#" onclick=removeProcess('+id+','+product+')>Quitar</a></td></tr>';
 
