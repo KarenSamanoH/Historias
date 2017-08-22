@@ -21,3 +21,4 @@ if( !session_id() )
 
 
 ?>
+<div class="backdrop"></div>

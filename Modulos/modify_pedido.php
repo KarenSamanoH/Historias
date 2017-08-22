@@ -31,20 +31,10 @@ while($row = mysqli_fetch_array($result))
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Historias en papel</title>
-<!--
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
---><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>  <!--
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-<link href="../css/font-awesome.css" rel="stylesheet" type="text/css"/>
-<link href="../css/historias.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
-
---><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -53,39 +43,6 @@ while($row = mysqli_fetch_array($result))
 <link href="../css/historias.css" rel="stylesheet" type="text/css"/>
 <script src="../js/jquery.js" type="text/javascript"></script>
 <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
-<!--<script>
-$( function() {
-$( "#datepicker" ).datepicker();
-} );
-</script>-->
-
-<!--
-
-<script>
-$.datepicker.regional['es'] = {
-closeText: 'Cerrar',
-
-prevText: '< Ant',
-nextText: 'Sig >',
-currentText: 'Hoy',
-monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-weekHeader: 'Sm',
-dateFormat: 'dd/mm/yy',
-firstDay: 1,
-isRTL: false,
-showMonthAfterYear: false,
-yearSuffix: ''
-};
-$.datepicker.setDefaults($.datepicker.regional['es']);
-$(function () {
-$("#fecha").datepicker();
-});
-</script>-->
-
 
 <!-- Custom Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -94,245 +51,7 @@ $("#fecha").datepicker();
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 <!-- JS--> 
 <style type="text/css">
-  .not-allow{
-    cursor:not-allowed!important;
-  }
-  .soft{
-    color: #bce8f1!important;
-    font-weight: normal!important;
-  }
-.checgroup{
   
-width: 75px;
-height: 50px;
-display: inline-block;
-font-size: 11px;
-font-weight: bold;
-
-position: relative;
--webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; 
-}
-.controls{
-  width: 45px;
-  position: relative;
-}
-.iteration{
-  background: #000; width: 18px; height: 18px; border-radius: 64px; color: #fff;
-  position: absolute;
-  top: 14px;
-  right: 15px;
-  line-height:  18px;
-
-
-}
-.less{
-   width: 18px; height: 18px; color: #000;
-  display: inline-block;
-  
-  margin-right: -2px;
-  padding: 0;
-  cursor: pointer;
-  background-image: url('../img/less.png');
-  background-position: center;
-  background-size: contain;
-  
-
-}
-.more{
-   width: 18px; height: 18px;  color: #000;
-  display: inline-block;
-  cursor: pointer;
-  margin-left: -2px;
-  padding: 0;
-  pointer-events: default;
-  background-image: url('../img/more.png');
-  background-position: center;
-  background-size: contain;
-  font-family: "helvetica";
-}
-.checgroup input{
-  display: none;
-}
-.checkicon{
-  width: 30px;
-  height: 30px;
-  background-image: url('../img/off.png');
-  background-position: center;
-  background-size: contain;
-  margin: 0 auto;
-  cursor: pointer;
-  
-}
-.checkicon-on{
-  width: 30px;
-  height: 30px;
-  background-image: url('../img/on.png');
-  background-position: center;
-  background-size: contain;
-  margin: 0 auto;
-  
-  
-}
-.checkicon-on-blue{
-  background-image: url('../images/completed.png');
-}
-.checkicon-on-green{
-  background-image: url('../images/ontime.png');
-}
-.checkicon-on-red{
-  background-image: url('../images/not.png');
-}
-.checkicon-on-yellow{
-  background-image: url('../images/late.png');
-}
-.checktext{
-  margin-top: 5px;
-}
-#mainNav{
-  padding:0!important;
-  margin: 0!important;
-}
-.line {
-    width: 97%;
-    position: relative;
-    border-bottom: 1px solid #ccc;
-    margin: 10px;
-}
-.separator {
-    padding: 0 10px;
-    margin-top: 10px;
-    background: #fff;
-    top: -10px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    color: #808080;
-    font-family: "Helvetica";
-    font-weight: bold;
-}
-.img-circle{
-  width: 35%!important;
-}
-.indicator{
-  position: absolute;
-  right: 7px;
-  top: 4px;
-  width: 30px;
-  height: 30px;
-}
-.indicator img{
-  width: 100%;
-  cursor: pointer;
-}
-.price{
-  position: absolute;
-  width: 75px;
-  height: 25px;
-  line-height: 25px;
-  top:-25px;
-  font-size: 15px;
-  text-align: center;
-}
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding:5px 16px;
-    font-size: 16px;
-    width: 180px;
-    border: none;
-    cursor: pointer;
-    
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    text-align: right;
-
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    width: 100%;
-    overflow: auto;
-    box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.86);
--moz-box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.86);
--webkit-box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.86);
-    z-index: 1;
-    text-align: left;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-  border:1px solid transparent;
-    text-decoration: none;
-    display: inline-block;
-}
-.dropdown-content a:hover{
-   background-color: #d9edf7;
-    border:1px solid #bce8f1;
-}
-
-
-
-.show {display:block;}
-.input_fields_wrap th{
-  text-align: center;
-  padding: 6px!important;
-  border:1px solid #f2f2f2;
-  
-}
-.input_fields_wrap{
-  margin-top: 30px!important;
-}
-.input_fields_wrap tr, td{
-  padding: 6px!important;
-   border:1px solid #f2f2f2;
-}
-.resume-heading{
-  padding-bottom: 0!important;
-}
-.input_fields_wrap tr:nth-child(even){background: #f2f2f2}
-.col-md-4 img{
-  width: 80%;
-}
-.panel-body-parent{
-  background:#F7F7F7!important;
-}
-.model-details{
-  display: inline-block;
-  width: 20%;
-  color: #fff;
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 18px;
-  position: relative;
-}
-.model-details img{
-  width: 30px;
-  position: absolute;
-  top: -3px;
-  right: 0;
-  cursor: pointer;
-}
-.addelem{
-  background: #5bc0de!important;
-  width: 190px!important;
-
-}
 </style>
 </head>
 
@@ -481,7 +200,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <img src="../img/22.jpg">
 </div>   
 <div class=" col-md-8" >
-<div class="form">
+
 
     
       
@@ -663,10 +382,10 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   <p>Este producto no contiene elementos </p>
   <?php } ?> 
   </div>          
-</div>
+
         
 </div>
-        </form>
+        
 
 
 </div>
@@ -676,8 +395,12 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <?php } }else{ ?>  
 <p>No hay productos en esta cotizacion</p>
 <?php }?>
-</div>
-
+     </div>
+</form>
+    
+        </div>
+    </div>
+    
 </div>
  
 
@@ -685,9 +408,22 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <div class="clearfix"></div>
 </div>
 </div>
-
+ 
+<div class="success-modal">
+  <div class="saveloader">
+  
+    <img src="../img/loader.gif">
+    <p style="text-align: center; font-weight: bold;">Guardando..</p>
+  </div>
+  <div class="savesucces" style="display: none;">
+  
+    <img src="../img/success.png">
+    <p style="text-align: center; font-weight: bold;">Listo!</p>
+  </div>
+  </div>
 
 </body>
+
 </html>
 
 <!-- Autocomplete invitaciones -->
@@ -957,7 +693,7 @@ window.onclick = function(event) {
     
     function sendAllData(event){
               event.preventDefault();
-                    
+                    showLoad();
                         $.ajax({  
                               
                              type:"POST",
@@ -965,8 +701,13 @@ window.onclick = function(event) {
                              data:$('#general-form').serialize(),  
                                
                              success:function(data){
+                               $('.saveloader').hide();
+                              $('.savesucces').show();
                               
-                                  $('.col-lg-12').html(data);  
+
+                                setTimeout(function(){ location.reload(); }, 1000);
+                                 
+
                              }  
                         });
     }
@@ -1137,4 +878,16 @@ function removeElement(id,product){
         $('#elem-'+product+'-'+id).remove();
         collectPrices();
     }
+
+    function close_box()
+      {
+        $('.backdrop, .success-modal').animate({'opacity':'0'}, 300, 'linear', function(){
+          $('.backdrop, .success-modal').css('display', 'none');
+        });success-modal
+      }
+  function showLoad(){
+        $('.backdrop, .success-modal').animate({'opacity':'.50'}, 300, 'linear');
+          $('.success-modal').animate({'opacity':'1.00'}, 300, 'linear');
+          $('.backdrop, .success-modal').css('display', 'block');
+      }
 </script>
