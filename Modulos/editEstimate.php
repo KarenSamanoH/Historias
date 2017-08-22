@@ -12,6 +12,12 @@ foreach ($models as  $model) {
 		
 		
 		$content[$model]['contenido'][$key]['procesos']=$procesos;
+		$content[$model]['contenido'][$key]['datos']['material']=$_POST['material-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['alto']=$_POST['alto-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['ancho']=$_POST['ancho-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['cantidad']=$_POST['cantidad-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['costoMod']=$_POST['costoMod-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['costoFinal']=$_POST['costoFinal-'.$model.'-'.$elem];
 	} 
 	
 	$content[$model]['cantidad']=45;
@@ -31,7 +37,8 @@ $result=mysqli_query($conexion,$update_query);
 	if ($result) {
 		echo "todo salio bien";
 	} else{
-		echo mysqli_error;
+		echo mysqli_error($conexion);
+		echo $info_jsdon;
 			}
 
 ?>

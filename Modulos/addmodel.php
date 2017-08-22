@@ -2,7 +2,14 @@
 
 include("../code/conexion.php");
     $idprod=$_POST['idmodelo'];
+$query = "SELECT * FROM catalogomaterial";
+$result = mysqli_query($conexion, $query);
+$output = '';
 
+while($row = mysqli_fetch_array($result))
+{
+ $output .= '<option value="'.$row["IDCatMat"].'">'.$row["Nombre1"].'</option>'; 
+}
 
     $getelemquery="SELECT id_elemento_linea,IDCatElem FROM elementos_linea WHERE IDLinea=$idprod";
     $getelems=mysqli_query($conexion, $getelemquery);
@@ -134,7 +141,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 
 <div class="form-group">
 <label for="Material" class="control-label">Material</label>
-<select name="materiales[<?=$productId ?>]" id="Nombre1" class="form-control" placeholder='Material' >
+<select name="material-<?=$productId ?>-<?=$idelem; ?>" id="Nombre1" class="form-control" placeholder='Material' >
 <?php echo $output; ?>
 </select>
 </div>
@@ -143,12 +150,12 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 
 <div class="form-group">
  <label for="Alto" class="control-label">Alto</label>
-<input class="form-control prices" type="number" name="altos[<?=$productId ?>]" id="Alto" placeholder="Alto" value="0">
+<input class="form-control prices" type="number" name="alto-<?=$productId ?>-<?=$idelem; ?>" id="Alto" placeholder="Alto" value="0">
 </div>
 
 <div class="form-group">
 <label for="Ancho" class="control-label">Ancho</label>
-<input class="form-control prices" type="number" name="anchos[<?=$productId ?>]" id="Ancho" placeholder="Ancho" value="0">
+<input class="form-control prices" type="number" name="ancho-<?=$productId ?>-<?=$idelem; ?>" id="Ancho" placeholder="Ancho" value="0">
 </div>
     
 </div>
@@ -158,17 +165,17 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
         
        <div class="form-group">
            <label for="Cantidad" class="control-label">Cantidad</label>
-<input class="form-control prices" type="number" name="cantidades[<?=$productId ?>]" id="Cantidad" placeholder="Cantidad" value="<?= $details[$key]['cantidad'] ?>">
+<input class="form-control prices" type="number" name="cantidad-<?=$productId ?>-<?=$idelem; ?>" id="Cantidad" placeholder="Cantidad" value="<?= $details[$key]['cantidad'] ?>">
 </div>
 
 <div class="form-group ">
 <label for="Costo" class="control-label">Costo del papel</label>
-<input class="form-control prices" type="number" name="costosMod[<?=$productId ?>]" id="CostoMod" value="<?=$details[$key]['papel'] ?>" placeholder="$">
+<input class="form-control prices" type="number" name="costoMod-<?=$productId ?>-<?=$idelem; ?>" id="CostoMod" value="<?=$details[$key]['papel'] ?>" placeholder="$">
 </div>
     
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final</label>
-<input class="form-control prices" type="number" name="costosFinales[<?=$productId ?>]" id="CostoFinal" value="<?=$details[$key]['costofinal'] ?>" placeholder="$ Final">
+<input class="form-control prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="CostoFinal" value="<?=$details[$key]['costofinal'] ?>" placeholder="$ Final">
 </div> 
         </div>
 <div class="col-md-2">
