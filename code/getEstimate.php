@@ -34,7 +34,7 @@ $query = "SELECT * FROM cotizacion WHERE IDCliente=$clientId ORDER BY IDCotizaci
 		<td><?=$row['IDCliente'] ?></td>
 		<td><?=$row['FechaEvento'] ?></td>
 		<td><?=$row['CostoFinal'] ?></td>
-		<td><button type="button" class="btn btn-warning btn-xs " onclick="modifiEstimate(<?=$row['IDCotizacion'] ?>)">Modificar</button></td>
+		<td><button type="button" class="btn btn-warning btn-xs " onclick="modifiEstimate(<?=$row['IDCotizacion'] ?>,<?=$clientId ?>)">Modificar</button></td>
 		<td><button type="button" class="btn btn-info btn-xs" >Realizar Pedido</button></td>
 
 	</tr>

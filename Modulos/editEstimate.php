@@ -32,7 +32,7 @@ $info_jsdon=json_encode($content);
 echo "<pre>";
 print_r($content);
 		echo "</pre>";
-$update_query="UPDATE cotizacion SET detalles='$info_jsdon' WHERE IDCotizacion=$idcotiza";
+$update_query="UPDATE cotizacion SET detalles='$info_jsdon', CostoFinal=$total WHERE IDCotizacion=$idcotiza";
 $result=mysqli_query($conexion,$update_query);
 	if ($result) {
 		echo "todo salio bien";

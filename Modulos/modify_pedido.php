@@ -1,6 +1,6 @@
 <?php include("../code/conexion.php");
 $cotizaId=$_POST['id-cotizacion'];
-
+$client=$_POST['client'];
 $data_query="SELECT * FROM cotizacion WHERE IDCotizacion=$cotizaId";
 
 
@@ -41,6 +41,7 @@ while($row = mysqli_fetch_array($result))
 <link href="../css/botones.css" rel="stylesheet" type="text/css"/>
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
 <link href="../css/historias.css" rel="stylesheet" type="text/css"/>
+<link href="../css/modify.css" rel="stylesheet" type="text/css"/>
 <script src="../js/jquery.js" type="text/javascript"></script>
 <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
@@ -144,7 +145,7 @@ while($row = mysqli_fetch_array($result))
 	<div class="tab-content" align="center">
 <div class="tab-pane active col-xs-12" role="tabpanel" id="invitacion">
 <h4 id="message" style="display: none;color: red;">Debes agregar al menos un producto</h4>
- <form id="general-form" method="post" onsubmit="sendAllData(event);">
+ <form id="general-form" method="post" onsubmit="sendAllData(event,<?=$client ?>);">
 <div class="col-lg-12" id="container">
 <input type="hidden" name="total-amount" id="total-amount">
 <input type="hidden" name="id-cotiza"  value="<?=$cotizaId ?>">
@@ -678,7 +679,7 @@ window.onclick = function(event) {
     
 
     
-    function sendAllData(event){
+    function sendAllData(event,id){
       event.preventDefault();
         var valueArray = $('.models').map(function() {
     return this.value;
@@ -699,9 +700,9 @@ window.onclick = function(event) {
                              success:function(data){
                                $('.saveloader').hide();
                               $('.savesucces').show();
-                              
-
-                                setTimeout(function(){ location.href='Clientes.php'; }, 1000);
+                                
+                               
+                                setTimeout(function(){ location.href='Clientes.php?cotizacion='+id; }, 1000);
                                  
 
                              }  
