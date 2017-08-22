@@ -97,22 +97,9 @@ while($row = mysqli_fetch_array($result))
 <div class="panel-heading resume-heading">
 <div class="row">
 <div class="col-lg-12">
-<div class="col-xs-12 col-sm-2">
-<figure>
-<img class="img-circle img-responsive" alt="cotizacion" src="../img/cot.png">
-</figure>
 
-<div class="row">
-<div class="col-xs-12 social-btns">
 
-<div class="col-xs-12 col-md-1 col-lg-1 social-btn-holder">
-</div>
-</div>
-</div>
-
-</div>
-
-<div class="col-xs-12 col-sm-10">
+<div class="col-xs-12 col-sm-12">
 
 
 
@@ -136,12 +123,12 @@ while($row = mysqli_fetch_array($result))
 <input  type="submit" class="btn btn-success" id="Pedido" name="Pedido" value="  Enviar pedido  ">
 </div>
 
-<div class="form-group col-xs-2">
+<div class="form-group col-xs-3">
 <p style="margin: 0;">&nbsp</p>
 
 <input  type="submit" class="btn btn-info" id="Coti" onclick="$('#general-form').submit();" name="Coti" value="Guardar cotización" >
 </div>
-<div class="form-group col-xs-2">
+<div class="form-group col-xs-3">
 <div class="search-box" style="margin-top: 25px;">
     <input type="text"  autocomplete="off" placeholder="Agregar otro modelo" />
         <div class="result"></div>
@@ -156,9 +143,9 @@ while($row = mysqli_fetch_array($result))
 <div class="container" style="width: 100%!important;">
 	<div class="tab-content" align="center">
 <div class="tab-pane active col-xs-12" role="tabpanel" id="invitacion">
-
+<h4 id="message" style="display: none;color: red;">Debes agregar al menos un producto</h4>
  <form id="general-form" method="post" onsubmit="sendAllData(event);">
-<div class="container col-lg-12" id="container">
+<div class="col-lg-12" id="container">
 <input type="hidden" name="total-amount" id="total-amount">
 <input type="hidden" name="id-cotiza"  value="<?=$cotizaId ?>">
 <?php
@@ -228,7 +215,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   </div>
 </div>
 </div>
-<div class="container col-lg-12" id="elem-contain-<?=$productId ?>">
+<div class="col-lg-12" id="elem-contain-<?=$productId ?>">
 <?php 
   $elements=$product['contenido'];
   if ($elements!='') {
@@ -692,7 +679,16 @@ window.onclick = function(event) {
 
     
     function sendAllData(event){
-              event.preventDefault();
+      event.preventDefault();
+        var valueArray = $('.models').map(function() {
+    return this.value;
+}).get();
+      console.log(valueArray);
+      if (valueArray=='') {
+        $('#message').show();
+        setTimeout(function(){ $('#message').hide(); }, 2000);
+      }else{
+        
                     showLoad();
                         $.ajax({  
                               
@@ -705,11 +701,13 @@ window.onclick = function(event) {
                               $('.savesucces').show();
                               
 
-                                setTimeout(function(){ location.reload(); }, 1000);
+                                setTimeout(function(){ location.href='Clientes.php'; }, 1000);
                                  
 
                              }  
                         });
+      }
+              
     }
 
   function collectPrices(){
@@ -890,4 +888,5 @@ function removeElement(id,product){
           $('.success-modal').animate({'opacity':'1.00'}, 300, 'linear');
           $('.backdrop, .success-modal').css('display', 'block');
       }
+
 </script>

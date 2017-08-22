@@ -339,7 +339,7 @@ $resultado=mysqli_query($conexion, $query2);
 while($row2 = mysqli_fetch_assoc($resultado)){ ?>
     
  <div class="btn-group" data-toggle="buttons">
-<label class="btn btn-info   <?=($flag==true)? active : '  ' ?>">				
+<label class="btn btn-info   <?=($flag==true)? 'active' : '  ' ?>">				
 <span class="">
 <i class="fa fa-check-square" aria-hidden="true"> </i><?=$row2 ['Nombre'] ?>  
 </span>

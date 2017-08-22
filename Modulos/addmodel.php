@@ -6,9 +6,9 @@ $query = "SELECT * FROM catalogomaterial";
 $result = mysqli_query($conexion, $query);
 $output = '';
 
-while($row = mysqli_fetch_array($result))
+while($row0 = mysqli_fetch_array($result))
 {
- $output .= '<option value="'.$row["IDCatMat"].'">'.$row["Nombre1"].'</option>'; 
+ $output .= '<option value="'.$row0["IDCatMat"].'">'.$row0["Nombre1"].'</option>'; 
 }
 
     $getelemquery="SELECT id_elemento_linea,IDCatElem FROM elementos_linea WHERE IDLinea=$idprod";
@@ -18,8 +18,8 @@ while($row = mysqli_fetch_array($result))
     while ($r=mysqli_fetch_assoc($getelems)) {
         $row[$r['id_elemento_linea']]=$r;
     }
-
-
+if (isset($row)) {
+ 
 foreach ($row as $key => $ro1) {
     
     $elements[]=$ro1['IDCatElem'];
@@ -37,6 +37,11 @@ foreach ($row as $key => $ro1) {
     }
     
 }
+}else{
+   $elements=array();
+   $processes=array();
+}
+
 
 
 $details=array($idprod =>array( 'contenido'=>$processes,'cantidad'=>8, 'descuento'=>8,'costofinal'=>8, 'papel'=>8) );
@@ -102,7 +107,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   </div>
 </div>
 </div>
-<div class="container col-lg-12" id="elem-contain-<?=$productId ?>">
+<div class="col-lg-12" id="elem-contain-<?=$productId ?>">
 <?php 
   $elements=$product['contenido'];
   if ($elements!='') {

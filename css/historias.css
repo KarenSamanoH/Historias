@@ -1252,3 +1252,24 @@ position: relative;
       width: 80%;
       margin: 0 auto;
     }
+    @media (min-width: 768px) {
+      .model-details{
+        font-size: 14px;
+      }
+      .model-details img{
+  
+  top: -5px;
+ 
+}
+.search-box {
+       width: 100%;
+    }
+    .dropdown {
+  
+
+}
+.dropdown-content {
+    z-index: 999999;
+
+}
+    }

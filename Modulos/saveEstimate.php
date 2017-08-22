@@ -41,9 +41,15 @@ foreach ($row as $key => $ro1) {
 	
 	while ($row2=mysqli_fetch_assoc($getprocs)) {
 		$processes[$ro1['IDCatElem']]['procesos'][]=$row2['IDCatPro'];
-
+		
 	}
-	
+	$processes[$ro1['IDCatElem']]['datos']['material']=1;
+		
+	$processes[$ro1['IDCatElem']]['datos']['alto']=4;
+		$processes[$ro1['IDCatElem']]['datos']['ancho']=5;
+		$processes[$ro1['IDCatElem']]['datos']['cantidad']=$qty;
+		$processes[$ro1['IDCatElem']]['datos']['costoMod']=10;
+		$processes[$ro1['IDCatElem']]['datos']['costoFinal']=$final;
 }
 
 
