@@ -7,7 +7,14 @@ include("../code/conexion.php");
     $getelemquery="SELECT * FROM catalogoelemento WHERE IDCatElem=$idelem";
     $getelems=mysqli_query($conexion, $getelemquery);
     //print_r($getelems);
-    
+    $query = "SELECT * FROM catalogomaterial";
+$result = mysqli_query($conexion, $query);
+$output = '';
+
+while($row = mysqli_fetch_array($result))
+{
+ $output .= '<option value="'.$row["IDCatMat"].'">'.$row["Nombre1"].'</option>'; 
+}
     ?>
     
 
@@ -39,7 +46,7 @@ include("../code/conexion.php");
 </div>
 <div id="collapse-elem-<?=$productId ?>-<?=$idelem ?>" class="panel-collapse collapse">
 <div class="panel-body">
-
+<input type="hidden" name="elements-<?=$productId ?>[<?=$idelem; ?>]" value="<?=$idelem; ?>">
     
 <div class="row ">
 <div class="col-md-12"><h5 class="headerSign">Caracteristicas</h5></div> 
@@ -49,7 +56,7 @@ include("../code/conexion.php");
 
 <div class="form-group">
 <label for="Material" class="control-label">Material</label>
-<select name="materiales[<?=$productId ?>]" id="Nombre1" class="form-control" placeholder='Material' >
+<select name="material-<?=$productId ?>-<?=$idelem; ?>" id="Nombre1" class="form-control" placeholder='Material' >
 <?php echo $output; ?>
 </select>
 </div>
@@ -58,12 +65,12 @@ include("../code/conexion.php");
 
 <div class="form-group">
  <label for="Alto" class="control-label">Alto</label>
-<input class="form-control prices" type="number" name="altos[<?=$productId ?>]" id="Alto" placeholder="Alto" value="0">
+<input class="form-control prices" type="number" name="alto-<?=$productId ?>-<?=$idelem; ?>" id="Alto" placeholder="Alto" value="0">
 </div>
 
 <div class="form-group">
 <label for="Ancho" class="control-label">Ancho</label>
-<input class="form-control prices" type="number" name="anchos[<?=$productId ?>]" id="Ancho" placeholder="Ancho" value="0">
+<input class="form-control prices" type="number" name="ancho-<?=$productId ?>-<?=$idelem; ?>" id="Ancho" placeholder="Ancho" value="0">
 </div>
     
 </div>
@@ -73,17 +80,17 @@ include("../code/conexion.php");
         
        <div class="form-group">
            <label for="Cantidad" class="control-label">Cantidad</label>
-<input class="form-control prices" type="number" name="cantidades[<?=$productId ?>]" id="Cantidad" placeholder="Cantidad" value="">
+<input class="form-control prices" type="number" name="cantidad-<?=$productId ?>-<?=$idelem; ?>" id="Cantidad" placeholder="Cantidad" value="">
 </div>
 
 <div class="form-group ">
 <label for="Costo" class="control-label">Costo del papel</label>
-<input class="form-control prices" type="number" name="costosMod[<?=$productId ?>]" id="CostoMod" value="" placeholder="$">
+<input class="form-control prices" type="number" name="costoMod-<?=$productId ?>-<?=$idelem; ?>" id="CostoMod" value="" placeholder="$">
 </div>
     
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final</label>
-<input class="form-control prices" type="number" name="costosFinales[<?=$productId ?>]" id="CostoFinal" value="" placeholder="$ Final">
+<input class="form-control prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="CostoFinal" value="" placeholder="$ Final">
 </div> 
         </div>
 <div class="col-md-2">
@@ -99,7 +106,7 @@ include("../code/conexion.php");
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
@@ -131,13 +138,13 @@ include("../code/conexion.php");
   $IDCatPro=$row3['IDCatPro'];
   $CostoUnitario=$row3['CostoUnitario'];
   ?>
- 
+<input type="hidden" name="procesos-<?=$productId ?>-<?=$idelem ?>[]" value="<?=$idproces ?>">
   <tr>
   <td>
     <?=$row3['Nombre'] ?>
   </td>
   
-  <td><select name="catalogos-<?=$idelem ?>[]">
+  <td><select name="catalogos-<?=$productId ?>-<?=$idelem ?>[]">
     <option>Conchita</option>
     <option>Galleta</option>
     <option>Lazo</option>
