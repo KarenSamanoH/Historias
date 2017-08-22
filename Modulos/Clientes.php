@@ -655,10 +655,10 @@ $('#CAjuste').val(model.CAjuste);
 
   console.log(model.CostoFinal);
 }
-function modifiEstimate(idc){
+function modifiEstimate(idc,client){
   console.log(idc);
   
-    $('#send-'+idc).html('<input type="hidden" value='+idc+' name="id-cotizacion">').submit();
+    $('#send-'+idc).html('<input type="hidden" value='+idc+' name="id-cotizacion"><input type="hidden" value='+client+' name="client">').submit();
    
 }
 function saveEstimate(id){
@@ -699,6 +699,13 @@ $(document).ready(function(){
   $('#action').val("Agregar");
   $('#operation2').val("Add");
  });
+ 
+  var item_id = querystring('cotizacion')[0];
+
+console.log(item_id)
+if (item_id!='') {
+   showEstimates(item_id);
+}
 
  
  $(document).on('submit', '#empresa_form',function(event){
@@ -736,7 +743,14 @@ $(document).ready(function(){
   }
   });
    });
- 
+
+ function querystring(key) {
+   var re=new RegExp('(?:\\?|&)'+key+'=(.*?)(?=&|$)','gi');
+   var r=[], m;
+   while ((m=re.exec(document.location.search)) != null) r[r.length]=m[1];
+   return r;
+}
+
  </script>
 
  
