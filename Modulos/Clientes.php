@@ -263,7 +263,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
           </div>
           <div class="panel-collapse collapse" id="panel-1">
             <div class="panel-body">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7H4OmX2NxwM?rel=0" frameborder="0" allowfullscreen></iframe>            </div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C7Rd_fbyX8o" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
         <div class="panel panel-default">
@@ -274,19 +274,18 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
           </div>
           <div class="panel-collapse collapse" id="panel-2">
             <div class="panel-body">
-              Panel 2
-            </div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AZUgeFiyd50" frameborder="0" allowfullscreen></iframe>            </div>
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">
-              <a href="#panel-3" data-parent="#accordion" data-toggle="collapse">¿Cómo editar la info. de un cliente?</a>
+              <a href="#panel-3" data-parent="#accordion" data-toggle="collapse">¿Cómo editar la info. de un cliente o eliminarlo?</a>
             </h2>
           </div>
           <div class="panel-collapse collapse" id="panel-3">
             <div class="panel-body">
-              Panel 3
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/LSJx8ZMMMfI?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -507,7 +506,6 @@ $(document).on('submit', '#product_form', function(event){
   
   
   var form_data = $(this).serialize();
-  console.log(IDEmpresa+Nombre1+TipoEvento);
   if(IDEmpresa !== '' && Nombre1 !== '' && TipoEvento !=='')
   {
    $.ajax({
@@ -518,7 +516,7 @@ $(document).on('submit', '#product_form', function(event){
     {
      swal(data);
      $('#product_form')[0].reset();
-     
+
      $('#AgregarModal').modal('hide');
      $('#cliente_info').bootgrid('reload');
     }
@@ -579,7 +577,7 @@ $('#Direccion').val(data.Direccion);
  {
   Tablacliente.find(".delete").on("click", function(event)
   {
-   if(confirm("¿Eliminar cliente?", "No se podra recurar el registro", "warning"))
+   if(confirm("¿Eliminar cliente?"))
    {
     var IDCliente = $(this).data("row-id");
     console.log(IDCliente);

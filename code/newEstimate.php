@@ -62,7 +62,7 @@ $(document).ready(function(){
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="contacto1" class="control-label" >Descripci?</label>
+                        <label for="contacto1" class="control-label" >Descripción</label>
                         <input type="text" class="form-control" id="est-descrip" name="est-descrip" readonly="">
                     </div>
                 </div>
@@ -73,53 +73,46 @@ $(document).ready(function(){
                     </div>
                 </div>
             
-             <div class="col-md-4">
+             <div >
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">Costo Unico</label>
-                        <input type="text" class="form-control" id="estcu" name="estcu" readonly="">
+                        <input type="hidden" class="form-control " id="estcu" name="estcu" readonly="">
                     </div>
                 </div>
 
-           <div class="col-md-4">
+           <div >
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">Costo unitario</label>
-                        <input type="text" class="form-control" id="est-1" name="est-1" readonly="">
+                        <input type="hidden" class="form-control" id="est-1" name="est-1" readonly="">
                     </div>
                 </div>
  
-      <div class="col-md-4">
+      <div >
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">Costo por ciento</label>
-                        <input type="text" class="form-control" id="est-100" name="est-100" readonly="">
+                        <input type="hidden" class="form-control" id="est-100" name="est-100" readonly="">
                     </div>
                 </div>
 
            
-            <div class="col-md-4">
+            <div >
                     <div class="form-group">
-                        <label for="curp1" class="control-label">Costo por millar</label>
-                        <input type="text" class="form-control" id="est-1000" name="est-1000" readonly="">
+                        <input type="hidden" class="form-control" id="est-1000" name="est-1000" readonly="">
                     </div>
                 </div>
 
-        <div class="col-md-4">
+        <div >
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">Papel</label>
-                        <input type="text" class="form-control" id="papel" name="papel" readonly="">
+                        <input type="hidden" class="form-control" id="papel" name="papel" readonly="">
                     </div>
                 </div>
 
-                     <div class="col-md-4">
+                     <div >
                     <div class="form-group">
-                        <label for="rcf1" class="control-label">Costo por Ajuste</label>
-                        <input type="text" class="form-control" id="CAjuste" name="CAjuste" readonly="">
+                        <input type="hidden" class="form-control" id="CAjuste" name="CAjuste" readonly="">
                     </div>
                 </div>
             
-             <div class="col-md-4">
+             <div >
                     <div class="form-group">
-                        <label for="colonia1" class="control-label">IVA</label>
-                        <input type="text" class="form-control" id="est-iva" name="est-iva" readonly="">
+                        <input type="hidden" class="form-control" id="est-iva" name="est-iva" readonly="">
                     </div>
             </div>
             
@@ -130,14 +123,7 @@ $(document).ready(function(){
                         <input type="text" class="form-control" id="datepicker" name="event_date" required="true">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="estado1" class="control-label">Cantidad</label>
-                        <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
+                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
                         <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true">
@@ -146,13 +132,40 @@ $(document).ready(function(){
                         </select>
                     </div>
                 </div>
-            
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="estado1" class="control-label">Cantidad</label>
+                        <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
+                    </div>
+                </div>
+
+               
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      
+
+                        <input type="hidden" class="form-control" id="vacio" name="vacio" readonly="" required="true">
+                     
+
+                    </div>
+                </div>            
                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="estado1" class="control-label">Costo Final</label>
+                        <h3 for="estado1" class="control-label " style="text-align:center;">Costo Final</h3>
 
                         <input type="hidden" class="form-control" id="est-final" name="est-final" readonly="" required="true">
                         <h1 type="text" id="final" style="text-align: center;" ></h1>
+
+                    </div>
+                </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                       
+
+                        <input type="hidden" class="form-control" id="vacio" name="vacio" readonly="" required="true">
+                      
 
                     </div>
                 </div>
