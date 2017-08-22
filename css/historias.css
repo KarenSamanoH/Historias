@@ -974,7 +974,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
 
 /* PEDIDO */
 
-not-allow{
+.not-allow{
     cursor:not-allowed!important;
   }
   .soft{
