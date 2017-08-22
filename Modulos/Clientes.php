@@ -701,7 +701,7 @@ $(document).ready(function(){
   var item_id = querystring('cotizacion')[0];
 
 console.log(item_id)
-if (item_id!='') {
+if (item_id!==undefined) {
    showEstimates(item_id);
 }
 
