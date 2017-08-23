@@ -1188,6 +1188,9 @@ position: relative;
 .input_fields_wrap tr:nth-child(even){background: #f2f2f2}
 .col-md-4 img{
   width: 80%;
+  box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.26);
+-moz-box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.26);
+-webkit-box-shadow: 0px 0px 8px 0px rgba(119, 119, 119, 0.26);
 }
 .panel-body-parent{
   background:#F7F7F7!important;
