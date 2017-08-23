@@ -152,8 +152,8 @@ while($row = mysqli_fetch_array($result))
 <?php
 if ($getdata['detalles']!='') {
   
-$details= json_decode($getdata['detalles'],TRUE);
-
+$data= json_decode($getdata['detalles'],TRUE);
+$details=($data!='')? $data : array();
 foreach ($details as $key => $product)
  
 {  $getprodinfo="SELECT * FROM catalogoproducto WHERE IDLinea=$key";
@@ -218,7 +218,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
 <div class="col-lg-12" id="elem-contain-<?=$productId ?>">
 <?php 
-  $elements=$product['contenido'];
+  $elements=(isset($product['contenido']))? $product['contenido'] : array();
   if ($elements!='') {
     
   foreach ($elements as $key2 => $element) 

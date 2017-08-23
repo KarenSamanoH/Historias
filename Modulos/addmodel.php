@@ -18,6 +18,7 @@ while($row0 = mysqli_fetch_array($result))
     while ($r=mysqli_fetch_assoc($getelems)) {
         $row[$r['id_elemento_linea']]=$r;
     }
+
 if (isset($row)) {
  
 foreach ($row as $key => $ro1) {
@@ -30,7 +31,7 @@ foreach ($row as $key => $ro1) {
         
     $getprocsquery="SELECT IDCatPro FROM procesoslinea WHERE id_elemento_linea=$id_elem";
     $getprocs=mysqli_query($conexion, $getprocsquery);
-    
+  
     while ($row2=mysqli_fetch_assoc($getprocs)) {
         $processes[$ro1['IDCatElem']]['procesos'][]=$row2['IDCatPro'];
 
