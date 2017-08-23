@@ -78,7 +78,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 <div class="panel-body panel-body-parent">
 
 <div class=" col-md-4">
-<img src="../img/22.jpg">
+<img src="../img/default.jpg">
 </div>   
 <div class=" col-md-8">
 <div class="form">
