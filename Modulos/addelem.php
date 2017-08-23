@@ -139,7 +139,7 @@ while($row = mysqli_fetch_array($result))
   $CostoUnitario=$row3['CostoUnitario'];
   ?>
 <input type="hidden" name="procesos-<?=$productId ?>-<?=$idelem ?>[]" value="<?=$idproces ?>">
-  <tr>
+  <tr id="proceso-<?=$productId ?>-<?=$idelem ?>-<?=$idproces ?>">
   <td>
     <?=$row3['Nombre'] ?>
   </td>
@@ -153,7 +153,7 @@ while($row = mysqli_fetch_array($result))
   <td><?=$CostoUnitario ?>
   <input type="hidden" class="prices" value="5">
   </td>
-  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>)">Quitar</a></td>
+  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>,<?=$idproces ?>)">Quitar</a></td>
  </tr>
 <?php } ?> 
 </table>
