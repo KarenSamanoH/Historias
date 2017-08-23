@@ -292,7 +292,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">
-              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo hacer una cotización?</a>
+              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo hacer una cotización sencilla?</a>
             </h2>
           </div>
           <div class="panel-collapse collapse" id="panel-4">
