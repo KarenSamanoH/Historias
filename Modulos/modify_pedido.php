@@ -366,7 +366,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
 </div>
 </div>
-<br>
+
   <?php } } else{ ?>
   <p>Este producto no contiene elementos </p>
   <?php } ?> 
