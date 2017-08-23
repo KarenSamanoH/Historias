@@ -226,7 +226,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   $CostoUnitario=$row3['CostoUnitario'];
   ?>
  
-  <tr>
+  <tr id="proceso-<?=$productId ?>-<?=$idelem ?>-<?=$idproces ?>">
   <td>
     <?=$row3['Nombre'] ?>
   </td>
@@ -240,7 +240,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   <td><?=$CostoUnitario ?>
   <input type="hidden" class="prices" value="5">
   </td>
-  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>)">Quitar</a></td>
+  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>,<?=$idproces ?>)">Quitar</a></td>
  </tr>
 <?php } ?> 
 </table>

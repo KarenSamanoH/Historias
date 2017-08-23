@@ -336,8 +336,9 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   $IDCatPro=$row3['IDCatPro'];
   $CostoUnitario=$row3['CostoUnitario'];
   ?>
-<input type="hidden" name="procesos-<?=$productId ?>-<?=$idelem ?>[]" value="<?=$idproces ?>">
-  <tr>
+
+  <tr id="proceso-<?=$productId ?>-<?=$idelem ?>-<?=$idproces ?>">
+  <input type="hidden" name="procesos-<?=$productId ?>-<?=$idelem ?>[]" value="<?=$idproces ?>">
   <td>
     <?=$row3['Nombre'] ?>
   </td>
@@ -351,7 +352,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   <td><?=$CostoUnitario ?>
   <input type="hidden" class="prices" value="5">
   </td>
-  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>)">Quitar</a></td>
+  <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>,<?=$idproces ?>)">Quitar</a></td>
  </tr>
 <?php } }?> 
 </table>
@@ -793,11 +794,12 @@ function addElem(product,name,id){
                              }  
                         });
 }
-function removeProcess(id,product){
+function removeProcess(id,product,proces){
      
       console.log('');
         event.preventDefault();
-        $('#input_fields_wrap_'+product+'_'+id).find('tr:last').remove(); x--;
+        //$('#input_fields_wrap_'+product+'_'+id).find('tr:last').remove(); x--;
+        $('#proceso-'+product+'-'+id+'-'+proces).remove();
         collectPrices();
     }
   function addProcess(id,sel,price,product,idpro){
@@ -851,13 +853,13 @@ function removeProcess(id,product){
                         '<option>Galleta</option>'+
                         '<option>Conchita</option>'+
                         '<option>Lazo</option>';
-        var new_tr='<tr><td>'+sel+'</td>'+
+        var new_tr='<tr id="proceso-'+product+'-'+id+'-'+idpro+'"><td>'+sel+'</td>'+
         '<input type="hidden" name="procesos-'+product+'-'+id+'[]" value="'+idpro+'">'+
 
                    /* '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+ */
                     '<td><select  class="disabled" name="catalogos-'+product+'-'+id+'[]">'+sec_options2+'</select></td>'+ 
                     '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
-                    '<td><a href="#" onclick=removeProcess('+id+','+product+')>Quitar</a></td></tr>';
+                    '<td><a href="#" onclick=removeProcess('+id+','+product+','+idpro+')>Quitar</a></td></tr>';
 
         
 
