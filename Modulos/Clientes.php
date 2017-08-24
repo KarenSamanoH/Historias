@@ -445,7 +445,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
       <tr>
        <th data-column-id="IDCliente" data-type="numeric">ID cliente</th>  
        <th data-column-id="Empresa">Empresa</th>
-       <th data-column-id="Nombre1">Nombre</th>
+       <th data-column-id="Nombre1">Primer Nombre</th>
        <th data-column-id="Telefono">Telefono</th>
        <th data-column-id="TipoEvento">Evento</th>
        <th data-column-id="commands" data-formatter="commands" data-sortable="false">Acciones</th>
@@ -812,33 +812,30 @@ if (item_id!==undefined) {
 
 <div class="col-md-4">
 <div class="form-group">
-<label>Primer Nombre <i class="fa fa-user" aria-hidden="true"></i></label>
-<input type="text" name="Nombre1" id="Nombre1" class="form-control" required="" />
+<label>1* Nombre completo<i class="fa fa-user" aria-hidden="true"></i></label>
+<input type="text" name="Nombre1" id="Nombre1" class="form-control" required="" placeholder="Javier Lopez Hernandez" />
 </div>
 </div>
-
-
-       
-      
+  
    
 <div class="col-md-4">
 <div class="form-group">
-<label for="nombre2" class="control-label">Segundo nombre <i class="fa fa-user-plus" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Nombre2" id="Nombre2" >
+<label for="nombre2" class="control-label">2* Nombre completo<i class="fa fa-user-plus" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Nombre2" id="Nombre2" placeholder="María Pineda Segundo" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
 <label for="telefono1" class="control-label">Telefono <i class="fa fa-phone" aria-hidden="true"></i></label>
-<input  type="text" class="form-control" name="Telefono" id="Telefono" >
+<input  type="text" class="form-control" name="Telefono" id="Telefono" placeholder=" XX-XX-XX-XX">
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
 <label for="celular1" class="control-label">Celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Celular1" id="Celular1" >
+<input type="text" class="form-control" name="Celular1" id="Celular1" placeholder="044 (55)">
 </div>
 </div>
 
@@ -846,7 +843,7 @@ if (item_id!==undefined) {
 <div class="col-md-4">
 <div class="form-group">
 <label for="celular2" class="control-label">Otro celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Celular2" id="Celular2">
+<input type="text" class="form-control" name="Celular2" id="Celular2" placeholder="044 (55)">
 </div>
 </div>
 
@@ -855,14 +852,14 @@ if (item_id!==undefined) {
 <div class="col-md-4">
 <div class="form-group">
 <label for="comentarios" class="control-label">Direccion <i class="fa fa-map-marker" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Direccion" id="Direccion" >
+<input type="text" class="form-control" name="Direccion" id="Direccion" placeholder="calle xx col xx ..." >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
 <label for="Emai1" class="control-label">Email <i class="fa fa-envelope" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Email1" id="Email1" >
+<input type="text" class="form-control" name="Email1" id="Email1" placeholder="ejemplo@correo.com" >
 </div>
 </div>
 
