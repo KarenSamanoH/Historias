@@ -233,7 +233,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   ?>
   
 <div class ="col-md-12 center-block" id="elem-<?=$productId ?>-<?=$idelem ?>">
-
+ <input type="hidden" id="costo-ajuste-<?=$productId ?>-<?=$idelem; ?>" name="costo-ajuste-<?=$productId ?>[<?=$idelem; ?>]" value="<?=$datos['ajuste'] ?>">
+ <input type="hidden" id="price-<?=$productId ?>-<?=$idelem; ?>" class="prices">
   <br>
 
 <div class="panel panel-info">
@@ -266,12 +267,12 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 
 <div class="form-group">
  <label for="Alto" class="control-label">Alto</label>
-<input class="form-control prices" type="number" name="alto-<?=$productId ?>-<?=$idelem; ?>" id="Alto" placeholder="Alto" value="<?=$datos['alto'] ?>" >
+<input class="form-control" type="number" name="alto-<?=$productId ?>-<?=$idelem; ?>" id="Alto" placeholder="Alto" value="<?=$datos['alto'] ?>" >
 </div>
 
 <div class="form-group">
 <label for="Ancho" class="control-label">Ancho</label>
-<input class="form-control prices" type="number" name="ancho-<?=$productId ?>-<?=$idelem; ?>" id="Ancho" placeholder="Ancho" value="<?=$datos['ancho'] ?>" >
+<input class="form-control" type="number" name="ancho-<?=$productId ?>-<?=$idelem; ?>" id="Ancho" placeholder="Ancho" value="<?=$datos['ancho'] ?>" >
 </div>
     
 </div>
@@ -281,17 +282,17 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
         
        <div class="form-group">
            <label for="Cantidad" class="control-label">Cantidad</label>
-<input class="form-control prices" type="number" name="cantidad-<?=$productId ?>-<?=$idelem; ?>" id="Cantidad" placeholder="Cantidad" value="<?=$datos['cantidad'] ?>" >
+<input class="form-control  Cantidad" type="number" name="cantidad-<?=$productId ?>-<?=$idelem; ?>" id="cantidad-<?=$productId ?>-<?=$idelem; ?>" placeholder="Cantidad" value="<?=$datos['cantidad'] ?>" onchange="calcByElement(<?=$productId ?>,<?=$idelem; ?>)">
 </div>
 
 <div class="form-group ">
 <label for="Costo" class="control-label">Costo del papel</label>
-<input class="form-control prices" type="number" name="costoMod-<?=$productId ?>-<?=$idelem; ?>" id="CostoMod" value="<?=$datos['costoMod'] ?>"  placeholder="$">
+<input class="form-control " type="number" name="papel-<?=$productId ?>-<?=$idelem; ?>" id="papel-<?=$productId ?>-<?=$idelem; ?>" value="<?=$datos['papel'] ?>"  placeholder="$">
 </div>
-    
+   
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final</label>
-<input class="form-control prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="CostoFinal" value="<?=$datos['costoFinal'] ?>"  placeholder="$ Final">
+<input class="form-control prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value="<?=$datos['costoFinal'] ?>"  placeholder="$ Final" disabled="true">
 </div> 
         </div>
 <div class="col-md-2">
@@ -307,7 +308,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>,<?=$process['CostoCiento'] ?>,
+<?=$process['CostoMillar'] ?>,<?=$process['CostoUnico'] ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
@@ -349,8 +351,11 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
     <option>Lazo</option>
   </select>
   </td>
-  <td><?=$CostoUnitario ?>
-  <input type="hidden" class="prices" value="5">
+  <td>$<?=$CostoUnitario ?>
+  <input type="hidden" class=" proces-<?=$productId ?>-<?=$idelem ?>" value="<?=$CostoUnitario ?>">
+  <input type="hidden" class=" ciento-<?=$productId ?>-<?=$idelem ?>" value="<?=$row3['CostoCiento'] ?>">
+  <input type="hidden" class=" millar-<?=$productId ?>-<?=$idelem ?>" value="<?=$row3['CostoMillar'] ?>">
+  <input type="hidden" class=" unico-<?=$productId ?>-<?=$idelem ?>" value="<?=$row3['CostoUnico'] ?>">
   </td>
   <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>,<?=$idproces ?>)">Quitar</a></td>
  </tr>
@@ -366,7 +371,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
 </div>
 </div>
-<br>
+
   <?php } } else{ ?>
   <p>Este producto no contiene elementos </p>
   <?php } ?> 
@@ -719,9 +724,8 @@ $('.prices').each(function(){
   if (val==''){ val=0;}
     sum += parseFloat(val);
 });
-$('#total-amount').val(sum);
-$('#CostoF').val(sum);
-
+$('#total-amount').val(sum.toFixed(2));
+$('#CostoF').val(sum.toFixed(2));
 
 
   }
@@ -801,8 +805,9 @@ function removeProcess(id,product,proces){
         //$('#input_fields_wrap_'+product+'_'+id).find('tr:last').remove(); x--;
         $('#proceso-'+product+'-'+id+'-'+proces).remove();
         collectPrices();
+         calcByElement(product,id);
     }
-  function addProcess(id,sel,price,product,idpro){
+  function addProcess(id,sel,price,product,idpro,ciento,millar,unico){
     wrapper=$("#input_fields_wrap_"+product+'_'+id); 
     event.preventDefault();
         console.log(sel);
@@ -854,11 +859,13 @@ function removeProcess(id,product,proces){
                         '<option>Conchita</option>'+
                         '<option>Lazo</option>';
         var new_tr='<tr id="proceso-'+product+'-'+id+'-'+idpro+'"><td>'+sel+'</td>'+
-        '<input type="hidden" name="procesos-'+product+'-'+id+'[]" value="'+idpro+'">'+
-
+        '<input type="hidden" class="proces-'+product+'-'+id+'" value="'+idpro+'">'+
+        '<input type="hidden" class="ciento-'+product+'-'+id+'" value="'+ciento+'">'+
+        '<input type="hidden" class="millar-'+product+'-'+id+'" value="'+millar+'">'+
+        '<input type="hidden" class="unico-'+product+'-'+id+'" value="'+unico+'">'+
                    /* '<td><select name="procesos-'+id+'[]">'+sec_options+'</select></td>'+ */
                     '<td><select  class="disabled" name="catalogos-'+product+'-'+id+'[]">'+sec_options2+'</select></td>'+ 
-                    '<td>$'+price+'</td><input type="hidden" class="prices" value="'+price+'">'+
+                    '<td>$'+price+'</td><input type="hidden" class="" value="'+price+'">'+
                     '<td><a href="#" onclick=removeProcess('+id+','+product+','+idpro+')>Quitar</a></td></tr>';
 
         
@@ -866,8 +873,11 @@ function removeProcess(id,product,proces){
       if(x < max_fields){ 
             x++; 
             $(wrapper).append(new_tr); 
+            calcByElement(product,id);
         }  
-collectPrices();
+        
+        collectPrices();
+
     }
     function drop(id,product) {
     document.getElementById("newproces-"+product+'-'+id).classList.toggle("show");
@@ -890,6 +900,86 @@ function removeElement(id,product){
         $('.backdrop, .success-modal').animate({'opacity':'.50'}, 300, 'linear');
           $('.success-modal').animate({'opacity':'1.00'}, 300, 'linear');
           $('.backdrop, .success-modal').css('display', 'block');
+      }
+
+      function calcByElement(product,element){
+       
+        var Descuento =  10;
+        var IVA =  0.16;
+        var costofinal = $('#costoFinal-'+product+'-'+element).val();
+        var Cantidad = $('#cantidad-'+product+'-'+element).val();
+       
+        var papel =  $('#papel-'+product+'-'+element).val();
+        var CAjuste = $('#ajuste-'+product+'-'+element).val();
+        var final=0;
+        var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
+
+        var costounitario = 0;
+        $('.proces-'+product+'-'+element).each(function(){
+          var val= this.value;
+          if (val==''){ val=0;}
+            costounitario += parseFloat(val);
+        });
+         var CostoCiento = 0;
+        $('.ciento-'+product+'-'+element).each(function(){
+          var val= this.value;
+          if (val==''){ val=0;}
+            CostoCiento += parseFloat(val);
+        });
+         var CostoMillar = 0;
+        $('.millar-'+product+'-'+element).each(function(){
+          var val= this.value;
+          if (val==''){ val=0;}
+            CostoMillar += parseFloat(val);
+        });
+        var CostoUnico = 0;
+        $('.millar-'+product+'-'+element).each(function(){
+          var val= this.value;
+          if (val==''){ val=0;}
+            CostoUnico += parseFloat(val);
+        });
+
+
+
+        if (Cantidad >= 0 && Cantidad <= 100)
+          { var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
+            var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
+            var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
+            var total = Costos + CCA + CanCos + parseFloat(papel) + .58;
+            var conD = total * parseFloat(Descuento);
+            var ConIva =  (total - conD) * parseFloat(IVA);
+            var final = conD  + ConIva;
+            console.log('entro a la func 1');
+            console.log('#costoFinal-'+product+'-'+element);
+           $('#costoFinal-'+product+'-'+element).val(final.toFixed(2));
+          }
+
+          else if (Cantidad >= 101 && Cantidad <= 999)
+          {
+            var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel); 
+                    var conD = total * parseFloat(Descuento);
+                   var ConIva =  (total - conD) * parseFloat(IVA);
+                  var final = conD + ConIva;
+                  $('#costoFinal-'+product+'-'+element).val(final.toFixed(2));
+            console.log('entro a la func 2');
+            console.log(CostoMillar);
+             console.log('#costoFinal-'+product+'-'+element);
+                }
+      else if (Cantidad >= 1000 && Cantidad <= 20000){
+
+
+             var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+             var conD = total * parseFloat(Descuento);
+            var ConIva =  (total - conD) * parseFloat(IVA);
+             var final = conD + ConIva;
+
+
+            $('#costoFinal-'+product+'-'+element).val(final.toFixed(2));
+           console.log('entro a la func 3');
+            console.log('#costoFinal-'+product+'-'+element);
+
+}
+
       }
 
 </script>

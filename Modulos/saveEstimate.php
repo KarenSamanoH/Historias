@@ -16,7 +16,7 @@ $event_date=$_POST['event_date'];
 $idprod=$_POST['idprod'];
 $qty=$_POST['qty'];
 $descu=$_POST['descu'];
-
+$ajuste=$_POST['CAjuste'];
 	
 
 	$getelemquery="SELECT id_elemento_linea,IDCatElem FROM elementos_linea WHERE IDLinea=$idprod";
@@ -48,12 +48,13 @@ foreach ($row as $key => $ro1) {
 	$processes[$ro1['IDCatElem']]['datos']['alto']=4;
 		$processes[$ro1['IDCatElem']]['datos']['ancho']=5;
 		$processes[$ro1['IDCatElem']]['datos']['cantidad']=$qty;
-		$processes[$ro1['IDCatElem']]['datos']['costoMod']=10;
+		$processes[$ro1['IDCatElem']]['datos']['ajuste']=$ajuste;
 		$processes[$ro1['IDCatElem']]['datos']['costoFinal']=$final;
+		$processes[$ro1['IDCatElem']]['datos']['papel']=$paper;
 }
 
 
-$producto=array($idprod =>array( 'contenido'=>$processes,'cantidad'=>$qty, 'descuento'=>$descu,'costofinal'=>$final, 'papel'=>$paper) );
+$producto=array($idprod =>array( 'contenido'=>$processes,'cantidad'=>$qty, 'descuento'=>$descu,'costofinal'=>$final, 'papel'=>$paper,'ajuste'=>$ajuste) );
 
 	echo "<pre>";
 print_r($processes);

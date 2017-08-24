@@ -16,7 +16,8 @@ foreach ($models as  $model) {
 		$content[$model]['contenido'][$key]['datos']['alto']=$_POST['alto-'.$model.'-'.$elem];
 		$content[$model]['contenido'][$key]['datos']['ancho']=$_POST['ancho-'.$model.'-'.$elem];
 		$content[$model]['contenido'][$key]['datos']['cantidad']=$_POST['cantidad-'.$model.'-'.$elem];
-		$content[$model]['contenido'][$key]['datos']['costoMod']=$_POST['costoMod-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['papel']=$_POST['papel-'.$model.'-'.$elem];
+		$content[$model]['contenido'][$key]['datos']['ajuste']=$_POST['ajuste-'.$model.'-'.$elem];
 		$content[$model]['contenido'][$key]['datos']['costoFinal']=$_POST['costoFinal-'.$model.'-'.$elem];
 	} 
 	
