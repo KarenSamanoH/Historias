@@ -908,6 +908,7 @@ function removeElement(id,product){
         var IVA =  0.16;
         var costofinal = $('#costoFinal-'+product+'-'+element).val();
         var Cantidad = $('#cantidad-'+product+'-'+element).val();
+        
        
         var papel =  $('#papel-'+product+'-'+element).val();
         var CAjuste = $('#ajuste-'+product+'-'+element).val();
@@ -942,7 +943,7 @@ function removeElement(id,product){
 
 
         if (Cantidad >= 0 && Cantidad <= 100)
-          { var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
+          { //var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
             var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
             var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
             var total = Costos + CCA + CanCos + parseFloat(papel) + .58;

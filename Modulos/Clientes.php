@@ -248,7 +248,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">¿En qué te puedo ayudar?</h4>
+        <h4 class="modal-title ">¿En qué te puedo ayudar?</h4>
       </div>
       <div class="modal-body">
       <!-----Contenido del modal---->
@@ -292,12 +292,12 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">
-              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo hacer una cotización sencilla?</a>
+              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo buscar y/o hacer una cotización?</a>
             </h2>
           </div>
           <div class="panel-collapse collapse" id="panel-4">
             <div class="panel-body">
-              Panel 3
+             <iframe width="560" height="315" src="https://www.youtube.com/embed/kwgc5dZiHJ0?ecver=1" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -546,14 +546,12 @@ $(document).on('submit', '#product_form', function(event){
     {
       console.log(data);
 $('#AgregarModal').modal('show');
-$('#IDEmpresa').val(data.IDEmpresa);
+$('#IDEmpresa ').val(data.IDEmpresa);
 $('#Nombre1').val(data.Nombre1);
 $('.modal-title').text("Editar cliente");
 $('#IDCliente').val(data.IDCliente);
-$('#TipoEvento').val(data.TipoEvento);
 $('#action').val("Editar");
 $('#operation').val("Editar");
-$('#Nombre2').val(data.Nombre2);
 $('#TipoEvento').val(data.TipoEvento);
 $('#Telefono').val(data.Telefono);
 $('#Celular1').val(data.Celular1);
