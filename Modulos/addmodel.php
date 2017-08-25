@@ -193,7 +193,7 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
     
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final de Elemento</label>
-<input class="form-control costo-elemento prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value="<?=$datos['costoFinal'] ?>"  placeholder="$ Final" readonly>
+<input class="form-control costo-elemento prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value=""  placeholder="$ Final" readonly>
 </div> 
         </div>
 <div class="col-md-2">
