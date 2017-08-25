@@ -134,7 +134,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
   ?>
   
 <div class ="col-md-12 center-block" id="elem-<?=$productId ?>-<?=$idelem ?>">
-
+<input type="hidden" id="costo-ajuste-<?=$productId ?>-<?=$idelem; ?>" name="costo-ajuste-<?=$productId ?>[<?=$idelem; ?>]" value="1">
+ <input type="hidden" id="price-<?=$productId ?>-<?=$idelem; ?>" class="prices">
   <br>
 
 <div class="panel panel-info">
@@ -187,12 +188,12 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 
 <div class="form-group ">
 <label for="Costo" class="control-label">Costo del papel</label>
-<input class="form-control " type="number" name="papel-<?=$productId ?>-<?=$idelem; ?>" id="papel-<?=$productId ?>-<?=$idelem; ?>" value="5"  placeholder="$">
+<input class="form-control " type="number" name="papel-<?=$productId ?>-<?=$idelem; ?>" id="papel-<?=$productId ?>-<?=$idelem; ?>" value="1"  placeholder="$">
 </div>
     
  <div class="form-group ">
  <label for="Cantidad" class="control-label">Costo Final de Elemento</label>
-<input class="form-control prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value=""  placeholder="$ Final" readonly>
+<input class="form-control costo-elemento prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value="<?=$datos['costoFinal'] ?>"  placeholder="$ Final" readonly>
 </div> 
         </div>
 <div class="col-md-2">

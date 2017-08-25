@@ -48,7 +48,7 @@ foreach ($row as $key => $ro1) {
 	$processes[$ro1['IDCatElem']]['datos']['alto']=$ro1['Alto'];
 		$processes[$ro1['IDCatElem']]['datos']['ancho']=$ro1['Ancho'];
 		$processes[$ro1['IDCatElem']]['datos']['cantidad']=$qty;
-		$processes[$ro1['IDCatElem']]['datos']['ajuste']=$ajuste;
+		$processes[$ro1['IDCatElem']]['datos']['ajuste']=1;
 		$processes[$ro1['IDCatElem']]['datos']['costoFinal']=$costoelem[$ro1['IDCatElem']];
 		$processes[$ro1['IDCatElem']]['datos']['papel']=$paper;
 }

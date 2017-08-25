@@ -222,10 +222,11 @@ foreach ($details as $key => $product)
 <div class="model-details">
 MODELO: <?=$row4['Modelo'] ?>
 </div><div class="model-details soft">
-DESCUENTO: 
+DESCUENTO: <?= $details[$key]['descuento']*100 ?>%
+<input type="hidden" id="descu" name="descu" value="<?= $details[$key]['descuento'] ?>">
 </div><div class="model-details soft">
 CANTIDAD: <?= $details[$key]['cantidad'] ?>
-<input type="hidden" id="cant" value="<?=$details[$key]['cantidad'] ?>">
+<input type="hidden" id="cant" name="cant" value="<?=$details[$key]['cantidad'] ?>">
 </div><div class="model-details soft">
   PRECIO: <?=$details[$key]['costofinal'] ?>
 </div></a><div class="model-details">
@@ -757,13 +758,17 @@ window.onclick = function(event) {
                              data:$('#general-form').serialize(),  
                                
                              success:function(data){
+                              
+                              //$('.tab-content').html(data);
+                              
+
                                $('.saveloader').hide();
                               $('.savesucces').show();
                                 
                                
                                 setTimeout(function(){ location.href='Clientes.php?cotizacion='+id; }, 1000);
                                  
-
+                               
                              }  
                         });
       }
@@ -777,8 +782,8 @@ $('.costo-elemento').each(function(){
   if (val==''){ val=0;}
     sum += parseFloat(val);
 });
-
-var conD = sum * 0.5;
+var desc=$('#descu').val();
+var conD = sum * parseFloat(desc);
 var ConIva = (sum - conD) * 0.16;
  
 var general=conD + ConIva;
@@ -973,7 +978,7 @@ function removeElement(id,product){
         
        
         var papel =  $('#papel-'+product+'-'+element).val();
-        var CAjuste = $('#ajuste-'+product+'-'+element).val();
+        var CAjuste = $('#costo-ajuste-'+product+'-'+element).val();
         var final=0;
        
 
