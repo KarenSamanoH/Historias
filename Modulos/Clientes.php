@@ -248,7 +248,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">¿En qué te puedo ayudar?</h4>
+        <h4 class="modal-title ">¿En qué te puedo ayudar?</h4>
       </div>
       <div class="modal-body">
       <!-----Contenido del modal---->
@@ -292,12 +292,12 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">
-              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo hacer una cotización?</a>
+              <a href="#panel-4" data-parent="#accordion" data-toggle="collapse">¿Cómo buscar y/o hacer una cotización?</a>
             </h2>
           </div>
           <div class="panel-collapse collapse" id="panel-4">
             <div class="panel-body">
-              Panel 3
+             <iframe width="560" height="315" src="https://www.youtube.com/embed/kwgc5dZiHJ0?ecver=1" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -445,7 +445,7 @@ box-shadow:         2px 2px 3px 0px rgba(50, 50, 50, 0.31);
       <tr>
        <th data-column-id="IDCliente" data-type="numeric">ID cliente</th>  
        <th data-column-id="Empresa">Empresa</th>
-       <th data-column-id="Nombre1">Nombre</th>
+       <th data-column-id="Nombre1">Primer Nombre</th>
        <th data-column-id="Telefono">Telefono</th>
        <th data-column-id="TipoEvento">Evento</th>
        <th data-column-id="commands" data-formatter="commands" data-sortable="false">Acciones</th>
@@ -546,14 +546,12 @@ $(document).on('submit', '#product_form', function(event){
     {
       console.log(data);
 $('#AgregarModal').modal('show');
-$('#IDEmpresa').val(data.IDEmpresa);
+$('#IDEmpresa ').val(data.IDEmpresa);
 $('#Nombre1').val(data.Nombre1);
 $('.modal-title').text("Editar cliente");
 $('#IDCliente').val(data.IDCliente);
-$('#TipoEvento').val(data.TipoEvento);
 $('#action').val("Editar");
 $('#operation').val("Editar");
-$('#Nombre2').val(data.Nombre2);
 $('#TipoEvento').val(data.TipoEvento);
 $('#Telefono').val(data.Telefono);
 $('#Celular1').val(data.Celular1);
@@ -818,33 +816,30 @@ if (item_id!==undefined) {
 
 <div class="col-md-4">
 <div class="form-group">
-<label>Primer Nombre <i class="fa fa-user" aria-hidden="true"></i></label>
-<input type="text" name="Nombre1" id="Nombre1" class="form-control" required="" />
+<label>1* Nombre completo<i class="fa fa-user" aria-hidden="true"></i></label>
+<input type="text" name="Nombre1" id="Nombre1" class="form-control" required="" placeholder="Javier Lopez Hernandez" />
 </div>
 </div>
-
-
-       
-      
+  
    
 <div class="col-md-4">
 <div class="form-group">
-<label for="nombre2" class="control-label">Segundo nombre <i class="fa fa-user-plus" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Nombre2" id="Nombre2" >
+<label for="nombre2" class="control-label">2* Nombre completo<i class="fa fa-user-plus" aria-hidden="true"></i></label>
+<input type="text" class="form-control" name="Nombre2" id="Nombre2" placeholder="María Pineda Segundo" >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
 <label for="telefono1" class="control-label">Telefono <i class="fa fa-phone" aria-hidden="true"></i></label>
-<input  type="text" class="form-control" name="Telefono" id="Telefono" >
+<input  type="text" class="form-control" name="Telefono" id="Telefono" placeholder=" XX-XX-XX-XX">
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
 <label for="celular1" class="control-label">Celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Celular1" id="Celular1" >
+<input type="text" class="form-control" name="Celular1" id="Celular1" placeholder="044 (55)">
 </div>
 </div>
 
@@ -852,7 +847,7 @@ if (item_id!==undefined) {
 <div class="col-md-4">
 <div class="form-group">
 <label for="celular2" class="control-label">Otro celular <i class="fa fa-mobile" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Celular2" id="Celular2">
+<input type="text" class="form-control" name="Celular2" id="Celular2" placeholder="044 (55)">
 </div>
 </div>
 
@@ -861,14 +856,14 @@ if (item_id!==undefined) {
 <div class="col-md-4">
 <div class="form-group">
 <label for="comentarios" class="control-label">Direccion <i class="fa fa-map-marker" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Direccion" id="Direccion" >
+<input type="text" class="form-control" name="Direccion" id="Direccion" placeholder="calle xx col xx ..." >
 </div>
 </div>
 
 <div class="col-md-4">
 <div class="form-group">
 <label for="Emai1" class="control-label">Email <i class="fa fa-envelope" aria-hidden="true"></i></label>
-<input type="text" class="form-control" name="Email1" id="Email1" >
+<input type="text" class="form-control" name="Email1" id="Email1" placeholder="ejemplo@correo.com" >
 </div>
 </div>
 

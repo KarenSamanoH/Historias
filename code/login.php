@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once "conexion.php";
 $mysqli=new mysqli("localhost","root","","historias");
@@ -7,7 +6,7 @@ $mysqli=new mysqli("localhost","root","","historias");
 $user1=$_POST['user'];
 $pass1= $_POST['password'];
 
-$sql="SELECT * from  cuenta where NombreCuenta='$user1' and Contrasena='$pass1'";
+$sql="SELECT * from  cuenta where NombreCuenta =  _utf8 '$user1' collate utf8_bin and Contrasena = _utf8 '$pass1' collate utf8_bin";
 
 $res=mysqli_fetch_assoc($mysqli->query($sql));
 

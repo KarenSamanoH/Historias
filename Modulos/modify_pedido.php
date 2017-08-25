@@ -84,6 +84,11 @@ while($row = mysqli_fetch_array($result))
 <a class="page-scroll" href="Reportar.php">Reportar un problema<span class="glyphicon glyphicon-exclamation-sign"></span></a>
 </li>
 <li>
+<a class="page-scroll" data-toggle="modal" data-target="#ayuda" >Ayuda
+<i class="fa fa-question-circle fa-spin fa-1x fa-fw" aria-hidden="true"></i>
+</a>
+</li>
+<li>
 <a class="page-scroll" href="../code/logout.php">Salir<span class="glyphicon glyphicon-log-out"></span></a>
 </li>
 </ul>
@@ -91,7 +96,54 @@ while($row = mysqli_fetch_array($result))
 
 </div>
 
+  <div class="box" style="border-color: white" align="right">
+
+<!-- Modal -->
+<div id="ayuda" class="modal fade" role="dialog">
+  <div class="modal-dialog" align="center">
+
+    <!-- Ayuda-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title ">¿En qué te puedo ayudar?</h4>
+      </div>
+      <div class="modal-body">
+      <!-----Contenido del modal---->
+
+  <div class="row">
+      <div id="accordion" class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a href="#panel-1" data-parent="#accordion" data-toggle="collapse">¿Cómo agregar elementos?</a>
+            </h2>
+          </div>
+          <div class="panel-collapse collapse" id="panel-1">
+            <div class="panel-body">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C7Rd_fbyX8o" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>   
+
+
 </nav>
+
+
 
 <div class="col-xs-12 col-sm-12 ">
 <div class="panel panel-default">
@@ -918,6 +970,7 @@ function removeElement(id,product){
         var IVA =  0.16;
         var costofinal = $('#costoFinal-'+product+'-'+element).val();
         var Cantidad = $('#cantidad-'+product+'-'+element).val();
+        
        
         var papel =  $('#papel-'+product+'-'+element).val();
         var CAjuste = $('#ajuste-'+product+'-'+element).val();
@@ -962,8 +1015,10 @@ function removeElement(id,product){
 
 
         if (Cantidad >= 0 && Cantidad <= 100)
+
           { var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
             var CCA = parseFloat(Cantidad);
+
             var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
             var final = Costos + CCA + CanCos + parseFloat(papel) + .58;
            

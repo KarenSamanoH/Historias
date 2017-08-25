@@ -44,7 +44,7 @@ $(document).ready(function(){
 <br>
 <div style="position: relative;  background: #f9f9f9; height: 50px; border:solid 1px #ddd; border-radius: 3px; text-align: center;">
 <div class="search-box">
-    <input type="text"  autocomplete="off" placeholder="Ingresa el modelo a cotizar" />
+    <input type="text"  autocomplete="off" placeholder="Ingresa el modelo a cotizar" required="" />
         <div class="result"></div>
     </div>
 
@@ -126,8 +126,10 @@ $(document).ready(function(){
                  <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
+
                         <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true" onchange="co()">
                             <option value="">Seleccionar descuento</option>
+
                            <?php echo $descu; ?>
                         </select>
                     </div>
