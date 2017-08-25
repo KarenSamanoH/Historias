@@ -763,10 +763,10 @@ window.onclick = function(event) {
                               
 
                                $('.saveloader').hide();
-                              $('.savesucces').show();
+                             $('.savesucces').show();
                                 
                                
-                                setTimeout(function(){ location.href='Clientes.php?cotizacion='+id; }, 1000);
+                               setTimeout(function(){ location.href='Clientes.php?cotizacion='+id; }, 1000);
                                  
                                
                              }  
@@ -926,6 +926,8 @@ function removeProcess(id,product,proces){
                         '<option>Conchita</option>'+
                         '<option>Lazo</option>';
         var new_tr='<tr id="proceso-'+product+'-'+id+'-'+idpro+'"><td>'+sel+'</td>'+
+    
+        '<input type="hidden" name="procesos-'+product+'-'+id+'[]" value="'+idpro+'">'+
         '<input type="hidden" class="proces-'+product+'-'+id+'" value="'+idpro+'">'+
         '<input type="hidden" class="ciento-'+product+'-'+id+'" value="'+ciento+'">'+
         '<input type="hidden" class="millar-'+product+'-'+id+'" value="'+millar+'">'+
