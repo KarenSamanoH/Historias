@@ -3,7 +3,7 @@
 include("../code/conexion.php");
     $idelem=$_POST['idelemento'];
     $productId=$_POST['producto'];
-
+$qty=$_POST['qty'];
     $getelemquery="SELECT * FROM catalogoelemento WHERE IDCatElem=$idelem";
     $getelems=mysqli_query($conexion, $getelemquery);
     //print_r($getelems);
@@ -80,7 +80,8 @@ while($row = mysqli_fetch_array($result))
         
        <div class="form-group">
            <label for="Cantidad" class="control-label">Cantidad</label>
-<input class="form-control prices" type="number" name="cantidad-<?=$productId ?>-<?=$idelem; ?>" id="Cantidad" placeholder="Cantidad" value="">
+<input class="form-control  Cantidad" type="number" name="cantidad-<?=$productId ?>-<?=$idelem; ?>" id="cantidad-<?=$productId ?>-<?=$idelem; ?>" placeholder="Cantidad" value="<?=$qty ?>" onchange="calcByElement(<?=$productId ?>,<?=$idelem; ?>)">
+
 </div>
 
 <div class="form-group ">
@@ -106,7 +107,8 @@ while($row = mysqli_fetch_array($result))
   while ($process=mysqli_fetch_assoc($getProcessCat)){
   
    ?>
-    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>)"><?=$process['Nombre'] ?></a>
+    <a href="#" onclick="addProcess(<?=$idelem ?>,'<?=$process['Nombre'] ?>',<?=$process['CostoUnitario'] ?>,<?=$productId ?>,<?=$process['IDCatPro'] ?>,<?=$process['CostoCiento'] ?>,
+<?=$process['CostoMillar'] ?>,<?=$process['CostoUnico'] ?>)"><?=$process['Nombre'] ?></a>
     
     <?php } ?>
   </div>
@@ -151,7 +153,10 @@ while($row = mysqli_fetch_array($result))
   </select>
   </td>
   <td><?=$CostoUnitario ?>
-  <input type="hidden" class="prices" value="5">
+  <input type="hidden" class=" proces-<?=$productId ?>-<?=$idelem ?>" value="<?=$CostoUnitario ?>">
+  <input type="hidden" class=" ciento-<?=$productId ?>-<?=$idelem ?>" value="<?=$row3['CostoCiento'] ?>">
+  <input type="hidden" class=" millar-<?=$productId ?>-<?=$idelem ?>" value="<?=$row3['CostoMillar'] ?>">
+  <input type="hidden" class=" unico-<?=$productId ?>-<?=$idelem ?>" value="<?=$row3['CostoUnico'] ?>">
   </td>
   <td><a href="#" class="remove_field" onclick="removeProcess(<?=$idelem ?>,<?=$productId ?>,<?=$idproces ?>)">Quitar</a></td>
  </tr>

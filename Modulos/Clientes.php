@@ -642,14 +642,18 @@ $('#papel').val(model.CostoPapel);
 $('#idprod').val(model.IDLinea);  
 $('#final-amount').html('$'+model.CostoFinal);
 $('#CAjuste').val(model.CAjuste);
-
-
-
-
-
-
-
-  console.log(model.CostoFinal);
+$.ajax({
+    url:"../code/getProcess.php",
+    method:"POST",
+    data:{prodid:id},
+    success:function(data)
+    {
+     
+     $('#content').html(data);
+     
+    }
+   });
+  
 }
 function modifiEstimate(idc,client){
   console.log(idc);
@@ -670,8 +674,8 @@ $.ajax({
                        
                      success:function(data){ 
                         
-                          showEstimates(id);
-                          //$('.modal-body').html(data);
+                          //showEstimates(id);
+                          $('.modal-body').html(data);
                            
                          
                      }  

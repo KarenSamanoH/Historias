@@ -225,6 +225,7 @@ MODELO: <?=$row4['Modelo'] ?>
 DESCUENTO: 
 </div><div class="model-details soft">
 CANTIDAD: <?= $details[$key]['cantidad'] ?>
+<input type="hidden" id="cant" value="<?=$details[$key]['cantidad'] ?>">
 </div><div class="model-details soft">
   PRECIO: <?=$details[$key]['costofinal'] ?>
 </div></a><div class="model-details">
@@ -343,8 +344,8 @@ CANTIDAD: <?= $details[$key]['cantidad'] ?>
 </div>
    
  <div class="form-group ">
- <label for="Cantidad" class="control-label">Costo Final</label>
-<input class="form-control prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value="<?=$datos['costoFinal'] ?>"  placeholder="$ Final" disabled="true">
+ <label for="Cantidad" class="control-label">Costo Final de Elemento</label>
+<input class="form-control costo-elemento prices" type="number" name="costoFinal-<?=$productId ?>-<?=$idelem; ?>" id="costoFinal-<?=$productId ?>-<?=$idelem; ?>" value="<?=$datos['costoFinal'] ?>"  placeholder="$ Final" readonly>
 </div> 
         </div>
 <div class="col-md-2">
@@ -771,14 +772,22 @@ window.onclick = function(event) {
 
   function collectPrices(){
       var sum = 0;
-$('.prices').each(function(){
+$('.costo-elemento').each(function(){
   var val= this.value;
   if (val==''){ val=0;}
     sum += parseFloat(val);
 });
-$('#total-amount').val(sum.toFixed(2));
-$('#CostoF').val(sum.toFixed(2));
 
+var conD = sum * 0.5;
+var ConIva = (sum - conD) * 0.16;
+ 
+var general=conD + ConIva;
+
+
+
+$('#total-amount').val(general.toFixed(2));
+$('#CostoF').val(general.toFixed(2));
+console.log('collect prices');
 
   }
   $('.prices').change(function() {
@@ -817,12 +826,12 @@ $(document).ready(function(){
 function fillData(id){
   
 
-  
+  var cant=$('#cant').val();
      $.ajax({  
                               
                              type:"POST",
                              url:"addmodel.php",   
-                             data:{idmodelo:id},  
+                             data:{idmodelo:id,qty:cant},  
                                
                              success:function(data){
                               
@@ -837,11 +846,12 @@ function removeModel(id){
 }
 function addElem(product,name,id){
   event.preventDefault();
+   var cant=$('#cant').val();
    $.ajax({  
                               
                              type:"POST",
                              url:"addelem.php",   
-                             data:{idelemento:id,producto:product},  
+                             data:{idelemento:id,producto:product,qty:cant},  
                                
                              success:function(data){
                               
@@ -965,7 +975,17 @@ function removeElement(id,product){
         var papel =  $('#papel-'+product+'-'+element).val();
         var CAjuste = $('#ajuste-'+product+'-'+element).val();
         var final=0;
-        var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
+       
+
+        if (Descuento=='') {Descuento=0;}
+        if (IVA=='') {IVA=0;}
+        if (costofinal=='') {costofinal=0;}
+        if (Cantidad=='') {Cantidad=0;}
+       
+        if (papel=='') {papel=0;}
+        if (CAjuste=='') {CAjuste=0;}
+
+
 
         var costounitario = 0;
         $('.proces-'+product+'-'+element).each(function(){
@@ -991,47 +1011,66 @@ function removeElement(id,product){
           if (val==''){ val=0;}
             CostoUnico += parseFloat(val);
         });
-
+         var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
 
 
         if (Cantidad >= 0 && Cantidad <= 100)
-          { //var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
-            var CCA = parseFloat(Cantidad) * parseFloat(CAjuste);
+
+          { var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
+            var CCA = parseFloat(Cantidad);
+
             var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
-            var total = Costos + CCA + CanCos + parseFloat(papel) + .58;
-            var conD = total * parseFloat(Descuento);
-            var ConIva =  (total - conD) * parseFloat(IVA);
-            var final = conD  + ConIva;
-            console.log('entro a la func 1');
+            var final = Costos + CCA + CanCos + parseFloat(papel) + .58;
+           
+           /*
+            console.log('costo unico: '+CostoUnico);
+             console.log('costo ciento: '+CostoCiento);
+              console.log('costo millar: '+CostoMillar);
+               console.log('costo unitario: '+costounitario);
+                console.log('total total: '+total);
+                console.log('costo CanCos: '+CanCos);
+                console.log('costo final: '+final);
+                console.log('Costos: '+Costos);
+                console.log('CCA: '+CCA);
+                console.log('costo papel: '+papel);
+          */
+          
             console.log('#costoFinal-'+product+'-'+element);
-           $('#costoFinal-'+product+'-'+element).val(final.toFixed(2));
+           $('#costoFinal-'+product+'-'+element).attr('value', final.toFixed(2));
+           collectPrices();
           }
 
           else if (Cantidad >= 101 && Cantidad <= 999)
           {
-            var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel); 
-                    var conD = total * parseFloat(Descuento);
-                   var ConIva =  (total - conD) * parseFloat(IVA);
-                  var final = conD + ConIva;
-                  $('#costoFinal-'+product+'-'+element).val(final.toFixed(2));
-            console.log('entro a la func 2');
-            console.log(CostoMillar);
-             console.log('#costoFinal-'+product+'-'+element);
+            var final = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel); 
+                    
+                  $('#costoFinal-'+product+'-'+element).attr('value', final.toFixed(2));
+            console.log('costo unico: '+CostoUnico);
+             console.log('costo ciento: '+CostoCiento);
+              console.log('costo millar: '+CostoMillar);
+               console.log('costo unitario: '+costounitario);
+                console.log('total total: '+total);
+                console.log('costo CanCos: '+CanCos);
+                console.log('costo final: '+final);
+                console.log('Costos: '+Costos);
+                console.log('CCA: '+CCA);
+                console.log('costo papel: '+papel);
+             collectPrices();
                 }
       else if (Cantidad >= 1000 && Cantidad <= 20000){
 
 
-             var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
-             var conD = total * parseFloat(Descuento);
-            var ConIva =  (total - conD) * parseFloat(IVA);
-             var final = conD + ConIva;
+              var final = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+            
 
 
-            $('#costoFinal-'+product+'-'+element).val(final.toFixed(2));
-           console.log('entro a la func 3');
-            console.log('#costoFinal-'+product+'-'+element);
-
+            $('#costoFinal-'+product+'-'+element).attr('value', final.toFixed(2));
+           collectPrices();
 }
+
+
+
+      //$('#est-final').val(general.toFixed(2));
 
       }
 

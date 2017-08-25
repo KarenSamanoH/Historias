@@ -17,12 +17,12 @@ $idprod=$_POST['idprod'];
 $qty=$_POST['qty'];
 $descu=$_POST['descu'];
 $ajuste=$_POST['CAjuste'];
-	
+$costoelem=$_POST['costo-elemento'];	
 
-	$getelemquery="SELECT id_elemento_linea,IDCatElem FROM elementos_linea WHERE IDLinea=$idprod";
+	$getelemquery="SELECT el.id_elemento_linea,el.IDCatElem,ce.Ancho,ce.Alto FROM elementos_linea el INNER JOIN catalogoelemento ce ON el.IDCatElem=ce.IDCatElem WHERE IDLinea=$idprod";
 	$getelems=mysqli_query($conexion, $getelemquery);
 	//print_r($getelems);
-	
+	echo $getelemquery;
 	while ($r=mysqli_fetch_assoc($getelems)) {
 		$row[$r['id_elemento_linea']]=$r;
 	}
@@ -45,11 +45,11 @@ foreach ($row as $key => $ro1) {
 	}
 	$processes[$ro1['IDCatElem']]['datos']['material']=1;
 		
-	$processes[$ro1['IDCatElem']]['datos']['alto']=4;
-		$processes[$ro1['IDCatElem']]['datos']['ancho']=5;
+	$processes[$ro1['IDCatElem']]['datos']['alto']=$ro1['Alto'];
+		$processes[$ro1['IDCatElem']]['datos']['ancho']=$ro1['Ancho'];
 		$processes[$ro1['IDCatElem']]['datos']['cantidad']=$qty;
 		$processes[$ro1['IDCatElem']]['datos']['ajuste']=$ajuste;
-		$processes[$ro1['IDCatElem']]['datos']['costoFinal']=$final;
+		$processes[$ro1['IDCatElem']]['datos']['costoFinal']=$costoelem[$ro1['IDCatElem']];
 		$processes[$ro1['IDCatElem']]['datos']['papel']=$paper;
 }
 
@@ -57,6 +57,7 @@ foreach ($row as $key => $ro1) {
 $producto=array($idprod =>array( 'contenido'=>$processes,'cantidad'=>$qty, 'descuento'=>$descu,'costofinal'=>$final, 'papel'=>$paper,'ajuste'=>$ajuste) );
 
 	echo "<pre>";
+	print_r($costoelem);
 print_r($processes);
 echo "</pre>";
 
