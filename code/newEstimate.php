@@ -126,7 +126,7 @@ $(document).ready(function(){
                  <div class="col-md-4">
                     <div class="form-group">
                         <label for="descuento" class="control-label">Descuento</label>
-                        <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true">
+                        <select type="number" class="form-control" name="descu" id="descu" placeholder="Descuento" required="true" onchange="co()">
                             <option value="">Seleccionar descuento</option>
                            <?php echo $descu; ?>
                         </select>
@@ -138,8 +138,8 @@ $(document).ready(function(){
                         <input type="number" class="form-control" onkeyup="co()" name="qty" id="qty" placeholder="Cantidad" required="true">
                     </div>
                 </div>
-
-               
+                <div class="col-md-12"><h5 class="headerSign" style="text-align: center;">Contenido</h5></div>
+               <div class="col-md-12" id="content"> </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
@@ -168,12 +168,14 @@ $(document).ready(function(){
                       
 
                     </div>
+
                 </div>
 
             
 <input type="hidden" class="form-control" id="est-cu" name="est-cu" placeholder="RCF" readonly="">
 <input type="hidden" class="form-control" id="est-lead" name="est-lead" placeholder="Calle" readonly="">
 <input type="hidden" class="form-control" id="est-paper" name="est-paper" placeholder="CP" readonly="">
+
 
     </div>
     
@@ -216,21 +218,28 @@ $(document).ready(function(){
 <script>
 
 function co()
-{
+{ 
+var model=$('#idelements').val();
+
 var Descuento =  document.getElementById("descu").value;
-var IVA =  document.getElementById("est-iva").value;
+//var IVA =  document.getElementById("est-iva").value;
+var IVA =  0.16;
 var costofinal = document.getElementById("est-final").value;
-var Cantidad = document.getElementById("qty").value;
-var CostoCiento = document.getElementById("est-100").value;
-var CostoMillar = document.getElementById("est-1000").value;
-var CostoUnico = document.getElementById("estcu").value;
-var costounitario = document.getElementById("est-1").value;
+var Cantidad=$('#qty').val();
 var papel =  document.getElementById("papel").value;
 var CAjuste =  document.getElementById("CAjuste").value;
+if (Descuento=='') {Descuento=0;}
+if (IVA=='') {IVA=0;}
+if (costofinal=='') {costofinal=0;}
+if (Cantidad=='') {Cantidad=0;}
+
+if (papel=='') {papel=0;}
+if (CAjuste=='') {CAjuste=0;}
 var final;
-var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
 
 
+if (Cantidad>0) {
+	/*
     if (Cantidad >= 0 && Cantidad <= 100)
     {
 
@@ -251,7 +260,7 @@ var final = conD  + ConIva;
 
        
 
-var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parsefloat(papel); 
+var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel); 
         var conD = total * parseFloat(Descuento);
        var ConIva =  (total - conD) * parseFloat(IVA);
       var final = conD + ConIva;
@@ -271,6 +280,98 @@ var ConIva =  (total - conD) * parseFloat(IVA);
       $('#final').html(final.toFixed(2));
       $('#est-final').val(final.toFixed(2));
 
+} */
+$.each(JSON.parse(model), function(i, item) {
+	
+	var CostoCiento =0;
+	
+$('#elem-'+item+' .CostoCiento').each(function(){
+  var val= this.value;
+  if (val==''){ val=0;}
+    CostoCiento += parseFloat(val);
+});
+	var CostoMillar = 0;
+	$('#elem-'+item+' .CostoMillar').each(function(){
+  var val= this.value;
+  if (val==''){ val=0;}
+    CostoMillar += parseFloat(val);
+});
+	var CostoUnico = 0;
+	$('#elem-'+item+' .CostoUnico').each(function(){
+  var val= this.value;
+  if (val==''){ val=0;}
+    CostoUnico += parseFloat(val);
+});
+	var costounitario = 0;
+	$('#elem-'+item+' .CostoUnitario').each(function(){
+  var val= this.value;
+  if (val==''){ val=0;}
+    costounitario += parseFloat(val);
+});
+	if (CostoCiento=='') {CostoCiento=0;}
+if (CostoMillar=='') {CostoMillar=0;}
+if (CostoUnico=='') {CostoUnico=0;}
+if (costounitario=='') {costounitario=0;}
+var Costos = parseFloat(CostoMillar) + parseFloat(CostoCiento)  + parseFloat(CostoUnico);
+if (Cantidad >= 0 && Cantidad <= 100)
+          { var total = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel);
+            var CCA = parseFloat(Cantidad);
+            var CanCos = parseFloat(Cantidad) * parseFloat(costounitario);
+            var final = Costos + CCA + CanCos + parseFloat(papel) + .58;
+           
+           /*
+            console.log('costo unico: '+CostoUnico);
+             console.log('costo ciento: '+CostoCiento);
+              console.log('costo millar: '+CostoMillar);
+               console.log('costo unitario: '+costounitario);
+                console.log('total total: '+total);
+                console.log('costo CanCos: '+CanCos);
+                console.log('costo final: '+final);
+                console.log('Costos: '+Costos);
+                console.log('CCA: '+CCA);
+                console.log('costo papel: '+papel);
+        */
+          
+           
+           $('#elem-'+item+' .costo-elemento').attr('value', final.toFixed(2));
+           
+          }
+
+          else if (Cantidad >= 101 && Cantidad <= 999)
+          {
+            var final = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + (parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100) + parseFloat(Cantidad) * parseFloat(costounitario) + parseFloat(papel); 
+                    
+                  $('#elem-'+item+' .costo-elemento').attr('value', final.toFixed(2));
+            	console.log('#elem-'+item);
+             	console.log(final);
+                }
+      else if (Cantidad >= 1000 && Cantidad <= 20000){
+
+
+              var final = parseFloat(CostoUnico) + parseFloat(CostoCiento) + parseFloat(CostoMillar) + ((parseFloat(Cantidad)-1000) * (parseFloat(CostoMillar)/1000)) + ((parseFloat(Cantidad)-100) * (parseFloat(CostoCiento)/100)) + (parseFloat(Cantidad) * parseFloat(costounitario)) + parseFloat(papel) + .58;
+            
+
+
+            $('#elem-'+item+' .costo-elemento').attr('value', final.toFixed(2));
+           
+}
+
+
+
+	
+});
+var sum = 0;
+$('.costo-elemento').each(function(){
+  var val= this.value;
+  if (val==''){ val=0;}
+    sum += parseFloat(val);
+});
+var conD = sum * parseFloat(Descuento);
+var ConIva = (sum - conD) * parseFloat(IVA);
+ 
+var general=conD + ConIva;
+$('#final').html(general.toFixed(2));
+      $('#est-final').val(general.toFixed(2));
 }
 
 }
