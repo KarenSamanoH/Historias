@@ -674,8 +674,8 @@ $.ajax({
                        
                      success:function(data){ 
                         
-                          //showEstimates(id);
-                          $('.modal-body').html(data);
+                          showEstimates(id);
+                          //$('.modal-body').html(data);
                            
                          
                      }  
